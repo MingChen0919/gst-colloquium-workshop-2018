@@ -1,0 +1,57 @@
+---
+weight: 2
+title: "Datasets"
+author: "gst data visualization group"
+output: html_document
+---
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
+options("width" = 200)
+```
+
+
+
+## Dataset descriptions
+
+```{r echo=FALSE}
+load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData'))
+```
+
+### Time series plot datasets: `trajectory`
+
+* **dimension**: 5001 rows x 30 columns
+* **column 1**: frame indices, from 1 to 5001.
+* **column 2-30**: feature values from molecular simulation.
+
+Below is the first few rows and columns of `trajectory`:
+
+```{r eval=TRUE}
+trajectory[1:10, 1:4]
+```
+
+### PCA plot datasets: `energy_tics`
+
+This data is the dimension-reduced trajectory. We used a PCA-like method to analyze the feature trajectory, which tells us vectors (called collective variables, CVs) that explain the pattern of how all the feature values change. A good example for thinking about this would be that you have a protein with a large and slow open-close motion. The open/close motion should be the first CV, so this vector is the change in feature values when the protein opens and closes. Say the CV points in the 'opening' direction, then if the protein is closed the coordinate in this CV would be 0 or small. As you add more of the vector to the feature values, the coordinate would grow to open the protein. This way, we only need a single number for each frame to tell us how open or closed the protein is. Typically, 3-5 CVs will replace hundreds of feature values, since each CV encodes something that happens to all the features. In this case, the CV's are called TICs. Then we cluster the frames in their CV coordinates into a big and a small groups called microstates and macrostates, respectively.
+
+
+* **dimension**: 5001 rows x 8 columns
+* **column 1**: frame indices, from 1 to 5001.
+* **column 2**: energy column. It isa rough estimate of the protein's internal energy in each frame.
+* **column 3-6**: collective variables columns (CVs).
+* **column 7**: microstates
+* **column 8**: macrostates.
+
+```{r}
+head(energy_tics)
+```
+

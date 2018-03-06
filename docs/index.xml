@@ -11,65 +11,65 @@
     
     
     <item>
-      <title>Scatterplot</title>
-      <link>/tutorials/scatterplot/</link>
+      <title>Line plot for time series data</title>
+      <link>/tutorials-4/line-plot/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tutorials/scatterplot/</guid>
-      <description>pre code, pre, code { white-space: pre !important; overflow-x: scroll !important; word-break: keep-all !important; word-wrap: initial !important; }  Import data load(url(&amp;#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&amp;#39;))  Visualization Time series plot (feature values against time) # ggplot2 template p1 = ggplot(data = trajectory) + geom_line(mapping = aes(x = frame_index/1000, y = trajectory[, 2]), stat = &amp;quot;identity&amp;quot;, position = &amp;quot;identity&amp;quot;, color = &amp;#39;#ff6d6d&amp;#39;) + coord_cartesian() + facet_null() + scale_x_continuous() + scale_y_continuous() + theme_classic() + # helper functions xlab(&amp;#39;Frame Index&amp;#39;) + ylab(colnames(trajectory)[2]) p1  Distribution of feature values # ggplot2 template p2 = ggplot(data = trajectory) + geom_density(mapping = aes(x = trajectory[, 2]), stat = &amp;quot;density&amp;quot;, position = &amp;quot;identity&amp;quot;, color = &amp;#39;#3dbfff&amp;#39;) + coord_flip() + facet_null() + scale_x_continuous() + theme_classic() + # helper functions xlab(colnames(trajectory)[2]) p2  Combine time series plot and density plot grid.</description>
+      <guid>/tutorials-4/line-plot/</guid>
+      <description>pre code, pre, code { white-space: pre !important; overflow-x: scroll !important; word-break: keep-all !important; word-wrap: initial !important; }  Import data load(url(&amp;#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&amp;#39;))  Load libraries library(ggplot2) library(gridExtra)  Visualization Feature against frame index  Geom object: line  frame_index -&amp;gt; x feature -&amp;gt; y   # ggplot2 template p1 = ggplot(data = trajectory) + geom_line(mapping = aes(x = frame_index/1000, y = trajectory[, 2]), stat = &amp;quot;identity&amp;quot;, position = &amp;quot;identity&amp;quot;, color = &amp;#39;#ff6d6d&amp;#39;) + coord_cartesian() + facet_null() + #----map data values to visual values--- scale_x_continuous(name = &amp;quot;Frame index&amp;quot;) + scale_y_continuous(name = colnames(trajectory[2])) + theme_classic() p1  Distribution of feature values  Geom object: density  feature -&amp;gt; x   # ggplot2 template p2 = ggplot(data = trajectory) + geom_density(mapping = aes(x = trajectory[, 2]), stat = &amp;quot;density&amp;quot;, position = &amp;quot;identity&amp;quot;, color = &amp;#39;#3dbfff&amp;#39;) + coord_flip() + facet_null() + #----map data values to visual values--- scale_x_continuous(name = colnames(trajectory)[2]) + theme_classic() p2  Combine time series plot and density plot grid.</description>
     </item>
     
     <item>
-      <title>PCA plot</title>
-      <link>/tutorials/pca/</link>
+      <title>Scatterplot for PCA data</title>
+      <link>/tutorials-4/pca/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tutorials/pca/</guid>
-      <description>pre code, pre, code { white-space: pre !important; overflow-x: scroll !important; word-break: keep-all !important; word-wrap: initial !important; }  Import data load(url(&amp;#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&amp;#39;))  Visualization Collective Variables and Macrostates  Geom object: point  TIC0 -&amp;gt; x TIC1 -&amp;gt; y macrostate -&amp;gt; color   ggplot(energy_tics) + geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)), stat = &amp;quot;identity&amp;quot;, position = &amp;quot;identity&amp;quot;) + coord_cartesian() + facet_null() + #----map data values to visual values--- scale_x_continuous() + scale_y_continuous() + scale_color_identity() + theme() ggplot(energy_tics) + geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.</description>
+      <guid>/tutorials-4/pca/</guid>
+      <description>pre code, pre, code { white-space: pre !important; overflow-x: scroll !important; word-break: keep-all !important; word-wrap: initial !important; }  Import data load(url(&amp;#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&amp;#39;))  Load libraries library(ggplot2)  Visualization Collective Variables and Macrostates  Geom object: point  TIC0 -&amp;gt; x TIC1 -&amp;gt; y macrostate -&amp;gt; color   ggplot(energy_tics) + geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)), stat = &amp;quot;identity&amp;quot;, position = &amp;quot;identity&amp;quot;) + coord_cartesian() + facet_null() + #----map data values to visual values--- scale_x_continuous() + scale_y_continuous() + scale_color_identity() + theme() ggplot(energy_tics) + geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.</description>
     </item>
     
     <item>
       <title></title>
-      <link>/tutorials/cluster_analysis_basic/</link>
+      <link>/tutorials-4/cluster_analysis_basic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tutorials/cluster_analysis_basic/</guid>
+      <guid>/tutorials-4/cluster_analysis_basic/</guid>
       <description>Import and parse data library(tidyr) data_path &amp;lt;- &#39;../datasets/john_datasets/traj_0.dat&#39; feature_names = stringr::str_split(readLines(data_path)[1], &#39;--&#39;)[[1]] # feature names have space and special characters. These characters are not good for variable names. # let&#39;s encode feature names names(feature_names) = paste0(&#39;V_&#39;, 1:length(feature_names)) data_raw = read.table(data_path, header = FALSE, sep = &#39; &#39;, comment.char = &#39;D&#39;, stringsAsFactors = FALSE) colnames(data_raw) = names(feature_names) str(data_raw) ## &#39;data.frame&#39;: 5001 obs. of 29 variables: ## $ V_1 : num 0.</description>
     </item>
     
     <item>
       <title></title>
-      <link>/tutorials/heatmap/</link>
+      <link>/tutorials-4/heatmap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tutorials/heatmap/</guid>
+      <guid>/tutorials-4/heatmap/</guid>
       <description>Import and parse data library(tidyr) library(ggplot2) ## Warning: package &#39;ggplot2&#39; was built under R version 3.3.3 library(reshape2) ## ## Attaching package: &#39;reshape2&#39; ## The following object is masked from &#39;package:tidyr&#39;: ## ## smiths data_path &amp;lt;- &#39;../datasets/john_datasets/traj_0.dat&#39; feature_names = stringr::str_split(readLines(data_path)[1], &#39;--&#39;)[[1]] # feature names have space and special characters. These characters are not good for variable names. # let&#39;s encode feature names names(feature_names) = paste0(&#39;V_&#39;, 1:length(feature_names)) data_raw = read.table(data_path, header = FALSE, sep = &#39; &#39;, comment.</description>
     </item>
     
     <item>
       <title>Cluster Tutorial</title>
-      <link>/tutorials/cluster_analysis_basic/</link>
+      <link>/tutorials-4/cluster_analysis_basic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tutorials/cluster_analysis_basic/</guid>
+      <guid>/tutorials-4/cluster_analysis_basic/</guid>
       <description>Import and parse data library(tidyr) data_path &amp;lt;- &amp;#39;../datasets/john_datasets/traj_0.dat&amp;#39; feature_names = stringr::str_split(readLines(data_path)[1], &amp;#39;--&amp;#39;)[[1]] # feature names have space and special characters. These characters are not good for variable names. # let&amp;#39;s encode feature names names(feature_names) = paste0(&amp;#39;V_&amp;#39;, 1:length(feature_names)) data_raw = read.table(data_path, header = FALSE, sep = &amp;#39; &amp;#39;, comment.char = &amp;#39;D&amp;#39;, stringsAsFactors = FALSE) colnames(data_raw) = names(feature_names) str(data_raw) ## &amp;#39;data.frame&amp;#39;: 5001 obs. of 29 variables: ## $ V_1 : num 0.39 0.</description>
     </item>
     
     <item>
       <title>Heatmap Tutorial</title>
-      <link>/tutorials/heatmap/</link>
+      <link>/tutorials-4/heatmap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tutorials/heatmap/</guid>
+      <guid>/tutorials-4/heatmap/</guid>
       <description>Import and parse data library(tidyr) library(ggplot2) library(reshape2) ## ## Attaching package: &amp;#39;reshape2&amp;#39; ## The following object is masked from &amp;#39;package:tidyr&amp;#39;: ## ## smiths data_path &amp;lt;- &amp;#39;../datasets/john_datasets/traj_0.dat&amp;#39; feature_names = stringr::str_split(readLines(data_path)[1], &amp;#39;--&amp;#39;)[[1]] # feature names have space and special characters. These characters are not good for variable names. # let&amp;#39;s encode feature names names(feature_names) = paste0(&amp;#39;V_&amp;#39;, 1:length(feature_names)) data_raw = read.table(data_path, header = FALSE, sep = &amp;#39; &amp;#39;, comment.char = &amp;#39;D&amp;#39;, stringsAsFactors = FALSE) colnames(data_raw) = names(feature_names) str(data_raw) ## &amp;#39;data.</description>
     </item>
     
     <item>
       <title>Network Tutorial</title>
-      <link>/tutorials/network_plot/</link>
+      <link>/tutorials-4/network_plot/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tutorials/network_plot/</guid>
+      <guid>/tutorials-4/network_plot/</guid>
       <description>pre code, pre, code { white-space: pre !important; overflow-x: scroll !important; word-break: keep-all !important; word-wrap: initial !important; }  Loading libraries library(tidyr) library(ggplot2) library(reshape2) library(GGally) library(network) library(sna) library(scales) library(reshape)  Import and parse data data_path &amp;lt;- &amp;#39;../datasets/john_datasets/traj_0.dat&amp;#39; feature_names = stringr::str_split(readLines(data_path)[1], &amp;#39;--&amp;#39;)[[1]] # feature names have space and special characters. These characters are not good for variable names. # let&amp;#39;s encode feature names names(feature_names) = paste0(&amp;#39;V_&amp;#39;, 1:length(feature_names)) data_raw = read.table(data_path, header = FALSE, sep = &amp;#39; &amp;#39;, comment.</description>
     </item>
     

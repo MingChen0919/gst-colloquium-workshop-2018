@@ -1,0 +1,54 @@
+---
+weight: 1
+title: "RStudio Accounts"
+author: "gst data visualization group"
+output: html_document
+---
+
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>
+<div id="workshop-environment" class="section level2">
+<h2>Workshop Environment</h2>
+<p><strong>RStudio Server Account</strong></p>
+<p>Select an user account from this <a href="https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0">google sheet</a> and put your name on the right to mark that this user account has been used.</p>
+<p><strong>Use the <code>upload</code> button to upload local files to the Server.</strong></p>
+<p><img src='images/upload-data.png' width="600"/></p>
+<div id="install-packages-optional" class="section level3">
+<h3>Install packages (optional)</h3>
+<p>You can use the code below to install R packages in the RStudio server.</p>
+<pre class="r"><code>dir.create(&#39;~/my-r-lib&#39;)
+.libPaths(&#39;~/my-r-lib&#39;)
+install.packages(&#39;ggplot2&#39;)</code></pre>
+</div>
+</div>
+<div id="build-workshop-environment-admin-users-only" class="section level2">
+<h2>Build Workshop Environment (admin users only)</h2>
+<div id="rstudio-docker-on-jetstream" class="section level3">
+<h3>RStudio Docker on Jetstream</h3>
+<p>Launch a Jetstream image with Docker installed on Jetstream. Then run the following to luanch an RStudio server.</p>
+<pre class="bash"><code>sudo su
+
+docker pull rocker/rstudio
+
+docker run --name=gst_dv -d -p 80:8787 rocker/rstudio </code></pre>
+</div>
+<div id="create-30-new-users" class="section level3">
+<h3>Create 30 new users</h3>
+<pre><code># login to the rstudio container
+docker exec -it gst_dv bash
+
+# create users in the rstudio container
+for id in $(seq 1 30)
+do
+  echo &quot;gst_user_${id}:passwd_user_${id}::::/home/gst_user_${id}:&quot; | newusers
+done</code></pre>
+</div>
+</div>

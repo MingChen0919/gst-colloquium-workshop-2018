@@ -3,31 +3,35 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/tutorials/scatterplot/</loc>
+    <loc>/tutorials-4/line-plot/</loc>
   </url>
   
   <url>
-    <loc>/tutorials/pca/</loc>
+    <loc>/rstudio-accounts-1/</loc>
   </url>
   
   <url>
-    <loc>/setup/</loc>
+    <loc>/datasets-2/</loc>
   </url>
   
   <url>
-    <loc>/datasets/</loc>
+    <loc>/tutorials-4/pca/</loc>
   </url>
   
   <url>
-    <loc>/tutorials/</loc>
+    <loc>/ggplot2-framework-3/</loc>
   </url>
   
   <url>
-    <loc>/tutorials/cluster_analysis_basic/</loc>
+    <loc>/tutorials-4/</loc>
   </url>
   
   <url>
-    <loc>/tutorials/heatmap/</loc>
+    <loc>/tutorials-4/cluster_analysis_basic/</loc>
+  </url>
+  
+  <url>
+    <loc>/tutorials-4/heatmap/</loc>
   </url>
   
   <url>
@@ -36,7 +40,7 @@
   </url>
   
   <url>
-    <loc>/tutorials/cluster_analysis_basic/</loc>
+    <loc>/tutorials-4/cluster_analysis_basic/</loc>
   </url>
   
   <url>
@@ -44,11 +48,11 @@
   </url>
   
   <url>
-    <loc>/tutorials/heatmap/</loc>
+    <loc>/tutorials-4/heatmap/</loc>
   </url>
   
   <url>
-    <loc>/tutorials/network_plot/</loc>
+    <loc>/tutorials-4/network_plot/</loc>
   </url>
   
   <url>

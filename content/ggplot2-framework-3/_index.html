@@ -1,0 +1,39 @@
+---
+weight: 3
+title: "ggplot2"
+author: "gst data visualization group"
+output: html_document
+---
+
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>
+<div id="ggplot2-graph-template" class="section level2">
+<h2>ggplot2 graph template</h2>
+<pre class="r"><code>ggplot(data = &lt;DATA&gt;) +
+  &lt;GEOM_FUNCTION&gt;(mapping = aes(&lt;MAPPINGS&gt;),
+                  stat = &lt;STAT&gt;, position = &lt;POSITION&gt;) +
+  &lt;COORDINATE_FUNCTION&gt; +
+  &lt;FACET_FUNCTION&gt; +
+  &lt;SCALE_FUNCTION&gt; +
+  &lt;THEME_FUNCTION&gt;</code></pre>
+<ul>
+<li><strong>GEOM_FUNCTION</strong>: use a geometric object to represent your data.
+<ul>
+<li><strong><em>MAPPINGS</em></strong>: associate data values with visual values. e.g., categorial data -&gt; different colors.</li>
+<li><strong><em>STAT</em></strong>: use raw data values or calculate new values from raw values.</li>
+<li><strong><em>POSITION</em></strong>: adjust overlapped geometric objects.</li>
+</ul></li>
+<li><strong>COORDINATE_FUNCTION</strong>: type of coordinate systems.</li>
+<li><strong>FACET_FUNCTION</strong>: divide plots into subplots</li>
+<li><strong>SCALE_FUNCTION</strong>: how data values are mapped to visual values.</li>
+<li><strong>THEME_FUNCTION</strong>: the apperance of graph components that is not directly related to the mappings.</li>
+</ul>
+</div>
