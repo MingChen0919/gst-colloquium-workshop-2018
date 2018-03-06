@@ -10,22 +10,22 @@
     <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
 
-    <title>Cluster Tutorial :: My New Hugo Site</title>
+    <title> :: My New Hugo Site</title>
     
     
-    <link href="../../css/nucleus.css?1520268866" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1520268866" rel="stylesheet">
-    <link href="../../css/hybrid.css?1520268866" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1520268866" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1520268866" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1520268866" rel="stylesheet">
-    <link href="../../css/theme.css?1520268866" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1520268866" rel="stylesheet">
+    <link href="../../css/nucleus.css?1520343914" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1520343914" rel="stylesheet">
+    <link href="../../css/hybrid.css?1520343914" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1520343914" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1520343914" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1520343914" rel="stylesheet">
+    <link href="../../css/theme.css?1520343914" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1520343914" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1520268866" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1520343914" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1520268866"></script>
+    <script src="../../js/jquery-2.x.min.js?1520343914"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1520268866"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1520268866"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1520343914"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1520343914"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1520268866"></script>
+<script type="text/javascript" src="../../js/search.js?1520343914"></script>
 
     
   </div>
@@ -183,7 +183,7 @@
  
   
     
-      <li data-nav-id="/tutorials/cluster_analysis_basic/" title="" class="dd-item ">
+      <li data-nav-id="/tutorials/cluster_analysis_basic/" title="" class="dd-item active">
         <a href="../../tutorials/cluster_analysis_basic/">
         
         
@@ -221,7 +221,7 @@
  
   
     
-      <li data-nav-id="/tutorials/cluster_analysis_basic/" title="Cluster Tutorial" class="dd-item active">
+      <li data-nav-id="/tutorials/cluster_analysis_basic/" title="Cluster Tutorial" class="dd-item ">
         <a href="../../tutorials/cluster_analysis_basic/">
         Cluster Tutorial
         
@@ -326,7 +326,7 @@
             
           
           
-            <a href='../../'>Data Visualization</a> > <a href='../../tutorials/'>Data Visualization</a> > Cluster Tutorial
+            <a href='../../'>Data Visualization</a> > <a href='../../tutorials/'>Data Visualization</a> > 
           
          
           
@@ -338,7 +338,12 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li><a href="#import-and-parse-data">Import and parse data</a></li>
+<li><a href="#cluster-data">Cluster data</a></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -350,25 +355,28 @@
         
         <div id="body-inner">
           
-            <h1>Cluster Tutorial</h1>
+            <h1></h1>
           
 
         
 
 
-<div id="import-and-parse-data" class="section level1">
-<h1>Import and parse data</h1>
-<pre class="r"><code>library(tidyr)
-data_path &lt;- &#39;../datasets/john_datasets/traj_0.dat&#39;
-feature_names = stringr::str_split(readLines(data_path)[1], &#39;--&#39;)[[1]]
+
+
+<h1 id="import-and-parse-data">Import and parse data</h1>
+
+<pre><code>library(tidyr)
+data_path &lt;- '../datasets/john_datasets/traj_0.dat'
+feature_names = stringr::str_split(readLines(data_path)[1], '--')[[1]]
 
 # feature names have space and special characters. These characters are not good for variable names.
-# let&#39;s encode feature names
-names(feature_names) = paste0(&#39;V_&#39;, 1:length(feature_names))
-data_raw = read.table(data_path, header = FALSE, sep = &#39; &#39;, comment.char = &#39;D&#39;, stringsAsFactors = FALSE)
+# let's encode feature names
+names(feature_names) = paste0('V_', 1:length(feature_names))
+data_raw = read.table(data_path, header = FALSE, sep = ' ', comment.char = 'D', stringsAsFactors = FALSE)
 colnames(data_raw) = names(feature_names)
-str(data_raw)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    5001 obs. of  29 variables:
+str(data_raw)
+
+## 'data.frame':    5001 obs. of  29 variables:
 ##  $ V_1 : num  0.39 0.391 0.386 0.389 0.39 0.377 0.383 0.391 0.382 0.392 ...
 ##  $ V_2 : num  0.663 0.676 0.683 0.648 0.673 0.702 0.68 0.654 0.632 0.704 ...
 ##  $ V_3 : num  0.931 0.946 0.934 1.001 0.954 ...
@@ -397,13 +405,15 @@ str(data_raw)</code></pre>
 ##  $ V_26: num  -0.272 0.091 -0.152 0.758 -0.575 -0.487 0.084 -0.495 0.076 -0.19 ...
 ##  $ V_27: num  0.659 0.66 0.68 0.668 0.641 0.65 0.659 0.639 0.65 0.685 ...
 ##  $ V_28: num  0.629 0.426 0.436 0.946 0.407 0.388 0.581 0.684 0.49 0.4 ...
-##  $ V_29: num  0.414 0.367 0.336 0.39 0.382 0.345 0.419 0.327 0.305 0.351 ...</code></pre>
-<pre class="r"><code># add frame index
-data_raw$frame_index = 1:nrow(data_raw)</code></pre>
-</div>
-<div id="cluster-data" class="section level1">
-<h1>Cluster data</h1>
-<pre class="r"><code>#Set frame index as row names
+##  $ V_29: num  0.414 0.367 0.336 0.39 0.382 0.345 0.419 0.327 0.305 0.351 ...
+
+# add frame index
+data_raw$frame_index = 1:nrow(data_raw)
+</code></pre>
+
+<h1 id="cluster-data">Cluster data</h1>
+
+<pre><code>#Set frame index as row names
 rownames(data_raw) &lt;- data_raw$frame_index
 data_raw$frame_index &lt;- NULL
 
@@ -414,38 +424,40 @@ data_clean &lt;- na.omit(data_raw)
 fit &lt;- kmeans(data_clean,5)
 
 #get cluster means
-aggregate(data_clean, by=list(fit$cluster), FUN=mean)</code></pre>
-<pre><code>##   Group.1       V_1       V_2       V_3       V_4       V_5       V_6
-## 1       1 0.3862190 0.6786038 0.9177829 0.8796571 0.3833486 0.5729219
-## 2       2 0.3862412 0.5591859 0.5787555 0.7032032 0.3836063 0.5651692
-## 3       3 0.3864077 0.5677077 0.8121385 0.9985923 0.3842000 0.5862385
-## 4       4 0.3865218 0.5562464 0.5444314 0.6530977 0.3836895 0.5575914
-## 5       5 0.3870620 0.5751752 0.5787039 0.6890915 0.3841302 0.5648698
-##         V_7       V_8       V_9      V_10        V_11       V_12
-## 1 0.6294286 0.3842457 0.5724286 0.3836743 -0.18981905 -0.7705752
-## 2 0.5863544 0.3840893 0.5723431 0.3841646  0.22555496 -0.8680020
-## 3 0.8648308 0.3834923 0.5864308 0.3840615 -0.02088462 -0.9419769
-## 4 0.5553123 0.3845982 0.5708059 0.3839941  0.34978227 -0.9048086
-## 5 0.5770822 0.3844357 0.5704543 0.3844822  0.30589457 -0.9115302
-##          V_13        V_14       V_15       V_16       V_17       V_18
-## 1  0.02742667 -0.74582667 0.11602476 -0.9270248 -0.7385143  0.5894133
-## 2  0.45111592 -0.81389940 0.04065157 -0.9296869  0.8771746 -0.3311446
-## 3 -0.65593846 -0.11573846 0.31730000  0.7286385  0.9161615 -0.1889231
-## 4  0.43632773 -0.83071273 0.28700818 -0.9251495  0.8217905 -0.5111027
-## 5 -0.86640465 -0.06119225 0.17460775 -0.9342651  0.8272403 -0.4833705
-##          V_19       V_20      V_21       V_22       V_23       V_24
-## 1  0.10976762 -0.9435124 0.8111029 -0.2724133 0.16265524 -0.9382400
-## 2 -0.15928448 -0.9532365 0.8883964 -0.2123937 0.16258827 -0.9467582
-## 3  0.17767692 -0.9357077 0.5182154  0.5895846 0.09267692 -0.9572615
-## 4  0.27981636 -0.9423836 0.8079964 -0.5367095 0.18260500 -0.9359691
-## 5  0.05510388 -0.9519953 0.8397659 -0.3540047 0.17377364 -0.9370667
-##        V_25        V_26      V_27      V_28      V_29
-## 1 0.7644210 -0.23301714 0.6448590 0.5275429 0.3990686
-## 2 0.8763165 -0.09823451 0.3641153 0.3990000 0.3994517
-## 3 0.5244538 -0.21440769 0.4508154 0.5262308 0.6245923
-## 4 0.7612914 -0.61678591 0.3460318 0.3412000 0.3594400
-## 5 0.8346946 -0.34364806 0.3591194 0.3744977 0.3781907</code></pre>
-<pre class="r"><code>#append cluster assignment
+aggregate(data_clean, by=list(fit$cluster), FUN=mean)
+
+##   Group.1       V_1       V_2       V_3       V_4       V_5       V_6
+## 1       1 0.3862348 0.5592769 0.5748100 0.6973926 0.3835960 0.5626535
+## 2       2 0.3864857 0.5678057 0.8016000 0.9851200 0.3842000 0.6134457
+## 3       3 0.3865253 0.5560662 0.5439531 0.6531682 0.3836820 0.5575487
+## 4       4 0.3870317 0.5752425 0.5751743 0.6832726 0.3841506 0.5618320
+## 5       5 0.3862538 0.6787672 0.9178263 0.8797462 0.3833511 0.5726985
+##         V_7       V_8       V_9      V_10       V_11       V_12
+## 1 0.5788722 0.3840656 0.5719552 0.3841920  0.2337157 -0.8667144
+## 2 0.8777257 0.3838743 0.5846571 0.3837943 -0.0057200 -0.9398400
+## 3 0.5555110 0.3846131 0.5708332 0.3839903  0.3491769 -0.9049453
+## 4 0.5696260 0.3843978 0.5705816 0.3845024  0.3067195 -0.9110634
+## 5 0.6291202 0.3842538 0.5725305 0.3836851 -0.1884389 -0.7712672
+##          V_13       V_14       V_15       V_16       V_17       V_18
+## 1  0.45324682 -0.8136134 0.05256054 -0.9333478  0.8752174 -0.3384883
+## 2 -0.52488000 -0.2704171 0.16125143  0.3471543  0.9050629 -0.2114457
+## 3  0.43790717 -0.8298051 0.28521921 -0.9254306  0.8220363 -0.5103837
+## 4 -0.86560856 -0.0559065 0.18861331 -0.9371109  0.8281601 -0.4813756
+## 5  0.02844466 -0.7456050 0.11597519 -0.9269046 -0.7416546  0.5897328
+##          V_19       V_20      V_21       V_22      V_23       V_24
+## 1 -0.16211237 -0.9545151 0.9189023 -0.2297124 0.1642268 -0.9463264
+## 2  0.14760000 -0.9320000 0.1892971  0.5537771 0.1010114 -0.9567886
+## 3  0.28400092 -0.9420368 0.8084044 -0.5374403 0.1827247 -0.9359674
+## 4  0.05383043 -0.9520143 0.8765832 -0.3730254 0.1732219 -0.9369049
+## 5  0.10945229 -0.9434771 0.8145477 -0.2727290 0.1625840 -0.9381603
+##        V_25       V_26      V_27      V_28      V_29
+## 1 0.8851866 -0.1011906 0.3592321 0.3921933 0.3933712
+## 2 0.5498514 -0.2002400 0.4865429 0.5589543 0.6348057
+## 3 0.7591471 -0.6208465 0.3459968 0.3412895 0.3595322
+## 4 0.8337607 -0.3441680 0.3544802 0.3696593 0.3716466
+## 5 0.7642844 -0.2324141 0.6447195 0.5275057 0.3987672
+
+#append cluster assignment
 data_kmean &lt;- data.frame(data_clean, fit$cluster)
 
 #cluster plot
@@ -453,11 +465,17 @@ library(cluster)
 clusplot(data_clean, fit$cluster, color=TRUE, shade=TRUE, labels=5, lines=0)
 
 #centroid plot against 1st 2 discriminant functions
-library(fpc)</code></pre>
-<p><img src="../../tutorials/cluster_analysis_basic_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code>plotcluster(data_clean, fit$cluster)</code></pre>
-<p><img src="../../tutorials/cluster_analysis_basic_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
-</div>
+library(fpc)
+
+## Warning: package 'fpc' was built under R version 3.3.3
+</code></pre>
+
+<p><img src="cluster_analysis_basic_files/figure-markdown_strict/unnamed-chunk-2-1.png" alt="" /></p>
+
+<pre><code>plotcluster(data_clean, fit$cluster)
+</code></pre>
+
+<p><img src="cluster_analysis_basic_files/figure-markdown_strict/unnamed-chunk-2-2.png" alt="" /></p>
 
 
 <footer class=" footline" >
@@ -685,20 +703,20 @@ library(fpc)</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1520268866"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1520268866"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1520268866"></script>
-    <script src="../../js/jquery.sticky.js?1520268866"></script>
-    <script src="../../js/featherlight.min.js?1520268866"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1520268866"></script>
-    <script src="../../js/highlight.pack.js?1520268866"></script>
+    <script src="../../js/clipboard.min.js?1520343914"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1520343914"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1520343914"></script>
+    <script src="../../js/jquery.sticky.js?1520343914"></script>
+    <script src="../../js/featherlight.min.js?1520343914"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1520343914"></script>
+    <script src="../../js/highlight.pack.js?1520343914"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1520268866"></script>
-    <script src="../../js/learn.js?1520268866"></script>
-    <script src="../../js/hugo-learn.js?1520268866"></script>
+    <script src="../../js/modernizr.custom.71422.js?1520343914"></script>
+    <script src="../../js/learn.js?1520343914"></script>
+    <script src="../../js/hugo-learn.js?1520343914"></script>
 
-    <link href="../../mermaid/mermaid.css?1520268866" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1520268866"></script>
+    <link href="../../mermaid/mermaid.css?1520343914" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1520343914"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
