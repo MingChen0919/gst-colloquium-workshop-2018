@@ -1,0 +1,47 @@
+---
+weight: 1
+title: "Group Meetings"
+author: "gst data visualization group"
+output: html_document
+---
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+
+
+# Data Visualization
+
+## Group meetings
+
+* **First group meeting** (4pm@235M, 01-17-2018, Hodges library)
+    + Narrow down topic, 
+    + Define learning goals, 
+    + Techniques to be taught,
+    + Assign tasks to team members
+    + Timeline with milestones for the semester
+    
+* Potential topic
+    + data visualization skills for publication ready plots with R.
+* [Visualizing big data with R](https://beta.rstudioconnect.com/jmcphers/datavis-talk/datavis.html)
+* Some examples
+    + [http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/](http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/)
+    + [heatmap](https://www.dovepress.com/cr_data/article_fulltext/s59000/59871/img/fig1.jpg)
+    + [phylogenetic tree](http://rsbl.royalsocietypublishing.org/content/12/8/20160407)
+    + [map plot](https://www.arilamstein.com/blog/2016/01/25/mapping-us-religion-adherence-county-r/)
+    + [genomic data visualization](https://academic.oup.com/bioinformatics/article/32/19/3012/2196360)
+    + [larget network data visualization](https://academic.oup.com/bioinformatics/article/30/19/2834/2422229)
+    + ...
+    
+    
+  

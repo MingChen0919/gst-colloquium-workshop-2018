@@ -1,0 +1,350 @@
+---
+title: "Data Visualization with ggplot2"
+author: "GST data visualization group"
+output: slidy_presentation
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache.rebuild = TRUE)
+library(ggplot2)
+library(gridExtra)
+```
+
+
+## Data Visualization
+
+* **Figure: a combination of geometric objects**
+    - dots
+    - lines
+    - areas
+* **Geometric objects have attributes**
+    - location
+    - color
+    - size
+    - shape
+    - transparency
+* **Data visualization**: mapping categorical/numeric variables to geometric objects and their attributes
+
+
+
+## ggplot2 plotting template
+
+* **GEOM function**: geometric objects
+    - Aesthetics: attributes of geometric objects
+    - Stat functions: variable transformation
+* **Coordinate function**: determine coordinate system
+    - cartesian coordinates
+    - polar coordinates
+    - …
+* **Facet function**: split plots to multiple coordinate systems
+* **Scale function**: adjust the mapping scale between data values and asethetic values
+* **Theme function**: determine the general apperance of a plot. Do not use any information from the data.
+
+##
+```{r echo=FALSE, fig.align='center', out.width='100%'}
+knitr::include_graphics('images/plotting-templates.png')
+```
+
+## 
+```{r fig.align='center'}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+```
+
+
+## Why <span style="color:red">ggplot2</span>?
+
+<br/>
+<br/>
+
+* Top 5 most downloaded R packages
+* Top 1 data visulization packages in R
+* Part of the Tidyverse
+* ggplot2 graphics helps you understand your data
+* Manny packages are built upon ggplot2: [ggplot2 extensions](http://www.ggplot2-exts.org/gallery/)
+
+
+## <br/><br/><br/><br/><br/><br/>
+
+<h1>The grammar and philosophy of ggplot2</h1>
+
+
+## Geom: which geometric object to use?
+
+```{r}
+p1 = ggplot(data = mtcars) + 
+  #---------- GEOM --------------
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  #---------- GEOM --------------
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  #---------- GEOM --------------
+  geom_histogram(mapping = aes(x = disp), 
+             stat = "bin", bins = 20) +
+  #---------- GEOM --------------
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+```
+
+##
+
+```{r fig.align='center', echo=FALSE}
+grid.arrange(p1, p2, ncol = 2)
+```
+
+
+## Aesthetics: manipulate attributes of geometric objects
+
+```{r}
+p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             #---------- aesthetic: color --------------
+             color = "black",
+             #---------- aesthetic: color --------------
+             stat = "identity") +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             #---------- aesthetic: color --------------
+             color = mtcars$carb,
+             #---------- aesthetic: color --------------
+             stat = "identity") +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+```
+
+
+##
+
+```{r fig.align='center', echo=FALSE}
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## Coordinate system
+
+```{r}
+p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             color = "black",
+             stat = "identity") +
+  #---------- coordinate: cartesian --------------
+  coord_cartesian() + 
+  #---------- coordinate: cartesian --------------
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  
+  geom_point(mapping = aes(x = disp, y = hp), 
+             color = "black",
+             stat = "identity") +
+  #---------- coordinate: cartesian --------------
+  coord_polar() + 
+  #---------- coordinate: cartesian --------------
+  scale_color_discrete() +
+  theme()
+```
+
+
+##
+
+```{r fig.align='center', echo=FALSE}
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## Scale: adjust aesthetic mappings
+
+Unique values of carb
+
+```{r echo=FALSE}
+unique(mtcars$carb)
+```
+
+```{r}
+p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)), 
+             stat = "identity") +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)),
+             stat = "identity") +
+  coord_cartesian() + 
+  #---------- scale: adjust mapping --------------
+  scale_colour_manual(values = c('1'='blue', '2' = 'red', '3' = 'yellow', '4' = 'brown', '6' = 'pink', '8' = 'purple')) +
+  #---------- scale: adjust mapping --------------
+  theme()
+```
+
+
+##
+
+```{r fig.align='center', echo=FALSE}
+grid.arrange(p1, p2, ncol = 2)
+```
+
+
+## Theme: determine the plot appearance
+
+```{r}
+p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)), 
+             stat = "identity") +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)), 
+             stat = "identity") +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme_classic()
+```
+
+##
+
+```{r fig.align='center', echo=FALSE}
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## Facet: split into multiple plots
+
+```{r}
+p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             color = "black",
+             stat = "identity") +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             color = "black",
+             stat = "identity") +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme() + 
+  #---------- facet --------------
+  facet_grid(. ~ am)
+  #---------- facet --------------
+```
+
+
+##
+
+```{r fig.align='center', echo=FALSE}
+grid.arrange(p1, p2, ncol = 2)
+```
+
+
+## Guides: axes and legends
+
+```{r}
+p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)), 
+             stat = "identity") +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme_classic()
+
+p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)), 
+             stat = "identity") +
+  coord_cartesian() + 
+  #----------- Guides: axes and legends ------
+  scale_color_manual(values = c('1'='blue', '2' = 'red', '3' = 'yellow', '4' = 'brown', '6' = 'pink', '8' = 'purple'),
+                     labels = paste('carb', c(1, 2, 3, 4, 6, 8)),
+                     guide = guide_legend(title = 'No. carburetors')) +
+  xlim(0, 1000) +
+  ylim(0, 1000) + 
+  xlab('Displacement (cu.in.)') +
+  ylab('Gross horsepower') +
+  ggtitle('Horsepower vs. Displacement') +
+  #----------- Guides: axes and legends ------
+  theme_classic()
+```
+
+##
+
+```{r fig.width=12, fig.height=5, fig.align='center', echo=FALSE}
+grid.arrange(p1, p2, ncol=2)
+```
+
+## <br/><br/><br/><br/><br/><br/>
+
+<h1>Goals</h1>
+- <h3>Learn the grammar of ggplot2 data visualization</h3>
+- <h3>Learn how to create pulication ready plots with ggplot2 and ggplot2 extensions</h3>
+
+
+## <br/><br/><br/><br/>
+
+<h1>Data Visualization in Practice</h1>
+
+- Scatter plot (MD simulation data)
+- Heatmap (expression/MD simulation data) 
+    * cluster/dendrogram
+- PCA plot (expression/MD simulation data)
+- Network (expression/MD simulation data ?)
+
+## Scatter plot (MD simulation data)
+
+Not familiar with MD simulation data, need some good figures (John?).
+
+## Heatmap with dendrogram (expression/MD simulation data)
+
+recommended ggplot2 extension: [ggtree](https://guangchuangyu.github.io/ggtree/gallery/)
+
+```{r echo=FALSE, fig=TRUE, fig.width=10}
+knitr::include_graphics('images/heatmap.png')
+```
+
+
+## PCA plot
+
+Recommended ggplot2 extension:  [ggfortify](https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html)
+
+```{r echo=FALSE, results='asis', cache.rebuild=TRUE}
+knitr::include_graphics(c('images/pca-1.png', 'images/pca-2.png'))
+```
+
+## Network
+
+Recommended ggplot2 extension: [ggraph](http://www.ggplot2-exts.org/ggraph.html)
+
+
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics('images/network.png')
+```
+
+
+<!--
+The following code is for creating scrollbar for code chunks. This should be placed at the
+end of this file. Otherwise, it will creates an empty slide.
+-->
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>

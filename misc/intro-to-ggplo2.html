@@ -1,0 +1,313 @@
+---
+title: "Data Visualization with ggplot2"
+author: "GST data visualization group"
+output: slidy_presentation
+---
+
+
+
+<div id="data-visualization" class="section level2">
+<h2>Data Visualization</h2>
+<ul>
+<li><strong>Figure: a combination of geometric objects</strong>
+<ul>
+<li>dots</li>
+<li>lines</li>
+<li>areas</li>
+</ul></li>
+<li><strong>Geometric objects have attributes</strong>
+<ul>
+<li>location</li>
+<li>color</li>
+<li>size</li>
+<li>shape</li>
+<li>transparency</li>
+</ul></li>
+<li><strong>Data visualization</strong>: mapping categorical/numeric variables to geometric objects and their attributes</li>
+</ul>
+</div>
+<div id="ggplot2-plotting-template" class="section level2">
+<h2>ggplot2 plotting template</h2>
+<ul>
+<li><strong>GEOM function</strong>: geometric objects
+<ul>
+<li>Aesthetics: attributes of geometric objects</li>
+<li>Stat functions: variable transformation</li>
+</ul></li>
+<li><strong>Coordinate function</strong>: determine coordinate system
+<ul>
+<li>cartesian coordinates</li>
+<li>polar coordinates</li>
+<li>…</li>
+</ul></li>
+<li><strong>Facet function</strong>: split plots to multiple coordinate systems</li>
+<li><strong>Scale function</strong>: adjust the mapping scale between data values and asethetic values</li>
+<li><strong>Theme function</strong>: determine the general apperance of a plot. Do not use any information from the data.</li>
+</ul>
+</div>
+<div id="section" class="section level2">
+<h2></h2>
+<p><img src="images/plotting-templates.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-1" class="section level2">
+<h2></h2>
+<pre class="r"><code>ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<p><img src="/Presentations/intro-to-ggplo2_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="why-ggplot2" class="section level2">
+<h2>Why <span style="color:red">ggplot2</span>?</h2>
+<p><br/> <br/></p>
+<ul>
+<li>Top 5 most downloaded R packages</li>
+<li>Top 1 data visulization packages in R</li>
+<li>Part of the Tidyverse</li>
+<li>ggplot2 graphics helps you understand your data</li>
+<li>Manny packages are built upon ggplot2: <a href="http://www.ggplot2-exts.org/gallery/">ggplot2 extensions</a></li>
+</ul>
+</div>
+<div id="section-2" class="section level2">
+<h2><br/><br/><br/><br/><br/><br/></h2>
+<h1>
+The grammar and philosophy of ggplot2
+</h1>
+</div>
+<div id="geom-which-geometric-object-to-use" class="section level2">
+<h2>Geom: which geometric object to use?</h2>
+<pre class="r"><code>p1 = ggplot(data = mtcars) + 
+  #---------- GEOM --------------
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  #---------- GEOM --------------
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  #---------- GEOM --------------
+  geom_histogram(mapping = aes(x = disp), 
+             stat = &quot;bin&quot;, bins = 20) +
+  #---------- GEOM --------------
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+</div>
+<div id="section-3" class="section level2">
+<h2></h2>
+<p><img src="/Presentations/intro-to-ggplo2_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="aesthetics-manipulate-attributes-of-geometric-objects" class="section level2">
+<h2>Aesthetics: manipulate attributes of geometric objects</h2>
+<pre class="r"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             #---------- aesthetic: color --------------
+             color = &quot;black&quot;,
+             #---------- aesthetic: color --------------
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             #---------- aesthetic: color --------------
+             color = mtcars$carb,
+             #---------- aesthetic: color --------------
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+</div>
+<div id="section-4" class="section level2">
+<h2></h2>
+<p><img src="/Presentations/intro-to-ggplo2_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="coordinate-system" class="section level2">
+<h2>Coordinate system</h2>
+<pre class="r"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             color = &quot;black&quot;,
+             stat = &quot;identity&quot;) +
+  #---------- coordinate: cartesian --------------
+  coord_cartesian() + 
+  #---------- coordinate: cartesian --------------
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  
+  geom_point(mapping = aes(x = disp, y = hp), 
+             color = &quot;black&quot;,
+             stat = &quot;identity&quot;) +
+  #---------- coordinate: cartesian --------------
+  coord_polar() + 
+  #---------- coordinate: cartesian --------------
+  scale_color_discrete() +
+  theme()</code></pre>
+</div>
+<div id="section-5" class="section level2">
+<h2></h2>
+<p><img src="/Presentations/intro-to-ggplo2_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="scale-adjust-aesthetic-mappings" class="section level2">
+<h2>Scale: adjust aesthetic mappings</h2>
+<p>Unique values of carb</p>
+<pre><code>## [1] 4 1 2 3 6 8</code></pre>
+<pre class="r"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  #---------- scale: adjust mapping --------------
+  scale_colour_manual(values = c(&#39;1&#39;=&#39;blue&#39;, &#39;2&#39; = &#39;red&#39;, &#39;3&#39; = &#39;yellow&#39;, &#39;4&#39; = &#39;brown&#39;, &#39;6&#39; = &#39;pink&#39;, &#39;8&#39; = &#39;purple&#39;)) +
+  #---------- scale: adjust mapping --------------
+  theme()</code></pre>
+</div>
+<div id="section-6" class="section level2">
+<h2></h2>
+<p><img src="/Presentations/intro-to-ggplo2_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="theme-determine-the-plot-appearance" class="section level2">
+<h2>Theme: determine the plot appearance</h2>
+<pre class="r"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme_classic()</code></pre>
+</div>
+<div id="section-7" class="section level2">
+<h2></h2>
+<p><img src="/Presentations/intro-to-ggplo2_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="facet-split-into-multiple-plots" class="section level2">
+<h2>Facet: split into multiple plots</h2>
+<pre class="r"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             color = &quot;black&quot;,
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()
+
+p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             color = &quot;black&quot;,
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme() + 
+  #---------- facet --------------
+  facet_grid(. ~ am)
+  #---------- facet --------------</code></pre>
+</div>
+<div id="section-8" class="section level2">
+<h2></h2>
+<p><img src="/Presentations/intro-to-ggplo2_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="guides-axes-and-legends" class="section level2">
+<h2>Guides: axes and legends</h2>
+<pre class="r"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme_classic()
+
+p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color = factor(carb)), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  #----------- Guides: axes and legends ------
+  scale_color_manual(values = c(&#39;1&#39;=&#39;blue&#39;, &#39;2&#39; = &#39;red&#39;, &#39;3&#39; = &#39;yellow&#39;, &#39;4&#39; = &#39;brown&#39;, &#39;6&#39; = &#39;pink&#39;, &#39;8&#39; = &#39;purple&#39;),
+                     labels = paste(&#39;carb&#39;, c(1, 2, 3, 4, 6, 8)),
+                     guide = guide_legend(title = &#39;No. carburetors&#39;)) +
+  xlim(0, 1000) +
+  ylim(0, 1000) + 
+  xlab(&#39;Displacement (cu.in.)&#39;) +
+  ylab(&#39;Gross horsepower&#39;) +
+  ggtitle(&#39;Horsepower vs. Displacement&#39;) +
+  #----------- Guides: axes and legends ------
+  theme_classic()</code></pre>
+</div>
+<div id="section-9" class="section level2">
+<h2></h2>
+<p><img src="/Presentations/intro-to-ggplo2_files/figure-html/unnamed-chunk-17-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-10" class="section level2">
+<h2><br/><br/><br/><br/><br/><br/></h2>
+<h1>
+Goals
+</h1>
+<ul>
+<li><h3>
+Learn the grammar of ggplot2 data visualization
+</h3></li>
+<li><h3>
+Learn how to create pulication ready plots with ggplot2 and ggplot2 extensions
+</h3></li>
+</ul>
+</div>
+<div id="section-11" class="section level2">
+<h2><br/><br/><br/><br/></h2>
+<h1>
+Data Visualization in Practice
+</h1>
+<ul>
+<li>Scatter plot (MD simulation data)</li>
+<li>Heatmap (expression/MD simulation data)
+<ul>
+<li>cluster/dendrogram</li>
+</ul></li>
+<li>PCA plot (expression/MD simulation data)</li>
+<li>Network (expression/MD simulation data ?)</li>
+</ul>
+</div>
+<div id="scatter-plot-md-simulation-data" class="section level2">
+<h2>Scatter plot (MD simulation data)</h2>
+<p>Not familiar with MD simulation data, need some good figures (John?).</p>
+</div>
+<div id="heatmap-with-dendrogram-expressionmd-simulation-data" class="section level2">
+<h2>Heatmap with dendrogram (expression/MD simulation data)</h2>
+<p>recommended ggplot2 extension: <a href="https://guangchuangyu.github.io/ggtree/gallery/">ggtree</a></p>
+<p><img src="images/heatmap.png" /><!-- --></p>
+</div>
+<div id="pca-plot" class="section level2">
+<h2>PCA plot</h2>
+<p>Recommended ggplot2 extension: <a href="https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html">ggfortify</a></p>
+<p><img src="images/pca-1.png" /><!-- --><img src="images/pca-2.png" /><!-- --></p>
+</div>
+<div id="network" class="section level2">
+<h2>Network</h2>
+<p>Recommended ggplot2 extension: <a href="http://www.ggplot2-exts.org/ggraph.html">ggraph</a></p>
+<p><img src="images/network.png" style="display: block; margin: auto;" /></p>
+<!--
+The following code is for creating scrollbar for code chunks. This should be placed at the
+end of this file. Otherwise, it will creates an empty slide.
+-->
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>
+</div>

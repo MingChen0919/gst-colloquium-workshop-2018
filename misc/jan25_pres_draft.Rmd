@@ -1,0 +1,108 @@
+---
+title: "Big Data Visualization"
+author: "GST data visualization group"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache.rebuild = TRUE)
+```
+
+## Big Data
+
+* **Very large data sets**
+* **Analyzed computationally to reveal:**
+    - patterns
+    - trends
+    - associations
+    
+    
+## Big Biological Data
+
+* **Large biological data sets are generated via several processes:**
+    - Genomic and metagenomic sequencing
+    - Molecular modeling and dynamics
+    - RNA sequencing
+    
+* **How do we visualize big biological data?**
+
+
+## Data Visualization
+
+* **Figure: a combination of geometric objects**
+    - dots
+    - lines
+    - areas
+* **Geometric objects have attributes**
+    - location
+    - color
+    - size
+    - shape
+    - transparency
+* **Data visualization**: mapping categorical/numeric variables to geometric objects and their attributes
+
+
+## Processing Big Data into Publication-Ready Figures
+
+* **Learning Goals:**
+    - Use coordinate systems (polar vs. cartesian)
+    - Make axes and legends
+    - Manipulate aesthetics and plot appearance
+    - Split larger plots into smaller readable plots (facetting)
+    - Cluster data
+    - Analyze data components
+    - Link and correlate specific data points to one another
+
+
+##Data Visualization in Practice Using R as a Platform
+
+* **Plot types**
+    - Scatter plot (MD simulation data)
+    - Heatmap (expression/MD simulation data)
+        *cluster/dendrogram
+    - PCA plot (expression/MD simulation data)
+    - Network (expression/MD simulation data)
+
+
+## Scatter plot (MD simulation data)
+
+**I don't know how to make this fill the screen**
+
+```{r echo=FALSE, fig=TRUE, fig.width=10}
+knitr::include_graphics('images/scatterplot_md.png')
+```
+
+
+## Heatmap with dendrogram (expression/MD simulation data)
+
+```{r echo=FALSE, fig=TRUE, fig.width=10}
+knitr::include_graphics('images/heatmap.png')
+```
+
+
+## PCA plot
+
+```{r echo=FALSE, results='asis', cache.rebuild=TRUE}
+knitr::include_graphics(c('images/pca-1.png', 'images/pca-2.png'))
+```
+
+
+## Network Plot
+
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics('images/network.png')
+```
+
+
+<!--
+The following code is for creating scrollbar for code chunks. This should be placed at the
+end of this file. Otherwise, it will creates an empty slide.
+-->
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>

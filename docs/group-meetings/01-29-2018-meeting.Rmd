@@ -1,0 +1,75 @@
+---
+weight: 2
+title: "1/29/2018 Group Meeting Notes"
+author: "Rachel Steele"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache.rebuild = TRUE)
+```
+
+
+## John presented his data and how it is set up within his .dat trajectory files:
+* 29 Columns – representing features of molecular dynamics data
+* 5000 rows – representing distances of carbons in protein backbone from one another at different time points
+
+## Stuff we need to work on:
+* A data parser – main problem seemed to be figuring out how to parse header column separately from data values, as delimiter is different for data values (space is delimiter) and column names (-- is delimiter)
+
+Below is my solution for reference. (Ming): 
+```{r}
+library(ggplot2)
+library(stringr)
+
+# data path
+data_path = '../datasets/John_datasets/traj_0.dat'
+
+# get first line of the tray_0.dat and split by '--' to get all feature names
+feature_names = str_split(readLines(data_path)[1], '--')[[1]]
+
+# read data without header
+data_raw = read.table(data_path, header = FALSE, sep = ' ', comment.char = 'D')
+
+# assign feature names to the obtain data
+colnames(data_raw) = feature_names
+
+# show structure of the data, which is a data frame with 5001 rows and 29 columns.
+str(data_raw)
+```
+
+* John -- make jupyter notebooks accessible to everyone and everyone else look at the jupyter notebooks -- this will give us a good baseline for figuring out what to do with the data in R (though John has it coded in python)
+* To start creating different plots:
+    - John had the idea of plotting frame values vs feature values (1-29)
+        * To do this we will need to pull the y value from the header for labeling purposes as the numbers 1-29 are not very informative
+        * solution for reference (MC):
+            + see [GEOM_POINT for scatter plot](http://ggplot2.tidyverse.org/reference/geom_point.html)
+            + labels are in the `feature_names` variable
+            
+* To figure out in R how to bin the data – so we can make a histogram of p-values indicating probability of certain values to occur
+    + solution for reference (MC)
+        * bin single value with histogram, see [GEOM_HISTOGRAM](http://ggplot2.tidyverse.org/reference/geom_histogram.html)
+        * bin two variables with [GEOM_BIN2D](http://ggplot2.tidyverse.org/reference/geom_bin2d.html) or [GEOM_HEX](http://ggplot2.tidyverse.org/reference/geom_hex.html)
+    
+* Figure out how to make a covariance matrix using sliding model for x number of time steps as presented
+    + covariance matrix example (MC)
+  
+```{r}
+my_matrix = data.frame(x = sample(1:100, 10),
+                       y = rnorm(10, 5, 10),
+                       z = 1:10 + rnorm(1, 2))
+my_matrix
+cov(my_matrix)
+```
+  
+
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>

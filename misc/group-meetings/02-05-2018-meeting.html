@@ -1,0 +1,149 @@
+---
+weight: 3
+title: "02/05/2018 Group Meeting Notes"
+author: "Rachel Steele"
+output: html_document
+---
+
+
+
+<div id="md-vs.-transcriptomics-data-decision" class="section level2">
+<h2><strong>MD Vs. Transcriptomics Data Decision</strong></h2>
+<p>It was decided that we will stick with the MD datasets</p>
+</div>
+<div id="the-game-plan" class="section level2">
+<h2><strong>The game plan:</strong></h2>
+<ul>
+<li>Get in groups and <strong>make the code</strong></li>
+<li>Sufficiently <strong>document the code</strong> to start making a workshop manual/guide to follow during the workshop</li>
+<li>Meet with each other and <strong>practice presenting</strong> the material workshop style</li>
+</ul>
+</div>
+<div id="workshop-flow" class="section level2">
+<h2><strong>Workshop flow</strong></h2>
+<div id="introduction" class="section level3">
+<h3><em>Introduction</em></h3>
+<ul>
+<li>John will come up with good explanations for his data which are simple enough to understand and which will:
+<ul>
+<li>Highlight the terminology for the data (frame/energy values, distances between modeled atoms, etc.)</li>
+<li>Define PCA components</li>
+<li>Use pictures and video to give a clear understanding of what the data represents</li>
+</ul></li>
+</ul>
+</div>
+<div id="plots" class="section level3">
+<h3><em>Plots</em></h3>
+<div id="scatterplots" class="section level4">
+<h4>Scatterplots</h4>
+<ul>
+<li><strong>Big data principles:</strong>
+<ul>
+<li>use of faceting</li>
+<li>Grid arrangement</li>
+</ul></li>
+<li>Using John’s raw data, each of the 29 columns (representing features) of data can be represented:
+<ul>
+<li>X axis – frame value/1,000</li>
+<li>Y axis – value</li>
+</ul></li>
+<li>Ming has already drafted code which will do this – located under tutorials on our blogdown site</li>
+</ul>
+</div>
+<div id="pca-plotting" class="section level4">
+<h4>PCA Plotting</h4>
+<ul>
+<li><strong>Big data principles:</strong>
+<ul>
+<li>Using PCA to simplify relationships between multiple variable</li>
+</ul></li>
+<li>First column is the energy value of the frame</li>
+<li>Remaining columns are PCA scores
+<ul>
+<li>We will explain how to calculate the PCA score – we can go into more detail on this process in supplemental materials. In addition, we can include some of the more complicated data pre-processing steps on the blogdown site.</li>
+</ul></li>
+</ul>
+</div>
+<div id="network-plot" class="section level4">
+<h4>Network Plot</h4>
+<ul>
+<li><strong>Big data principles:</strong>
+<ul>
+<li>Using networks to relate many data points to one another</li>
+</ul></li>
+<li>We will make two plots:
+<ul>
+<li>The first will show how using all of the data for a network plot will result in a big messy network!</li>
+<li>We will cluster the data into (200?) representative groups.
+<ul>
+<li>for MD data, the number of clusters is the square root of the number of frames</li>
+</ul></li>
+</ul></li>
+<li>We can use the clusters we make or the strength of the relationships found within the network plot for our heatmap plot.</li>
+</ul>
+</div>
+<div id="heatmap-plot" class="section level4">
+<h4>Heatmap Plot</h4>
+<ul>
+<li><strong>Big data principles:</strong>
+<ul>
+<li>To pictorially represent data correlations, showing complex data in tabular format</li>
+</ul></li>
+<li>We can use the original data to make a big heat map</li>
+<li>We can use clustered data (clustered for network plot) to make a heat map
+<ul>
+<li>This would result in a 200x200 matrix</li>
+<li>Using data after time-flatting, however, may be more informational</li>
+</ul></li>
+<li>We can use node strengths from the network plot to make a heat map</li>
+<li>We can use traditional pipelines for RNA-seq analysis to:
+<ul>
+<li>Cluster the data and make a dendrogram</li>
+<li>Create a heatmap of clustered groups of the data
+<ul>
+<li>Examples available at Statonlab.github.io</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="group-assignments" class="section level2">
+<h2><strong>Group Assignments:</strong></h2>
+<div id="by-2192018-each-group-should" class="section level3">
+<h3><em>By 2/19/2018 each group should:</em></h3>
+<ul>
+<li>Come up with one or more <strong>codes</strong> for their respective plots</li>
+<li><strong>Document the code(s)</strong> with comments and explanations</li>
+<li>Integrate the code and corresponding explanations into a <strong>draft manual</strong></li>
+<li>Be prepared to <strong>mock present</strong> their code in workshop style format to the other group</li>
+</ul>
+</div>
+<div id="heatmap-and-network-plot-coding" class="section level3">
+<h3>Heatmap and Network Plot Coding:</h3>
+<ul>
+<li>Rachel</li>
+<li>Sanjeev</li>
+<li>Shawn</li>
+<li>Amanda</li>
+<li>Pawat</li>
+</ul>
+</div>
+<div id="scatterplot-and-pca-coding" class="section level3">
+<h3>Scatterplot and PCA Coding:</h3>
+<ul>
+<li>Ming</li>
+<li>Jiali</li>
+<li>John</li>
+<li>Karthik</li>
+<li>Jennifer</li>
+</ul>
+</div>
+</div>
+<div id="next-group-meeting" class="section level2">
+<h2><em>Next Group Meeting</em></h2>
+<ul>
+<li>2/19/2018 at 4:00 p.m.</li>
+<li>Ming will book a room in the library</li>
+</ul>
+</div>

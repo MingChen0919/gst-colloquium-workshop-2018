@@ -1,0 +1,278 @@
+---
+weight: 1
+title: "01/17/2018 Group Meeting Notes"
+author: "by GST Data Visualization Group"
+output: html_document
+---
+
+
+
+<p><strong><span style="color:#F6C55B">Thanks to John for writing up this meeting report! And thanks to all group members for a great meeting! Everyone please read this page to find out our group plans and your assignments.</span></strong></p>
+<div id="todo" class="section level2">
+<h2>TODO</h2>
+<ul>
+<li>Ming: doodle poll for regular meeting</li>
+<li>Everyone: see <strong>for next week</strong> section</li>
+<li>final choice of expression dataset</li>
+<li>next week presentation slides
+<ul>
+<li>including example for each plot type?</li>
+</ul></li>
+<li>Later
+<ul>
+<li>after assignments are finalized, we need to exactly list out
+<ul>
+<li>what the data is down to the syntax / format of data files</li>
+<li>what is the simple version of plot (ie x- and y-axes values are from the data)</li>
+<li>what are the features / enhancements to make
+<ul>
+<li>1 new enhancement per plot is probably the limit we could handle with 8 total plots. maybe some plots we will go super fast and make trivial changes between the 2 examples, and get more time/features on other plots.</li>
+</ul></li>
+<li>at which plot do we introduce what concepts
+<ul>
+<li>how to choose color scheme</li>
+<li>axis stacking</li>
+<li>etc</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Model of Workshop</strong></p>
+<ul>
+<li>Parallel workup of 4 plot types with 2 data sets
+<ul>
+<li>progression from simpler plotting with less analysis to more advanced plotting with processed data</li>
+</ul></li>
+<li>5-10 minutes of background on data sets
+<ul>
+<li>This is the “biological context”</li>
+<li>Data sets are: (need to make final choice for expression data)
+<ul>
+<li>Expression Data of (<em>protein/RNA</em>)</li>
+<li>MD Simulation Data of protein folding</li>
+</ul></li>
+</ul></li>
+<li>5 minutes types of plots and what they fundamentally show</li>
+<li>5-7 minutes on relevant clustering and PCA methods
+<ul>
+<li>the data processing we do to move beyond raw data</li>
+</ul></li>
+<li>5-7 minutes on the meaning of the processed data
+<ul>
+<li>in the realm of biological context</li>
+</ul></li>
+<li>30 minutes per plot average. Some we might want to spend more time, some less
+<ul>
+<li>examine the ‘raw’ data for the plot</li>
+<li>look at simplest code for plot type with the raw data</li>
+<li>expansion to view the specific features of the figure that are included to enhance the display &amp; examination of the data</li>
+</ul></li>
+</ul>
+<p><strong>For next week</strong></p>
+<ul>
+<li>For presentation to class
+<ul>
+<li>Info slides to introduce plan &amp; context</li>
+<li>Plot slides: titles and examples of plot types</li>
+<li>Info slides:
+<ul>
+<li>slide to explain the Workshop Model
+<ul>
+<li>same plot types exemplified by 2 datasets, with some processing along the way</li>
+</ul></li>
+<li>slide to describe each data set</li>
+<li>slide to describe plotting &amp; analysis progression (PCA &amp; clustering processing)
+<ul>
+<li>4 plot types, exemplified twice via each dataset
+<ul>
+<li>raw data &amp; simple code first</li>
+<li>expansion for featurization of additional dimensions of data</li>
+<li>reminder of what processing happened to data &amp; corresponding interpretation</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>For us:
+<ul>
+<li>assign yourself to (at least) 2 plot types. for some of us, more might makes sense.
+<ul>
+<li>put at ‘X’ for your assignment, or an ‘R’ if you have some R experience instead of the ‘X’
+<ul>
+<li>John will get data for all the MD plots ready, but has NO experience with R!</li>
+<li>each row should have some R plz</li>
+</ul></li>
+<li>consider the distribution of people when you look at the table, not just your comfort zone!
+<ul>
+<li>since we’re really just finding informative ways to plot data, if its ‘your type’ of data is really secondary and more important is to create multifaceted plots with expressive features beyond the simple version</li>
+<li>we pretty much have the story for each data as a given, so we can all learn what we need for that</li>
+</ul></li>
+<li>by MONDAY, find example plot of the plot types you choose and push to repo. maybe just upload the whole publication and mention the figure number(s).</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Personnel Assingments</strong></p>
+<ul>
+<li>I cannot remember if we said whether we want to include the plot examples in our presentation to class, or just list out the plot types and data progression!?</li>
+<li>Who will present broad concept of workshop to the class
+<ul>
+<li>Ming
+<ul>
+<li>Expression dataset</li>
+<li>Simple to featurized idea for obtaining each final plot</li>
+<li>Scatterplot examples</li>
+<li>Heatmap examples</li>
+</ul></li>
+<li>John
+<ul>
+<li>Introduce Workshop Model: datasets, plot types, progression</li>
+<li>Learning Goals</li>
+<li>MD dataset</li>
+<li>PCA scatterplot examples</li>
+<li>Network plot examples</li>
+</ul></li>
+</ul></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Ming</th>
+<th>John</th>
+<th>Karthik</th>
+<th>Jiali</th>
+<th>Shawn</th>
+<th>Jennifer</th>
+<th>Amanda</th>
+<th>Pawat</th>
+<th>Sanjeev</th>
+<th>Rachel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ScatterPlot-EX</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>ScatterPlot-MD</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+</tr>
+<tr class="odd">
+<td>PCA Scatter-EX</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>PCA Scatter-MD</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+</tr>
+<tr class="odd">
+<td>Heatmap-EX</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Heatmap-MD</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+</tr>
+<tr class="odd">
+<td>Network-EX</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Network-MD</td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Learning Goals</strong></p>
+<ul>
+<li>Overview of plot types &amp; meaning</li>
+<li>Demonstrate how plotting concepts can be creatively ‘deployed’ using programmatic plotting utilities <span class="math inline">\(R\)</span>
+<ul>
+<li>build up from simple plot</li>
+<li>featurization utilities in R</li>
+</ul></li>
+<li>Tutorialize 4 advanced plots effective for showing big data</li>
+</ul>
+<p><strong>Installation</strong></p>
+<ul>
+<li>1 week ahead installation for participants</li>
+<li>sample data and scripts to do importing &amp; sample processing
+<ul>
+<li>read sample data: lets make noise</li>
+<li>output sample plots</li>
+<li>run by oracle script we give them</li>
+</ul></li>
+</ul>
+</div>

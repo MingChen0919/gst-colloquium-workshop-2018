@@ -1,0 +1,84 @@
+---
+title: "Network Tutorial"
+author: "Rachel Steele"
+date: "February 15, 2018"
+output: md_document
+---
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# Loading libraries
+
+```{r}
+library(tidyr)
+library(ggplot2)
+library(reshape2)
+library(GGally)
+library(network)
+library(sna)
+library(scales)
+library(reshape)
+```
+
+# Import and parse data
+
+```{r}
+data_path <- '../datasets/john_datasets/traj_0.dat'
+feature_names = stringr::str_split(readLines(data_path)[1], '--')[[1]]
+
+# feature names have space and special characters. These characters are not good for variable names.
+# let's encode feature names
+names(feature_names) = paste0('V_', 1:length(feature_names))
+data_raw = read.table(data_path, header = FALSE, sep = ' ', comment.char = 'D', stringsAsFactors = FALSE)
+colnames(data_raw) = names(feature_names)
+str(data_raw)
+
+# add frame index
+data_raw$frame_index = 1:nrow(data_raw)
+```
+ 
+
+# Network plot
+```{r}
+#convert data to adjacency matrix
+#lookup table from feature to frame index
+feature_to_frame <- data_raw$frame_index
+names(feature_to_frame) <- data_raw$V_1
+
+#normalize
+data_melt <- melt(data_raw, id=c("frame_index", "V_1"))
+
+#remap feature to frame index
+map <- data.frame(src=data_melt$frame_index, dest=feature_to_frame[as.character(data_melt$value)])
+
+#convert to adjacency matrix
+adj_matrix <- xtabs(~ src + dest, map)
+
+#convert xtabs format to matrix
+attr(adj_matrix, "class") <- NULL
+attr(adj_matrix, "call") <- NULL
+
+#convert matrix to data.frame
+df_adj<- as.data.frame(adj_matrix)
+
+#These formats (xtabs, matrix, and data.frame) don't seem to be working with ggnet2
+#will keep on trying to troubleshoot later
+ggnet2(df_adj)
+
+
+
+
+```
+

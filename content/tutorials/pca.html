@@ -1,0 +1,67 @@
+---
+weight: 2
+title: "PCA plot"
+author: "GST Data Visualization Group"
+output: html_document
+---
+
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>
+<div id="import-data" class="section level2">
+<h2>Import data</h2>
+<pre class="r"><code>load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&#39;))</code></pre>
+</div>
+<div id="visualization" class="section level2">
+<h2>Visualization</h2>
+<div id="collective-variables-vs.macrostates" class="section level3">
+<h3>Collective Variables vs. Macrostates</h3>
+<pre class="r"><code>ggplot(energy_tics) +
+  geom_point(aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
+             stat = &quot;identity&quot;, position = &quot;identity&quot;) +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_manual(name = &quot;Macrostate&quot;,
+                     values = c(&quot;#7572ff&quot;, &quot;#ff0000&quot;, &quot;#f0ff00&quot;, &quot;#22ff00&quot;, &quot;#2200ff&quot;, &quot;#7c00ff&quot;, &quot;#e13535&quot;),
+                     limits = 0:6, breaks = 0:6) +
+  theme_classic() +
+  
+  # helper functions
+  xlab(&#39;TIC0&#39;) +
+  ylab(&#39;TIC1&#39;)</code></pre>
+<p><img src="/tutorials/pca_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="collective-variables-vs.energy" class="section level3">
+<h3>Collective Variables vs. Energy</h3>
+<pre class="r"><code>ggplot(energy_tics) +
+  geom_point(aes(x = TIC0, y = TIC1, color = Energy),
+             stat = &quot;identity&quot;, position = &quot;identity&quot;) +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_gradient(low=&quot;blue&quot;, high=&quot;red&quot;) +
+  theme_classic() +
+  
+  # helper functions
+  xlab(&#39;TIC0&#39;) +
+  ylab(&#39;TIC1&#39;)</code></pre>
+<p><img src="/tutorials/pca_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div id="references" class="section level4">
+<h4>References:</h4>
+<ul>
+<li><a href="http://rstudio-pubs-static.s3.amazonaws.com/53162_cd16ee63c24747459ccd180f69f07810.html">ref 1</a></li>
+<li><a href="http://ggplot2.tidyverse.org/reference/stat_ellipse.html">ref 2</a></li>
+</ul>
+</div>
+</div>
+</div>

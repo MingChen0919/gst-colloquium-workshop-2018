@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/tutorials/scatterplot/</loc>
+  </url>
+  
+  <url>
+    <loc>/tutorials/pca/</loc>
+  </url>
+  
+  <url>
+    <loc>/setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/datasets/</loc>
+  </url>
+  
+  <url>
+    <loc>/tutorials/</loc>
+  </url>
+  
+  <url>
+    <loc>/tutorials/cluster_analysis_basic/</loc>
+  </url>
+  
+  <url>
+    <loc>/tutorials/heatmap/</loc>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tutorials/cluster_analysis_basic/</loc>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+  </url>
+  
+  <url>
+    <loc>/tutorials/heatmap/</loc>
+  </url>
+  
+  <url>
+    <loc>/tutorials/network_plot/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
