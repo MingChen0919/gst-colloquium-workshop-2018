@@ -13,19 +13,19 @@
     <title>PCA plot :: My New Hugo Site</title>
     
     
-    <link href="../../css/nucleus.css?1520343914" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1520343914" rel="stylesheet">
-    <link href="../../css/hybrid.css?1520343914" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1520343914" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1520343914" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1520343914" rel="stylesheet">
-    <link href="../../css/theme.css?1520343914" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1520343914" rel="stylesheet">
+    <link href="../../css/nucleus.css?1520358239" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1520358239" rel="stylesheet">
+    <link href="../../css/hybrid.css?1520358239" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1520358239" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1520358239" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1520358239" rel="stylesheet">
+    <link href="../../css/theme.css?1520358239" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1520358239" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1520343914" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1520358239" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1520343914"></script>
+    <script src="../../js/jquery-2.x.min.js?1520358239"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1520343914"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1520343914"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1520358239"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1520358239"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1520343914"></script>
+<script type="text/javascript" src="../../js/search.js?1520358239"></script>
 
     
   </div>
@@ -370,49 +370,145 @@ pre code, pre, code {
 </div>
 <div id="visualization" class="section level2">
 <h2>Visualization</h2>
-<div id="collective-variables-vs.macrostates" class="section level3">
-<h3>Collective Variables vs. Macrostates</h3>
-<pre class="r"><code>ggplot(energy_tics) +
-  geom_point(aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
-             stat = &quot;identity&quot;, position = &quot;identity&quot;) +
-  coord_cartesian() +
-  facet_null() +
-  scale_x_continuous() +
-  scale_y_continuous() +
-  scale_color_manual(name = &quot;Macrostate&quot;,
-                     values = c(&quot;#7572ff&quot;, &quot;#ff0000&quot;, &quot;#f0ff00&quot;, &quot;#22ff00&quot;, &quot;#2200ff&quot;, &quot;#7c00ff&quot;, &quot;#e13535&quot;),
-                     limits = 0:6, breaks = 0:6) +
-  theme_classic() +
-  
-  # helper functions
-  xlab(&#39;TIC0&#39;) +
-  ylab(&#39;TIC1&#39;)</code></pre>
-<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-</div>
-<div id="collective-variables-vs.energy" class="section level3">
-<h3>Collective Variables vs. Energy</h3>
-<pre class="r"><code>ggplot(energy_tics) +
-  geom_point(aes(x = TIC0, y = TIC1, color = Energy),
-             stat = &quot;identity&quot;, position = &quot;identity&quot;) +
-  coord_cartesian() +
-  facet_null() +
-  scale_x_continuous() +
-  scale_y_continuous() +
-  scale_color_gradient(low=&quot;blue&quot;, high=&quot;red&quot;) +
-  theme_classic() +
-  
-  # helper functions
-  xlab(&#39;TIC0&#39;) +
-  ylab(&#39;TIC1&#39;)</code></pre>
-<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<div id="references" class="section level4">
-<h4>References:</h4>
+<div id="collective-variables-and-macrostates" class="section level3">
+<h3>Collective Variables and Macrostates</h3>
 <ul>
-<li><a href="http://rstudio-pubs-static.s3.amazonaws.com/53162_cd16ee63c24747459ccd180f69f07810.html">ref 1</a></li>
-<li><a href="http://ggplot2.tidyverse.org/reference/stat_ellipse.html">ref 2</a></li>
+<li><strong>Geom object: point</strong>
+<ul>
+<li>TIC0 -&gt; x</li>
+<li>TIC1 -&gt; y</li>
+<li>macrostate -&gt; color</li>
+</ul></li>
 </ul>
+<pre class="r"><code>ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
+             stat = &quot;identity&quot;, 
+             position = &quot;identity&quot;) +
+  coord_cartesian() +
+  facet_null() +
+  
+  #----map data values to visual values---
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_identity() +
+  
+  theme()</code></pre>
+<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
+             stat = &quot;identity&quot;, 
+             position = &quot;identity&quot;) +
+  coord_cartesian() +
+  facet_null() +
+  
+  ##----map data values to visual values---
+  scale_x_continuous(name = &quot;TIC-0&quot;, 
+                     breaks = c(-1, 0, 1, 2, 3, 4, 5, 6, 7),
+                     limits = c(-2, 10)) +
+  scale_y_continuous(name = &quot;TIC-1&quot;,
+                     breaks = -6:3, 
+                     trans = &quot;reverse&quot;) +
+  scale_color_manual(values = c(&quot;1&quot; = &quot;red&quot;, &quot;2&quot; = &quot;blue&quot;, &quot;3&quot; = &quot;yellow&quot;, &quot;4&quot; = &quot;green&quot;),
+                     name = &quot;Macrostate&quot;, 
+                     breaks = c(1,2,3),
+                     labels = c(&#39;state 1&#39;, &#39;state 2&#39;, &#39;state 3&#39;)) +
+  
+  theme_classic()</code></pre>
+<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="collective-variables-macrostate-and-energy" class="section level3">
+<h3>Collective Variables, macrostate and Energy</h3>
+<ul>
+<li><strong>Geom object: point</strong>
+<ul>
+<li>TIC0 -&gt; x</li>
+<li>TIC1 -&gt; y</li>
+<li>macrostate -&gt; shape</li>
+<li>Energy -&gt; color</li>
+</ul></li>
+</ul>
+<pre class="r"><code>ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate), color = Energy),
+             stat = &quot;identity&quot;, position = &quot;identity&quot;) +
+  coord_cartesian() +
+  facet_null() +
+  
+  ##----map data values to visual values---
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_gradient() +
+  scale_shape_discrete() +
+  theme()</code></pre>
+<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate), color = Energy),
+             stat = &quot;identity&quot;, position = &quot;identity&quot;) +
+  coord_cartesian() +
+  facet_null() +
+  
+  ##----map data values to visual values---
+  scale_x_continuous(name = &quot;TIC-0&quot;,
+                     breaks = -1:8) +
+  scale_y_continuous(name = &quot;TIC-1&quot;,
+                     breaks = -6:3) +
+  scale_color_gradient(low=&quot;blue&quot;, high=&quot;red&quot;,
+                       breaks = 0:8) +
+  scale_shape_manual(values = c(&quot;1&quot; = 15, &quot;2&quot; = 17, &quot;3&quot; = 19, &quot;4&quot; = 22),
+                     name = &quot;Macrostate&quot;) +
+  theme_classic()</code></pre>
+<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 </div>
+<div id="confidence-ellipse" class="section level2">
+<h2>Confidence ellipse</h2>
+<ul>
+<li><strong>Geom object: point</strong>
+<ul>
+<li>TIC0 -&gt; x</li>
+<li>TIC1 -&gt; y</li>
+<li>macrostate -&gt; shape</li>
+<li>Energy -&gt; color</li>
+</ul></li>
+<li><strong>Geom object: path</strong>
+<ul>
+<li>TIC0 -&gt; x</li>
+<li>TIC1 -&gt; y</li>
+<li>macrostate -&gt; color</li>
+</ul></li>
+</ul>
+<pre class="r"><code>ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, color = Energy),
+             stat = &quot;identity&quot;, position = &quot;identity&quot;, inherit.aes = FALSE) +
+  geom_path(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)), 
+               stat = &quot;ellipse&quot;, inherit.aes = FALSE) + 
+  coord_cartesian() +
+  facet_null() +
+  
+  #----map data values to visual values---
+  scale_x_continuous(name = &quot;TIC-0&quot;,
+                     breaks = -1:8) +
+  scale_y_continuous(name = &quot;TIC-1&quot;,
+                     breaks = -6:3) +
+  scale_color_discrete() +
+  theme_classic()</code></pre>
+<pre class="r"><code>ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, fill = Energy, shape = as.factor(macrostate)),
+             stat = &quot;identity&quot;, position = &quot;identity&quot;, inherit.aes = FALSE) +
+  geom_path(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)), 
+               stat = &quot;ellipse&quot;, inherit.aes = FALSE) + 
+  coord_cartesian() +
+  facet_null() +
+  
+  #----map data values to visual values---
+  scale_x_continuous(name = &quot;TIC-0&quot;,
+                     breaks = -1:8) +
+  scale_y_continuous(name = &quot;TIC-1&quot;,
+                     breaks = -6:3) +
+  scale_shape_manual(values = c(&quot;1&quot; = 22, &quot;2&quot; = 24, &quot;3&quot; = 23, &quot;4&quot; = 25)) +
+  scale_fill_gradient(low = &quot;blue&quot;, high = &quot;red&quot;) +
+  scale_color_discrete() +
+  theme_classic()</code></pre>
+<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 
 
@@ -637,20 +733,20 @@ pre code, pre, code {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1520343914"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1520343914"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1520343914"></script>
-    <script src="../../js/jquery.sticky.js?1520343914"></script>
-    <script src="../../js/featherlight.min.js?1520343914"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1520343914"></script>
-    <script src="../../js/highlight.pack.js?1520343914"></script>
+    <script src="../../js/clipboard.min.js?1520358239"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1520358239"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1520358239"></script>
+    <script src="../../js/jquery.sticky.js?1520358239"></script>
+    <script src="../../js/featherlight.min.js?1520358239"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1520358239"></script>
+    <script src="../../js/highlight.pack.js?1520358239"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1520343914"></script>
-    <script src="../../js/learn.js?1520343914"></script>
-    <script src="../../js/hugo-learn.js?1520343914"></script>
+    <script src="../../js/modernizr.custom.71422.js?1520358239"></script>
+    <script src="../../js/learn.js?1520358239"></script>
+    <script src="../../js/hugo-learn.js?1520358239"></script>
 
-    <link href="../../mermaid/mermaid.css?1520343914" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1520343914"></script>
+    <link href="../../mermaid/mermaid.css?1520358239" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1520358239"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
