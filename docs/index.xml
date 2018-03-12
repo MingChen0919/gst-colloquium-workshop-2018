@@ -29,6 +29,15 @@
     </item>
     
     <item>
+      <title>Network for graph-like data</title>
+      <link>/tutorials-4/network/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorials-4/network/</guid>
+      <description>pre code, pre, code { white-space: pre !important; overflow-x: scroll !important; word-break: keep-all !important; word-wrap: initial !important; }  Import data transition = read.table(url(&amp;#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets-2/John_datasets/transitionmatrix.dat&amp;#39;))  Load libraries library(ggnetwork) library(sna)  Simple network n = network(transition) n1 = ggnetwork(n) n1$x = n1$x[, 1] n1$y = n1$y[, 1] n1$xend = n1$xend[, 1] n1$yend = n1$yend[, 1] ggplot(n1, aes(x = x, y = y, xend = xend, yend = yend)) + geom_nodes() + geom_edges() + theme_blank()  Add attributes to vertices Assign an importance level to each vertex</description>
+    </item>
+    
+    <item>
       <title></title>
       <link>/tutorials-4/cluster_analysis_basic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
