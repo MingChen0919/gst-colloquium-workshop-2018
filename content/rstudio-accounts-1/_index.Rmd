@@ -47,9 +47,12 @@ Launch a Jetstream image with Docker installed on Jetstream. Then run the follow
 ```{bash}
 sudo su
 
-docker pull rocker/rstudio
+# docker pull rocker/rstudio
 
-docker run --name=gst_dv -d -p 80:8787 rocker/rstudio 
+# docker run --name=gst_dv -d -p 80:8787 rocker/rstudio
+
+docker pull mingchen0919/gst-dv-rstudio
+docker run --name=gst_dv -d -p 80:8787 mingchen0919/gst-dv-rstudio
 ```
 
 ### Create 30 new users

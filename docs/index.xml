@@ -37,50 +37,5 @@
       <description>pre code, pre, code { white-space: pre !important; overflow-x: scroll !important; word-break: keep-all !important; word-wrap: initial !important; }  Import data transition = read.table(url(&amp;#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets-2/John_datasets/transitionmatrix.dat&amp;#39;))  Load libraries library(ggnetwork) library(sna)  Simple network n = network(transition) n1 = ggnetwork(n) n1$x = n1$x[, 1] n1$y = n1$y[, 1] n1$xend = n1$xend[, 1] n1$yend = n1$yend[, 1] ggplot(n1, aes(x = x, y = y, xend = xend, yend = yend)) + geom_nodes() + geom_edges() + theme_blank()  Add attributes to vertices Assign an importance level to each vertex</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>/tutorials-4/cluster_analysis_basic/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tutorials-4/cluster_analysis_basic/</guid>
-      <description>Import and parse data library(tidyr) data_path &amp;lt;- &#39;../datasets/john_datasets/traj_0.dat&#39; feature_names = stringr::str_split(readLines(data_path)[1], &#39;--&#39;)[[1]] # feature names have space and special characters. These characters are not good for variable names. # let&#39;s encode feature names names(feature_names) = paste0(&#39;V_&#39;, 1:length(feature_names)) data_raw = read.table(data_path, header = FALSE, sep = &#39; &#39;, comment.char = &#39;D&#39;, stringsAsFactors = FALSE) colnames(data_raw) = names(feature_names) str(data_raw) ## &#39;data.frame&#39;: 5001 obs. of 29 variables: ## $ V_1 : num 0.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/tutorials-4/heatmap/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tutorials-4/heatmap/</guid>
-      <description>Import and parse data library(tidyr) library(ggplot2) ## Warning: package &#39;ggplot2&#39; was built under R version 3.3.3 library(reshape2) ## ## Attaching package: &#39;reshape2&#39; ## The following object is masked from &#39;package:tidyr&#39;: ## ## smiths data_path &amp;lt;- &#39;../datasets/john_datasets/traj_0.dat&#39; feature_names = stringr::str_split(readLines(data_path)[1], &#39;--&#39;)[[1]] # feature names have space and special characters. These characters are not good for variable names. # let&#39;s encode feature names names(feature_names) = paste0(&#39;V_&#39;, 1:length(feature_names)) data_raw = read.table(data_path, header = FALSE, sep = &#39; &#39;, comment.</description>
-    </item>
-    
-    <item>
-      <title>Cluster Tutorial</title>
-      <link>/tutorials-4/cluster_analysis_basic/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tutorials-4/cluster_analysis_basic/</guid>
-      <description>Import and parse data library(tidyr) data_path &amp;lt;- &amp;#39;../datasets/john_datasets/traj_0.dat&amp;#39; feature_names = stringr::str_split(readLines(data_path)[1], &amp;#39;--&amp;#39;)[[1]] # feature names have space and special characters. These characters are not good for variable names. # let&amp;#39;s encode feature names names(feature_names) = paste0(&amp;#39;V_&amp;#39;, 1:length(feature_names)) data_raw = read.table(data_path, header = FALSE, sep = &amp;#39; &amp;#39;, comment.char = &amp;#39;D&amp;#39;, stringsAsFactors = FALSE) colnames(data_raw) = names(feature_names) str(data_raw) ## &amp;#39;data.frame&amp;#39;: 5001 obs. of 29 variables: ## $ V_1 : num 0.39 0.</description>
-    </item>
-    
-    <item>
-      <title>Heatmap Tutorial</title>
-      <link>/tutorials-4/heatmap/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tutorials-4/heatmap/</guid>
-      <description>Import and parse data library(tidyr) library(ggplot2) library(reshape2) ## ## Attaching package: &amp;#39;reshape2&amp;#39; ## The following object is masked from &amp;#39;package:tidyr&amp;#39;: ## ## smiths data_path &amp;lt;- &amp;#39;../datasets/john_datasets/traj_0.dat&amp;#39; feature_names = stringr::str_split(readLines(data_path)[1], &amp;#39;--&amp;#39;)[[1]] # feature names have space and special characters. These characters are not good for variable names. # let&amp;#39;s encode feature names names(feature_names) = paste0(&amp;#39;V_&amp;#39;, 1:length(feature_names)) data_raw = read.table(data_path, header = FALSE, sep = &amp;#39; &amp;#39;, comment.char = &amp;#39;D&amp;#39;, stringsAsFactors = FALSE) colnames(data_raw) = names(feature_names) str(data_raw) ## &amp;#39;data.</description>
-    </item>
-    
-    <item>
-      <title>Network Tutorial</title>
-      <link>/tutorials-4/network_plot/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tutorials-4/network_plot/</guid>
-      <description>pre code, pre, code { white-space: pre !important; overflow-x: scroll !important; word-break: keep-all !important; word-wrap: initial !important; }  Loading libraries library(tidyr) library(ggplot2) library(reshape2) library(GGally) library(network) library(sna) library(scales) library(reshape)  Import and parse data data_path &amp;lt;- &amp;#39;../datasets/john_datasets/traj_0.dat&amp;#39; feature_names = stringr::str_split(readLines(data_path)[1], &amp;#39;--&amp;#39;)[[1]] # feature names have space and special characters. These characters are not good for variable names. # let&amp;#39;s encode feature names names(feature_names) = paste0(&amp;#39;V_&amp;#39;, 1:length(feature_names)) data_raw = read.table(data_path, header = FALSE, sep = &amp;#39; &amp;#39;, comment.</description>
-    </item>
-    
   </channel>
 </rss>

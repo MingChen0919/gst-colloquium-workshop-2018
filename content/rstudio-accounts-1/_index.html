@@ -36,9 +36,12 @@ install.packages(&#39;ggplot2&#39;)</code></pre>
 <p>Launch a Jetstream image with Docker installed on Jetstream. Then run the following to luanch an RStudio server.</p>
 <pre class="bash"><code>sudo su
 
-docker pull rocker/rstudio
+# docker pull rocker/rstudio
 
-docker run --name=gst_dv -d -p 80:8787 rocker/rstudio </code></pre>
+# docker run --name=gst_dv -d -p 80:8787 rocker/rstudio
+
+docker pull mingchen0919/gst-dv-rstudio
+docker run --name=gst_dv -d -p 80:8787 mingchen0919/gst-dv-rstudio</code></pre>
 </div>
 <div id="create-30-new-users" class="section level3">
 <h3>Create 30 new users</h3>
