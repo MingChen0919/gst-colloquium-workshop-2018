@@ -22,7 +22,9 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 **RStudio Server Account**
 
-Select an user account from this [google sheet](https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0) and put your name on the right to mark that this user account has been used.
+Select an user account (row) from this [google sheet](https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0) and put your name on the right column to mark that this user account has been used.
+
+**Open the URL in the first row in a new browser tab (copy URL and paste in tab, hit [enter])**
 
 **Use the `upload` button to upload local files to the Server.**
 
