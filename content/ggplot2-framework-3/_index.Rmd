@@ -21,15 +21,7 @@ options("width" = 200)
 
 ## ggplot2 graph template
 
-```{r eval=FALSE}
-ggplot(data = <DATA>) +
-  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>),
-                  stat = <STAT>, position = <POSITION>) +
-  <COORDINATE_FUNCTION> +
-  <FACET_FUNCTION> +
-  <SCALE_FUNCTION> +
-  <THEME_FUNCTION>
-```
+![](images/ggplot2-template.png)
 
 * **GEOM_FUNCTION**: use a geometric object to represent your data.
     + ***MAPPINGS***: associate data values with visual values. e.g., categorial data -> different colors.
