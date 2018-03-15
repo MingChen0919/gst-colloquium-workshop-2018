@@ -17,7 +17,7 @@ pre code, pre, code {
 </style>
 <div id="import-data" class="section level2">
 <h2>Import data</h2>
-<pre class="r"><code>load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&#39;))</code></pre>
+<pre class="r"><code>load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets-2/datasets.RData&#39;))</code></pre>
 </div>
 <div id="load-libraries" class="section level2">
 <h2>Load libraries</h2>
@@ -48,7 +48,7 @@ pre code, pre, code {
   scale_color_identity() +
   
   theme()</code></pre>
-<p><img src="/tutorials/pca_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/tutorials-4/pca_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code>ggplot(energy_tics) +
   geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
              stat = &quot;identity&quot;, 
@@ -69,7 +69,7 @@ pre code, pre, code {
                      labels = c(&#39;state 1&#39;, &#39;state 2&#39;, &#39;state 3&#39;)) +
   
   theme_classic()</code></pre>
-<p><img src="/tutorials/pca_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/tutorials-4/pca_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="collective-variables-macrostate-and-energy" class="section level3">
 <h3>Collective Variables, macrostate and Energy</h3>
@@ -94,7 +94,7 @@ pre code, pre, code {
   scale_color_gradient() +
   scale_shape_discrete() +
   theme()</code></pre>
-<p><img src="/tutorials/pca_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/tutorials-4/pca_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>ggplot(energy_tics) +
   geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate), color = Energy),
              stat = &quot;identity&quot;, position = &quot;identity&quot;) +
@@ -111,7 +111,7 @@ pre code, pre, code {
   scale_shape_manual(values = c(&quot;1&quot; = 15, &quot;2&quot; = 17, &quot;3&quot; = 19, &quot;4&quot; = 22),
                      name = &quot;Macrostate&quot;) +
   theme_classic()</code></pre>
-<p><img src="/tutorials/pca_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/tutorials-4/pca_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 </div>
 <div id="confidence-ellipse" class="section level2">
@@ -163,5 +163,5 @@ pre code, pre, code {
   scale_fill_gradient(low = &quot;blue&quot;, high = &quot;red&quot;) +
   scale_color_discrete() +
   theme_classic()</code></pre>
-<p><img src="/tutorials/pca_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/tutorials-4/pca_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>

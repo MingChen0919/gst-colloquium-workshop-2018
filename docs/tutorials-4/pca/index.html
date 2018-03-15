@@ -13,19 +13,19 @@
     <title>Scatterplot for PCA data :: My New Hugo Site</title>
     
     
-    <link href="../../css/nucleus.css?1521142070" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1521142070" rel="stylesheet">
-    <link href="../../css/hybrid.css?1521142070" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1521142070" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1521142070" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1521142070" rel="stylesheet">
-    <link href="../../css/theme.css?1521142070" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1521142070" rel="stylesheet">
+    <link href="../../css/nucleus.css?1521143690" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1521143690" rel="stylesheet">
+    <link href="../../css/hybrid.css?1521143690" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1521143690" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1521143690" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1521143690" rel="stylesheet">
+    <link href="../../css/theme.css?1521143690" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1521143690" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1521142070" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1521143690" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1521142070"></script>
+    <script src="../../js/jquery-2.x.min.js?1521143690"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1521142070"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1521142070"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1521143690"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1521143690"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1521142070"></script>
+<script type="text/javascript" src="../../js/search.js?1521143690"></script>
 
     
   </div>
@@ -312,7 +312,7 @@ pre code, pre, code {
 </style>
 <div id="import-data" class="section level2">
 <h2>Import data</h2>
-<pre class="r"><code>load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&#39;))</code></pre>
+<pre class="r"><code>load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets-2/datasets.RData&#39;))</code></pre>
 </div>
 <div id="load-libraries" class="section level2">
 <h2>Load libraries</h2>
@@ -343,7 +343,7 @@ pre code, pre, code {
   scale_color_identity() +
   
   theme()</code></pre>
-<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="../../tutorials-4/pca_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code>ggplot(energy_tics) +
   geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
              stat = &quot;identity&quot;, 
@@ -364,7 +364,7 @@ pre code, pre, code {
                      labels = c(&#39;state 1&#39;, &#39;state 2&#39;, &#39;state 3&#39;)) +
   
   theme_classic()</code></pre>
-<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="../../tutorials-4/pca_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="collective-variables-macrostate-and-energy" class="section level3">
 <h3>Collective Variables, macrostate and Energy</h3>
@@ -389,7 +389,7 @@ pre code, pre, code {
   scale_color_gradient() +
   scale_shape_discrete() +
   theme()</code></pre>
-<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="../../tutorials-4/pca_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>ggplot(energy_tics) +
   geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate), color = Energy),
              stat = &quot;identity&quot;, position = &quot;identity&quot;) +
@@ -406,7 +406,7 @@ pre code, pre, code {
   scale_shape_manual(values = c(&quot;1&quot; = 15, &quot;2&quot; = 17, &quot;3&quot; = 19, &quot;4&quot; = 22),
                      name = &quot;Macrostate&quot;) +
   theme_classic()</code></pre>
-<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="../../tutorials-4/pca_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 </div>
 <div id="confidence-ellipse" class="section level2">
@@ -458,7 +458,7 @@ pre code, pre, code {
   scale_fill_gradient(low = &quot;blue&quot;, high = &quot;red&quot;) +
   scale_color_discrete() +
   theme_classic()</code></pre>
-<p><img src="../../tutorials/pca_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="../../tutorials-4/pca_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 
 
@@ -635,20 +635,20 @@ pre code, pre, code {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1521142070"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1521142070"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1521142070"></script>
-    <script src="../../js/jquery.sticky.js?1521142070"></script>
-    <script src="../../js/featherlight.min.js?1521142070"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1521142070"></script>
-    <script src="../../js/highlight.pack.js?1521142070"></script>
+    <script src="../../js/clipboard.min.js?1521143690"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1521143690"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1521143690"></script>
+    <script src="../../js/jquery.sticky.js?1521143690"></script>
+    <script src="../../js/featherlight.min.js?1521143690"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1521143690"></script>
+    <script src="../../js/highlight.pack.js?1521143690"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1521142070"></script>
-    <script src="../../js/learn.js?1521142070"></script>
-    <script src="../../js/hugo-learn.js?1521142070"></script>
+    <script src="../../js/modernizr.custom.71422.js?1521143690"></script>
+    <script src="../../js/learn.js?1521143690"></script>
+    <script src="../../js/hugo-learn.js?1521143690"></script>
 
-    <link href="../../mermaid/mermaid.css?1521142070" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1521142070"></script>
+    <link href="../../mermaid/mermaid.css?1521143690" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1521143690"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
