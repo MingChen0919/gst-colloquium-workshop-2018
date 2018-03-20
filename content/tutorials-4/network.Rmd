@@ -18,20 +18,50 @@ pre code, pre, code {
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
+## Load packages, set up working environment. 
+
+If the packages cannot be found, please install first using `install.packages()` command. 
+
+```{r}
+library(ggnetwork)
+library(sna)
+library(reshape2)
+library(ggplot2)
+```
+* The "ggnetwork"" package provides a way to build network plots with ggplot2.
+* The "sna" package contains a range of tools for social network analysis, including node and graph-level indices, structural distance and covariance methods, structural equivalence detection, network regression, random graph generation, and 2D/3D network visualization.
+
+
 ## Import data
 
 ```{r}
 transition = read.table(url('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets-2/John_datasets/transitionmatrix.dat'))
 ```
 
+Now, take a look at the data we just imported. Click `Environment` on the right board, and then click the `transistion`. 
+If you are command line geek, you can also type `View(transition)` in console. 
 
-## Load libraries
 
+## Plotting heatmap
+Firt, I will help you to do some data transformation and reshaping.
 ```{r}
-library(ggnetwork)
-library(sna)
+# Change data into a matrix with same row names and column names. 
+row.names(transition) <- colnames(transition) 
+transition_mat <- as.matrix(transition)
+melt_mat <- melt(transition_mat)
 ```
 
+Now, use ggplot2 to make a heatmap using the 'melt_mat'
+```{r}
+ggplot(data = melt_mat) +
+  geom_tile(mapping = aes(x=Var1, y=Var2, fill=value)) +
+  scale_fill_gradient(name= "transition") +
+  theme_void()
+```
+Think about how you can make the heatmap look better? 
+- using log values
+- change scale colors
+- anything else?
 
 ## Simple network
 
