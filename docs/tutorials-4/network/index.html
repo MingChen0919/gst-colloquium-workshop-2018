@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="generator" content="Hugo 0.31.1" />
+    <meta name="generator" content="Hugo 0.33" />
     <meta name="description" content="">
 
 
@@ -13,19 +13,19 @@
     <title>Network for graph-like data :: My New Hugo Site</title>
     
     
-    <link href="../../css/nucleus.css?1521143690" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1521143690" rel="stylesheet">
-    <link href="../../css/hybrid.css?1521143690" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1521143690" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1521143690" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1521143690" rel="stylesheet">
-    <link href="../../css/theme.css?1521143690" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1521143690" rel="stylesheet">
+    <link href="../../css/nucleus.css?1521603217" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1521603217" rel="stylesheet">
+    <link href="../../css/hybrid.css?1521603217" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1521603217" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1521603217" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1521603217" rel="stylesheet">
+    <link href="../../css/theme.css?1521603217" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1521603217" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1521143690" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1521603217" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1521143690"></script>
+    <script src="../../js/jquery-2.x.min.js?1521603217"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1521143690"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1521143690"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1521603217"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1521603217"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1521143690"></script>
+<script type="text/javascript" src="../../js/search.js?1521603217"></script>
 
     
   </div>
@@ -186,9 +186,9 @@
  
   
     
-      <li data-nav-id="/tutorials-4/pca/" title="Scatterplot for PCA data" class="dd-item ">
-        <a href="../../tutorials-4/pca/">
-        Scatterplot for PCA data
+      <li data-nav-id="/tutorials-4/scatterplot/" title="Scatterplot" class="dd-item ">
+        <a href="../../tutorials-4/scatterplot/">
+        Scatterplot
         
         </a>
     </li>
@@ -208,6 +208,25 @@
       <li data-nav-id="/tutorials-4/network/" title="Network for graph-like data" class="dd-item active">
         <a href="../../tutorials-4/network/">
         Network for graph-like data
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/tutorials-4/scatterplot/" title="" class="dd-item ">
+        <a href="../../tutorials-4/scatterplot/">
+        
         
         </a>
     </li>
@@ -310,17 +329,49 @@ pre code, pre, code {
   word-wrap: initial !important;
 }
 </style>
+<div id="load-packages-set-up-working-environment." class="section level2">
+<h2>Load packages, set up working environment.</h2>
+<p>If the packages cannot be found, please install first using <code>install.packages()</code> command.</p>
+<pre class="r"><code>library(ggnetwork)
+library(sna)
+library(reshape2)
+library(ggplot2)</code></pre>
+<ul>
+<li>The “ggnetwork”&quot; package provides a way to build network plots with ggplot2.</li>
+<li>The “sna” package contains a range of tools for social network analysis, including node and graph-level indices, structural distance and covariance methods, structural equivalence detection, network regression, random graph generation, and 2D/3D network visualization.</li>
+</ul>
+</div>
 <div id="import-data" class="section level2">
 <h2>Import data</h2>
 <pre class="r"><code>transition = read.table(url(&#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets-2/John_datasets/transitionmatrix.dat&#39;))</code></pre>
+<p>Now, take a look at the data we just imported. Click <code>Environment</code> on the right board, and then click the <code>transistion</code>. If you are command line geek, you can also type <code>View(transition)</code> in console.</p>
 </div>
-<div id="load-libraries" class="section level2">
-<h2>Load libraries</h2>
-<pre class="r"><code>library(ggnetwork)
-library(sna)</code></pre>
+<div id="plotting-heatmap" class="section level2">
+<h2>Plotting heatmap</h2>
+<p>Firt, I will help you to do some data transformation and reshaping.</p>
+<pre class="r"><code># Change data into a matrix with same row names and column names. 
+row.names(transition) &lt;- colnames(transition) 
+transition_mat &lt;- as.matrix(transition)
+melt_mat &lt;- melt(transition_mat)</code></pre>
+<p>Now, use ggplot2 to make a heatmap using the ‘melt_mat’ data.</p>
+<pre class="r"><code>ggplot(data = melt_mat) +
+  geom_tile(mapping = aes(x=Var1, y=Var2, fill=value)) +
+  scale_fill_gradient(name= &quot;transition&quot;) +
+  theme_void()</code></pre>
+<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div id="think-about-how-you-can-make-the-heatmap-look-better" class="section level3">
+<h3>Think about how you can make the heatmap look better?</h3>
+<ul>
+<li>using log values</li>
+<li>change scale colors</li>
+<li><p>anything else?</p></li>
+<li><p>Practice: try to make your heatmap looks better. (5 min)</p></li>
+</ul>
+</div>
 </div>
 <div id="simple-network" class="section level2">
 <h2>Simple network</h2>
+<p>We can also use the transition data to make network plots. First, an example of a messy network figure using only transition data values. (You don’t have to try this)</p>
 <pre class="r"><code>n = network(transition)
 
 n1 = ggnetwork(n)
@@ -334,15 +385,22 @@ ggplot(n1, aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_nodes() +
   geom_edges() +
   theme_blank()</code></pre>
-<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
-<div id="add-attributes-to-vertices" class="section level2">
-<h2>Add attributes to <strong>vertices</strong></h2>
-<p>Assign an importance level to each vertex</p>
-<pre class="r"><code>n %v% &quot;importance&quot; = sample(1:6, nrow(transition), replace = TRUE)</code></pre>
-<p>Assign group to vertex</p>
-<pre class="r"><code>n %v% &quot;group&quot; = sample(c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), nrow(transition), replace = TRUE)</code></pre>
-<p>Visualize <strong>group</strong> and <strong>importance</strong> informaction.</p>
+<div id="informative-network" class="section level2">
+<h2>Informative network</h2>
+<div id="add-attributes-to-vertices" class="section level3">
+<h3>Add attributes to <strong>vertices</strong></h3>
+<ol style="list-style-type: decimal">
+<li><p>Assign an important level to each vertex. Importance is ramdonly assigned here since we don’t have this type of data. However, in the real world you may have information e.g. p-value, FDR, correlation coeffient to determine the importance of your data.</p></li>
+<li><p>Assign group to vertex. Groups are also assigned ramdonly, just want to give you a feeling of how to deal with multidimentional data.</p></li>
+</ol>
+<pre class="r"><code>n = network(transition)
+n %v% &quot;importance&quot; = sample(1:6, nrow(transition), replace = TRUE)
+n %v% &quot;group&quot; = sample(c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), nrow(transition), replace = TRUE)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Visualize <strong>transition</strong>, <strong>group</strong> and <strong>importance</strong> information in one figure.</li>
+</ol>
 <pre class="r"><code>n2 = ggnetwork(n)
 
 n2$x = n2$x[, 1]
@@ -355,17 +413,24 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_nodes(mapping = aes(color = group, size = importance)) +
   geom_edges() +
   theme_blank()</code></pre>
-<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
-<div id="adjust-edges" class="section level2">
-<h2>Adjust edges</h2>
-<p>Edge transprancy</p>
+</div>
+<div id="modify-the-basic-network" class="section level2">
+<h2>Modify the basic network</h2>
+<div id="adjust-edges." class="section level3">
+<h3>Adjust edges.</h3>
+<ol style="list-style-type: decimal">
+<li>To change the transprancy of edges.</li>
+</ol>
 <pre class="r"><code>ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_nodes(mapping = aes(color = group, size = importance)) +
   geom_edges(alpha = 0.05) +
   theme_blank()</code></pre>
-<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Threshold for edge display</p>
+<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Set a threshold for edge display.</li>
+</ol>
 <pre class="r"><code>threshold = 0.1
 transition2 = transition
 transition2[transition2 &lt; 0.1] = 0
@@ -387,10 +452,11 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_nodes(mapping = aes(color = group, size = importance)) +
   geom_edges(alpha = 0.8) +
   theme_blank()</code></pre>
-<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
-<div id="add-labels-to-nodes" class="section level2">
-<h2>Add labels to nodes</h2>
+<div id="add-labels-to-nodes-optional" class="section level3">
+<h3>Add labels to nodes (Optional)</h3>
+<p>We will not include this part in our workshop, please try it yourself if you are interested in and would like to use this type of plot in your research.</p>
 <pre class="r"><code>ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_edges(alpha = 0.8) +
   geom_nodelabel(aes(label = vertex.names, color = as.factor(importance)), 
@@ -398,7 +464,8 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
                  fontface = &quot;bold&quot;) +
   scale_color_manual(name = &quot;Importance&quot;, values = colorRampPalette(c(&quot;yellow&quot;, &quot;red&quot;))(6)) +
   theme_blank()</code></pre>
-<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="../../tutorials-4/network_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
 </div>
 
 
@@ -550,6 +617,25 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
             
         
                     
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -560,10 +646,10 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
 
 
         
-            <a class="nav nav-prev" href="../../tutorials-4/pca/" title="Scatterplot for PCA data"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="../../tutorials-4/scatterplot/" title="Scatterplot"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="../../tutorials-4/line-plot/" title="Line plot for time series data" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="../../tutorials-4/scatterplot/" title="" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -572,20 +658,20 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1521143690"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1521143690"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1521143690"></script>
-    <script src="../../js/jquery.sticky.js?1521143690"></script>
-    <script src="../../js/featherlight.min.js?1521143690"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1521143690"></script>
-    <script src="../../js/highlight.pack.js?1521143690"></script>
+    <script src="../../js/clipboard.min.js?1521603217"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1521603217"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1521603217"></script>
+    <script src="../../js/jquery.sticky.js?1521603217"></script>
+    <script src="../../js/featherlight.min.js?1521603217"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1521603217"></script>
+    <script src="../../js/highlight.pack.js?1521603217"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1521143690"></script>
-    <script src="../../js/learn.js?1521143690"></script>
-    <script src="../../js/hugo-learn.js?1521143690"></script>
+    <script src="../../js/modernizr.custom.71422.js?1521603217"></script>
+    <script src="../../js/learn.js?1521603217"></script>
+    <script src="../../js/hugo-learn.js?1521603217"></script>
 
-    <link href="../../mermaid/mermaid.css?1521143690" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1521143690"></script>
+    <link href="../../mermaid/mermaid.css?1521603217" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1521603217"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
