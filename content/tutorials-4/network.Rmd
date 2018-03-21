@@ -51,19 +51,23 @@ transition_mat <- as.matrix(transition)
 melt_mat <- melt(transition_mat)
 ```
 
-Now, use ggplot2 to make a heatmap using the 'melt_mat'
+Now, use ggplot2 to make a heatmap using the 'melt_mat' data. 
 ```{r}
 ggplot(data = melt_mat) +
   geom_tile(mapping = aes(x=Var1, y=Var2, fill=value)) +
   scale_fill_gradient(name= "transition") +
   theme_void()
 ```
-Think about how you can make the heatmap look better? 
+
+### Think about how you can make the heatmap look better? 
 - using log values
 - change scale colors
 - anything else?
 
+* Practice: try to make your heatmap looks better. (5 min)
+
 ## Simple network
+We can also use the transition data to make network plots. First, an example of a messy network figure using only transition data values. (You don't have to try this)
 
 ```{r}
 n = network(transition)
@@ -81,21 +85,21 @@ ggplot(n1, aes(x = x, y = y, xend = xend, yend = yend)) +
   theme_blank()
 ```
 
-## Add attributes to **vertices**
+## Informative network
 
-Assign an importance level to each vertex
+### Add attributes to **vertices**
+
+1. Assign an important level to each vertex. Importance is ramdonly assigned here since we don't have this type of data. However, in the real world you may have information e.g. p-value, FDR, correlation coeffient to determine the importance of your data. 
+
+2. Assign group to vertex. Groups are also assigned ramdonly, just want to give you a feeling of how to deal with multidimentional data. 
 
 ```{r}
+n = network(transition)
 n %v% "importance" = sample(1:6, nrow(transition), replace = TRUE)
-```
-
-Assign group to vertex
-
-```{r}
 n %v% "group" = sample(c("A", "B", "C"), nrow(transition), replace = TRUE)
 ```
 
-Visualize **group** and **importance** informaction.
+3. Visualize **transition**, **group** and **importance** information in one figure.
 
 ```{r}
 n2 = ggnetwork(n)
@@ -112,9 +116,10 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   theme_blank()
 ```
 
-## Adjust edges
+## Modify the basic network
 
-Edge transprancy
+### Adjust edges.
+1. To change the transprancy of edges.
 
 ```{r}
 ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
@@ -123,7 +128,7 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   theme_blank()
 ```
 
-Threshold for edge display
+2. Set a threshold for edge display.
 
 ```{r}
 threshold = 0.1
@@ -149,7 +154,8 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   theme_blank()
 ```
 
-## Add labels to nodes
+### Add labels to nodes (Optional)
+We will not include this part in our workshop, please try it yourself if you are interested in and would like to use this type of plot in your research.
 
 ```{r}
 ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
