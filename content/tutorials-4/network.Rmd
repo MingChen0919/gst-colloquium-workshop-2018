@@ -60,11 +60,12 @@ ggplot(data = melt_mat) +
 ```
 
 ### Think about how you can make the heatmap look better? 
-- using log values
-- change scale colors
-- anything else?
+ - using log values
+ - change scale colors
+ - anything else?
 
-* Practice: try to make your heatmap looks better. (5 min)
+
+#### Practice: try to make your heatmap looks better. (5 min)
 
 ## Simple network
 We can also use the transition data to make network plots. First, an example of a messy network figure using only transition data values. (You don't have to try this)
@@ -118,7 +119,7 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
 
 ## Modify the basic network
 
-### Adjust edges.
+### a. Adjust edges.
 1. To change the transprancy of edges.
 
 ```{r}
@@ -154,7 +155,7 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   theme_blank()
 ```
 
-### Add labels to nodes (Optional)
+### b. Add labels to nodes (Optional)
 We will not include this part in our workshop, please try it yourself if you are interested in and would like to use this type of plot in your research.
 
 ```{r}

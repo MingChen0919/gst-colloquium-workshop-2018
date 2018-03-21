@@ -50,9 +50,11 @@ melt_mat &lt;- melt(transition_mat)</code></pre>
 <ul>
 <li>using log values</li>
 <li>change scale colors</li>
-<li><p>anything else?</p></li>
-<li><p>Practice: try to make your heatmap looks better. (5 min)</p></li>
+<li>anything else?</li>
 </ul>
+<div id="practice-try-to-make-your-heatmap-looks-better.-5-min" class="section level4">
+<h4>Practice: try to make your heatmap looks better. (5 min)</h4>
+</div>
 </div>
 </div>
 <div id="simple-network" class="section level2">
@@ -104,8 +106,8 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
 </div>
 <div id="modify-the-basic-network" class="section level2">
 <h2>Modify the basic network</h2>
-<div id="adjust-edges." class="section level3">
-<h3>Adjust edges.</h3>
+<div id="a.-adjust-edges." class="section level3">
+<h3>a. Adjust edges.</h3>
 <ol style="list-style-type: decimal">
 <li>To change the transprancy of edges.</li>
 </ol>
@@ -140,8 +142,8 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   theme_blank()</code></pre>
 <p><img src="/tutorials-4/network_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
-<div id="add-labels-to-nodes-optional" class="section level3">
-<h3>Add labels to nodes (Optional)</h3>
+<div id="b.-add-labels-to-nodes-optional" class="section level3">
+<h3>b. Add labels to nodes (Optional)</h3>
 <p>We will not include this part in our workshop, please try it yourself if you are interested in and would like to use this type of plot in your research.</p>
 <pre class="r"><code>ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_edges(alpha = 0.8) +
