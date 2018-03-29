@@ -1,0 +1,193 @@
+---
+weight: 3
+title: "Ggplot2"
+output: 
+  html_document:
+    fig_width: 6
+    fig_height: 4
+---
+
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.left {
+  text-align: left;
+  float: left;
+  width:50%;
+  z-index:-10;
+  border: 5px solid #fff;
+}
+</style>
+<div id="plotting-template" class="section level2">
+<h2>Plotting template</h2>
+<div class="figure">
+<img src="images/ggplot2-template.png" />
+
+</div>
+<ul>
+<li><strong>GEOM_FUNCTION</strong>: use a geometric object to represent your data.
+<ul>
+<li><strong><em>MAPPINGS</em></strong>: associate data values with visual values. e.g., categorial data -&gt; different colors.</li>
+<li><strong><em>STAT</em></strong>: use raw data values or calculate new values from raw values.</li>
+<li><strong><em>POSITION</em></strong>: adjust overlapped geometric objects.</li>
+</ul></li>
+<li><strong>COORDINATE_FUNCTION</strong>: type of coordinate systems.</li>
+<li><strong>FACET_FUNCTION</strong>: divide plots into subplots</li>
+<li><strong>SCALE_FUNCTION</strong>: how data values are mapped to visual values.</li>
+<li><strong>THEME_FUNCTION</strong>: the apperance of graph components that is not directly related to the mappings.</li>
+</ul>
+</div>
+<div id="geom_function" class="section level2">
+<h2>GEOM_FUNCTION</h2>
+<div id="which-geometric-object-point-vs.line" class="section level3">
+<h3>Which geometric object: point vs. line</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_line(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2></h2>
+<p><img src="/S3-ggplot2-framework/_index_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="mappings" class="section level2">
+<h2>Mappings</h2>
+<div id="from-data-values-to-visual-values" class="section level3">
+<h3>From data values to visual values</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp,
+                           color = as.factor(gear)),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp,
+                           color = as.factor(am)), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<p><img src="/S3-ggplot2-framework/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="stat" class="section level2">
+<h2>Stat</h2>
+<div id="statistical-transformation" class="section level3">
+<h3>Statistical transformation</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_bin2d(mapping = aes(x = disp, y = hp), 
+             stat = &quot;bin2d&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<p><img src="/S3-ggplot2-framework/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="coordinate" class="section level2">
+<h2>COORDINATE</h2>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_polar() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<p><img src="/S3-ggplot2-framework/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="facet" class="section level2">
+<h2>Facet</h2>
+<div id="split-data-into-multiple-plots." class="section level3">
+<h3>Split data into multiple plots.</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  facet_null() +
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  facet_grid(am ~ .) +
+  scale_color_discrete() +
+  theme()</code></pre>
+<p><img src="/S3-ggplot2-framework/_index_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scale" class="section level2">
+<h2>Scale</h2>
+<div id="how-data-values-are-mapped-to-visual-values" class="section level3">
+<h3>How data values are mapped to visual values</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, 
+                           y = hp,
+                           color = as.factor(gear)),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete(
+    
+    
+  ) +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, 
+                           y = hp, 
+                           color = as.factor(gear)), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_manual(name = &#39;gear&#39;,
+                     values = c(&#39;3&#39; = &#39;blue&#39;,
+                                &#39;4&#39; = &#39;yellow&#39;,
+                                &#39;5&#39; = &#39;red&#39;)) +
+  theme()</code></pre>
+<p><img src="/S3-ggplot2-framework/_index_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="theme" class="section level2">
+<h2>Theme</h2>
+<div id="the-general-appearance" class="section level3">
+<h3>The general appearance</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme_classic()</code></pre>
+<p><img src="/S3-ggplot2-framework/_index_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>

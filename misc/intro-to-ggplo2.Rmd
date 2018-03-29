@@ -123,6 +123,7 @@ p2 = ggplot(data = mtcars) +
              #---------- aesthetic: color --------------
              stat = "identity") +
   coord_cartesian() + 
+  facet_grid(. ~ am) + 
   scale_color_discrete() +
   theme()
 ```
