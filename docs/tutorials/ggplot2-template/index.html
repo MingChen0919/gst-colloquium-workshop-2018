@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
 
-    <title>Scatterplot :: My New Hugo Site</title>
+    <title>Ggplot2 :: My New Hugo Site</title>
     
     
     <link href="../../css/nucleus.css?1522697027" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/tutorials/scatterplot/">
+  <body class="" data-url="/tutorials/ggplot2-template/">
     <nav id="sidebar" class="">
 
 
@@ -167,7 +167,7 @@
  
   
     
-      <li data-nav-id="/tutorials/ggplot2-template/" title="Ggplot2" class="dd-item ">
+      <li data-nav-id="/tutorials/ggplot2-template/" title="Ggplot2" class="dd-item active">
         <a href="../../tutorials/ggplot2-template/">
         Ggplot2
         
@@ -205,7 +205,7 @@
  
   
     
-      <li data-nav-id="/tutorials/scatterplot/" title="Scatterplot" class="dd-item active">
+      <li data-nav-id="/tutorials/scatterplot/" title="Scatterplot" class="dd-item ">
         <a href="../../tutorials/scatterplot/">
         Scatterplot
         
@@ -291,7 +291,7 @@
             
           
           
-            <a href='../../'>Data Visualization</a> > <a href='../../tutorials/'>Data Visualization</a> > Scatterplot
+            <a href='../../'>Data Visualization</a> > <a href='../../tutorials/'>Data Visualization</a> > Ggplot2
           
          
           
@@ -315,7 +315,7 @@
         
         <div id="body-inner">
           
-            <h1>Scatterplot</h1>
+            <h1>Ggplot2</h1>
           
 
         
@@ -328,204 +328,179 @@ pre code, pre, code {
   word-break: keep-all !important;
   word-wrap: initial !important;
 }
+
+.left {
+  text-align: left;
+  float: left;
+  width:50%;
+  z-index:-10;
+  border: 5px solid #fff;
+}
 </style>
-<div id="import-data" class="section level2">
-<h2>Import Data</h2>
-<pre class="r"><code>#---Loading data---#
-load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&#39;))</code></pre>
+<div id="plotting-template" class="section level2">
+<h2>Plotting template</h2>
+<div class="figure">
+<img src="images/ggplot2-template.png" />
+
 </div>
-<div id="load-ggplot2-library" class="section level2">
-<h2>Load ggplot2 library</h2>
-<pre class="r"><code>#---loading ggplot library---#
-library(ggplot2)</code></pre>
-</div>
-<div id="visualization" class="section level2">
-<h2>Visualization</h2>
-<div id="plot-one-collective-variables-and-macrostates" class="section level3">
-<h3>Plot One; collective variables and macrostates</h3>
 <ul>
-<li>Geom object: point
+<li><strong>GEOM_FUNCTION</strong>: use a geometric object to represent your data.
 <ul>
-<li>TIC-0 -&gt; x</li>
-<li>TIC-1 -&gt; y</li>
-<li>Macrostate -&gt; color</li>
+<li><strong><em>MAPPINGS</em></strong>: associate data values with visual values. e.g., categorial data -&gt; different colors.</li>
+<li><strong><em>STAT</em></strong>: use raw data values or calculate new values from raw values.</li>
+<li><strong><em>POSITION</em></strong>: adjust overlapped geometric objects.</li>
 </ul></li>
+<li><strong>COORDINATE_FUNCTION</strong>: type of coordinate systems.</li>
+<li><strong>FACET_FUNCTION</strong>: divide plots into subplots</li>
+<li><strong>SCALE_FUNCTION</strong>: how data values are mapped to visual values.</li>
+<li><strong>THEME_FUNCTION</strong>: the apperance of graph components that is not directly related to the mappings.</li>
 </ul>
-<pre class="r"><code>#---plot one---#
-ggplot(energy_tics) +
-  geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
-             stat = &quot;identity&quot;, 
-             position = &quot;identity&quot;) +
-  coord_cartesian() +
-  facet_null() +
-  
-  ##----map data values to visual values---##
-  scale_x_continuous() +
-  scale_y_continuous() +
-  scale_color_identity() +
-  theme()</code></pre>
-<p><img src="../../tutorials/scatterplot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
-<div id="plot-two-manipulating-axes-point-colors" class="section level3">
-<h3>Plot Two; manipulating axes, point colors</h3>
-<ul>
-<li>Geom object: point
-<ul>
-<li>TIC-0 -&gt; x</li>
-<li>TIC-1 -&gt; y</li>
-<li>Macrostate -&gt; color</li>
-</ul></li>
-<li>Plot edits
-<ul>
-<li>Set the axis labels (breaks)<br />
-</li>
-<li>Set the axis limits (limits)<br />
-</li>
-<li>Change axis orientation (trans = “reverse”)<br />
-</li>
-<li>Change colors for macrostates (scale_color_manual())<br />
-</li>
-<li>Set labels for macrostates (breaks; labels)<br />
-</li>
-<li>Change theme (theme_classic())</li>
-</ul></li>
-</ul>
-<pre class="r"><code>#---plot two---#
-ggplot(energy_tics) +
-  geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
-             stat = &quot;identity&quot;, 
-             position = &quot;identity&quot;) +
-  coord_cartesian() +
-  facet_null() +
-  
-  ##----map data values to visual values---##
-  scale_x_continuous(name = &quot;TIC-0&quot;, 
-                     breaks = c(-1, 0, 1, 2, 3, 4, 5, 6, 7),
-                     limits = c(-1, 7)) +
-  scale_y_continuous(name = &quot;TIC-1&quot;,
-                     breaks = -7:3, 
-                     trans = &quot;reverse&quot;,
-                     limits = c(3, -7)) +
-  scale_color_manual(values = c(&quot;1&quot; = &quot;red&quot;, &quot;2&quot; = &quot;blue&quot;, &quot;3&quot; = &quot;yellow&quot;, &quot;4&quot; = &quot;green&quot;),
-                     name = &quot;Macrostate&quot;, 
-                     breaks = c(1,2,3,4),
-                     labels = c(&#39;state 1&#39;, &#39;state 2&#39;, &#39;state 3&#39;, &#39;state 4&#39;)) + 
-  theme_classic()</code></pre>
-<p><img src="../../tutorials/scatterplot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-</div>
-<div id="plot-three-add-additional-factor-to-visualize" class="section level3">
-<h3>Plot Three; add additional factor to visualize</h3>
-<ul>
-<li>Geom object: point
-<ul>
-<li>TIC-0 -&gt; x</li>
-<li>TIC-1 -&gt; y</li>
-<li>Macrostate -&gt; shape</li>
-<li>Energy -&gt; color</li>
-</ul></li>
-<li>Plot edits
-<ul>
-<li>Energy added as parameter</li>
-<li>Change macrostate label</li>
-</ul></li>
-</ul>
-<pre class="r"><code>#---plot three---#
-ggplot(energy_tics) +
-  geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate), color = Energy),
-             stat = &quot;identity&quot;, position = &quot;identity&quot;) +
-  coord_cartesian() +
-  facet_null() +
-  
-  ##----map data values to visual values---##
-  scale_x_continuous() +
-  scale_y_continuous() +
-  scale_color_gradient() +
-  scale_shape_discrete() +
-  theme() +
-  
-  ##---change macrostate legend label---##
-  labs(shape=&quot;Macrostate&quot;) </code></pre>
-<p><img src="../../tutorials/scatterplot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-</div>
-<div id="plot-four-manipulate-color-gradients-specify-point-shapes" class="section level3">
-<h3>Plot Four; manipulate color gradients, specify point shapes</h3>
-<ul>
-<li>Geom object: point
-<ul>
-<li>TIC-0 -&gt; x</li>
-<li>TIC-1 -&gt; y</li>
-<li>Macrostate -&gt; shape</li>
-<li>Energy -&gt; color</li>
-</ul></li>
-<li>Plot edits
-<ul>
-<li>Change color gradient for energy (scale_color_gradient)</li>
-<li>Specify shapes for macrostates</li>
-</ul></li>
-</ul>
-<pre class="r"><code>#---plot four---#
-ggplot(energy_tics) +
-  geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate), color = Energy),
-             stat = &quot;identity&quot;, position = &quot;identity&quot;) +
-  coord_cartesian() +
-  facet_null() +
-  
-  ##----map data values to visual values---##
-  scale_x_continuous(name = &quot;TIC-0&quot;,
-                     breaks = -1:8) +
-  scale_y_continuous(name = &quot;TIC-1&quot;,
-                     breaks = -6:3) +
-  scale_color_gradient(low=&quot;blue&quot;, high=&quot;red&quot;,
-                       breaks = 0:8) +
-  scale_shape_manual(values = c(&quot;1&quot; = 15, &quot;2&quot; = 17, &quot;3&quot; = 19, &quot;4&quot; = 22),
-                     name = &quot;Macrostate&quot;) +
-  theme_classic()</code></pre>
-<p><img src="../../tutorials/scatterplot_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-</div>
-<div id="plot-five-add-confidence-ellipses" class="section level3">
-<h3>Plot Five; add confidence ellipses</h3>
-<ul>
-<li>Geom object: point
-<ul>
-<li>TIC-0 -&gt; x</li>
-<li>TIC-1 -&gt; y</li>
-<li>Macrostate -&gt; shape</li>
-<li>Energy -&gt; color</li>
-</ul></li>
-<li>Geom object: path
-<ul>
-<li>TIC-0 -&gt; x</li>
-<li>TIC-1 -&gt; y</li>
-<li>Macrostate -&gt; color</li>
-<li>confidence ellipse -&gt; stat</li>
-</ul></li>
-<li>Plot edits
-<ul>
-<li>Change legend labels (labs())</li>
-</ul></li>
-</ul>
-<pre class="r"><code>#---plot five---#
-ggplot(energy_tics) +
-  geom_point(mapping = aes(x = TIC0, y = TIC1, fill = Energy, shape = as.factor(macrostate)),
-             stat = &quot;identity&quot;, position = &quot;identity&quot;, inherit.aes = FALSE) +
-  geom_path(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)), 
-            stat = &quot;ellipse&quot;, inherit.aes = FALSE) + 
-  coord_cartesian() +
-  facet_null() +
-  
-  ##----map data values to visual values---##
-  scale_x_continuous(name = &quot;TIC-0&quot;,
-                     breaks = -1:8) +
-  scale_y_continuous(name = &quot;TIC-1&quot;,
-                     breaks = -6:3) +
-  scale_shape_manual(values = c(&quot;1&quot; = 22, &quot;2&quot; = 24, &quot;3&quot; = 23, &quot;4&quot; = 25)) +
-  scale_fill_gradient(low = &quot;blue&quot;, high = &quot;red&quot;) +
+<div id="geom_function" class="section level2">
+<h2>GEOM_FUNCTION</h2>
+<div id="which-geometric-object-point-vs.line" class="section level3">
+<h3>Which geometric object: point vs. line</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
   scale_color_discrete() +
-  theme_classic() +
-  
-  ##---change macrostate legend label---##
-  labs(shape=&quot;Macrostate&quot;, color = &quot;Macrostate&quot;) </code></pre>
-<p><img src="../../tutorials/scatterplot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_line(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2></h2>
+<p><img src="../../tutorials/ggplot2-template_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="mappings" class="section level2">
+<h2>Mappings</h2>
+<div id="from-data-values-to-visual-values" class="section level3">
+<h3>From data values to visual values</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp,
+                           color = as.factor(gear)),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp,
+                           color = as.factor(am)), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<p><img src="../../tutorials/ggplot2-template_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="stat" class="section level2">
+<h2>Stat</h2>
+<div id="statistical-transformation" class="section level3">
+<h3>Statistical transformation</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_bin2d(mapping = aes(x = disp, y = hp), 
+             stat = &quot;bin2d&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<p><img src="../../tutorials/ggplot2-template_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="coordinate" class="section level2">
+<h2>COORDINATE</h2>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_polar() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<p><img src="../../tutorials/ggplot2-template_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="facet" class="section level2">
+<h2>Facet</h2>
+<div id="split-data-into-multiple-plots." class="section level3">
+<h3>Split data into multiple plots.</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  facet_null() +
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  facet_grid(am ~ .) +
+  scale_color_discrete() +
+  theme()</code></pre>
+<p><img src="../../tutorials/ggplot2-template_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="scale" class="section level2">
+<h2>Scale</h2>
+<div id="how-data-values-are-mapped-to-visual-values" class="section level3">
+<h3>How data values are mapped to visual values</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, 
+                           y = hp,
+                           color = as.factor(gear)),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete(
+    
+    
+  ) +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, 
+                           y = hp, 
+                           color = as.factor(gear)), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_manual(name = &#39;gear&#39;,
+                     values = c(&#39;3&#39; = &#39;blue&#39;,
+                                &#39;4&#39; = &#39;yellow&#39;,
+                                &#39;5&#39; = &#39;red&#39;)) +
+  theme()</code></pre>
+<p><img src="../../tutorials/ggplot2-template_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="theme" class="section level2">
+<h2>Theme</h2>
+<div id="the-general-appearance" class="section level3">
+<h3>The general appearance</h3>
+<pre class="r left"><code>p1 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp),
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme()</code></pre>
+<pre class="r left"><code>p2 = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = &quot;identity&quot;) +
+  coord_cartesian() + 
+  scale_color_discrete() +
+  theme_classic()</code></pre>
+<p><img src="../../tutorials/ggplot2-template_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 
@@ -631,41 +606,6 @@ ggplot(energy_tics) +
             
                 
                     
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -697,6 +637,38 @@ ggplot(energy_tics) +
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -707,10 +679,10 @@ ggplot(energy_tics) +
 
 
         
-            <a class="nav nav-prev" href="../../tutorials/line-plot/" title="Line plot for time series data"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="../../tutorials/" title="Data Visualization"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="../../tutorials/network/" title="Network for graph-like data" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="../../tutorials/line-plot/" title="Line plot for time series data" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 

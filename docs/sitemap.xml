@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/tutorials/line-plot/</loc>
+    <loc>/tutorials/ggplot2-template/</loc>
   </url>
   
   <url>
@@ -12,6 +12,10 @@
   
   <url>
     <loc>/datasets/</loc>
+  </url>
+  
+  <url>
+    <loc>/tutorials/line-plot/</loc>
   </url>
   
   <url>

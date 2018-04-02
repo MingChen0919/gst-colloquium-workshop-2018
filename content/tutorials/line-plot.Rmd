@@ -1,5 +1,5 @@
 ---
-weight: 1
+weight: 2
 title: "Line plot for time series data"
 output: html_document
 ---
