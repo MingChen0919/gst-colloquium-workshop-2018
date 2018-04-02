@@ -29,7 +29,7 @@ library(ggplot2)</code></pre>
 </div>
 <div id="import-data" class="section level2">
 <h2>Import data</h2>
-<pre class="r"><code>transition = read.table(url(&#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets-2/John_datasets/transitionmatrix.dat&#39;))</code></pre>
+<pre class="r"><code>transition = read.table(url(&#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/S2-datasets/John_datasets/transitionmatrix.dat&#39;))</code></pre>
 <p>Now, take a look at the data we just imported. Click <code>Environment</code> on the right board, and then click the <code>transistion</code>. If you are command line geek, you can also type <code>View(transition)</code> in console.</p>
 </div>
 <div id="plotting-heatmap" class="section level2">
@@ -44,7 +44,7 @@ melt_mat &lt;- melt(transition_mat)</code></pre>
   geom_tile(mapping = aes(x=Var1, y=Var2, fill=value)) +
   scale_fill_gradient(name= &quot;transition&quot;) +
   theme_void()</code></pre>
-<p><img src="/tutorials-4/network_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/network_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div id="think-about-how-you-can-make-the-heatmap-look-better" class="section level3">
 <h3>Think about how you can make the heatmap look better?</h3>
 <ul>
@@ -73,7 +73,7 @@ ggplot(n1, aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_nodes() +
   geom_edges() +
   theme_blank()</code></pre>
-<p><img src="/tutorials-4/network_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/network_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="informative-network" class="section level2">
 <h2>Informative network</h2>
@@ -101,7 +101,7 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_nodes(mapping = aes(color = group, size = importance)) +
   geom_edges() +
   theme_blank()</code></pre>
-<p><img src="/tutorials-4/network_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/network_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 </div>
 <div id="modify-the-basic-network" class="section level2">
@@ -115,7 +115,7 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_nodes(mapping = aes(color = group, size = importance)) +
   geom_edges(alpha = 0.05) +
   theme_blank()</code></pre>
-<p><img src="/tutorials-4/network_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/network_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>Set a threshold for edge display.</li>
 </ol>
@@ -140,7 +140,7 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_nodes(mapping = aes(color = group, size = importance)) +
   geom_edges(alpha = 0.8) +
   theme_blank()</code></pre>
-<p><img src="/tutorials-4/network_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/network_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="b.-add-labels-to-nodes-optional" class="section level3">
 <h3>b. Add labels to nodes (Optional)</h3>
@@ -152,6 +152,6 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
                  fontface = &quot;bold&quot;) +
   scale_color_manual(name = &quot;Importance&quot;, values = colorRampPalette(c(&quot;yellow&quot;, &quot;red&quot;))(6)) +
   theme_blank()</code></pre>
-<p><img src="/tutorials-4/network_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/network_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>

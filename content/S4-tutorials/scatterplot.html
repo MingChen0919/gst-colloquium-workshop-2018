@@ -1,16 +1,23 @@
 ---
 weight: 2
 title: "Scatterplot"
-author: "GST Data Visualization Group"
-output: md_document
+output: html_document
 ---
 
 
 
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>
 <div id="import-data" class="section level2">
 <h2>Import Data</h2>
 <pre class="r"><code>#---Loading data---#
-load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets-2/datasets.RData&#39;))</code></pre>
+load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/S2-datasets/datasets.RData&#39;))</code></pre>
 </div>
 <div id="load-ggplot2-library" class="section level2">
 <h2>Load ggplot2 library</h2>
@@ -42,7 +49,7 @@ ggplot(energy_tics) +
   scale_y_continuous() +
   scale_color_identity() +
   theme()</code></pre>
-<p><img src="/tutorials-4/scatterplot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/scatterplot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 <div id="plot-two-manipulating-axes-point-colors" class="section level3">
 <h3>Plot Two; manipulating axes, point colors</h3>
@@ -89,7 +96,7 @@ ggplot(energy_tics) +
                      breaks = c(1,2,3,4),
                      labels = c(&#39;state 1&#39;, &#39;state 2&#39;, &#39;state 3&#39;, &#39;state 4&#39;)) + 
   theme_classic()</code></pre>
-<p><img src="/tutorials-4/scatterplot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/scatterplot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="plot-three-add-additional-factor-to-visualize" class="section level3">
 <h3>Plot Three; add additional factor to visualize</h3>
@@ -123,7 +130,7 @@ ggplot(energy_tics) +
   
   ##---change macrostate legend label---##
   labs(shape=&quot;Macrostate&quot;) </code></pre>
-<p><img src="/tutorials-4/scatterplot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/scatterplot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="plot-four-manipulate-color-gradients-specify-point-shapes" class="section level3">
 <h3>Plot Four; manipulate color gradients, specify point shapes</h3>
@@ -158,7 +165,7 @@ ggplot(energy_tics) +
   scale_shape_manual(values = c(&quot;1&quot; = 15, &quot;2&quot; = 17, &quot;3&quot; = 19, &quot;4&quot; = 22),
                      name = &quot;Macrostate&quot;) +
   theme_classic()</code></pre>
-<p><img src="/tutorials-4/scatterplot_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/scatterplot_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="plot-five-add-confidence-ellipses" class="section level3">
 <h3>Plot Five; add confidence ellipses</h3>
@@ -203,6 +210,6 @@ ggplot(energy_tics) +
   
   ##---change macrostate legend label---##
   labs(shape=&quot;Macrostate&quot;, color = &quot;Macrostate&quot;) </code></pre>
-<p><img src="/tutorials-4/scatterplot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/scatterplot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 </div>

@@ -1,14 +1,27 @@
 ---
 weight: 2
 title: "Scatterplot"
-author: "GST Data Visualization Group"
-output: md_document
+output: html_document
 ---
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 
 ## Import Data
 ```{r}
 #---Loading data---#
-load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets-2/datasets.RData'))
+load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/S2-datasets/datasets.RData'))
 ```
 
 ## Load ggplot2 library

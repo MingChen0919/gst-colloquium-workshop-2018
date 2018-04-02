@@ -35,7 +35,7 @@ library(ggplot2)
 ## Import data
 
 ```{r}
-transition = read.table(url('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets-2/John_datasets/transitionmatrix.dat'))
+transition = read.table(url('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/S2-datasets/John_datasets/transitionmatrix.dat'))
 ```
 
 Now, take a look at the data we just imported. Click `Environment` on the right board, and then click the `transistion`. 
