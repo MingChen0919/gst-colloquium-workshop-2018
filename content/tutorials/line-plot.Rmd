@@ -80,14 +80,11 @@ p2
 
 ```{r}
 grid.arrange(p1, p2, ncol = 2, widths = c(3,1))
-
-# overwrite xlab on density plot.
-grid.arrange(p1, p2 + xlab(''), ncol = 2, widths = c(3,1))
 ```
 
 
 
-## All features in one plots
+## All features in one plots (optional)
 
 **Define your own plotting functions**
 
@@ -142,19 +139,19 @@ for (i in 1:58) {
   
   # get column number
   col_n = (i + 1) %/% 2 + 1
-  cat('The column number is: ', col_n, '\n')
+  # cat('The column number is: ', col_n, '\n')
   
   if (i %% 2 == 1) {
-    cat('i is an odd number: i = ', i, '\n')
+    # cat('i is an odd number: i = ', i, '\n')
     all_plots[[i]] = line_plot(col_n)
   }
   
   else {
-    cat('i is an even number: i = ', i, '\n')
+    # cat('i is an even number: i = ', i, '\n')
     all_plots[[i]] = density_plot(col_n)
   }
   
-  cat('----------------------------------\n')
+  # cat('----------------------------------\n')
 }
 
 

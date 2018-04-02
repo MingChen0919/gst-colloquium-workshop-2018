@@ -74,13 +74,10 @@ p2</code></pre>
 <h3>Combine time series plot and density plot</h3>
 <pre class="r"><code>grid.arrange(p1, p2, ncol = 2, widths = c(3,1))</code></pre>
 <p><img src="/tutorials/line-plot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="r"><code># overwrite xlab on density plot.
-grid.arrange(p1, p2 + xlab(&#39;&#39;), ncol = 2, widths = c(3,1))</code></pre>
-<p><img src="/tutorials/line-plot_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 </div>
 </div>
-<div id="all-features-in-one-plots" class="section level2">
-<h2>All features in one plots</h2>
+<div id="all-features-in-one-plots-optional" class="section level2">
+<h2>All features in one plots (optional)</h2>
 <p><strong>Define your own plotting functions</strong></p>
 <pre class="r"><code>line_plot = function(col_n) {
   p = ggplot(data = trajectory) +
@@ -127,195 +124,23 @@ for (i in 1:58) {
   
   # get column number
   col_n = (i + 1) %/% 2 + 1
-  cat(&#39;The column number is: &#39;, col_n, &#39;\n&#39;)
+  # cat(&#39;The column number is: &#39;, col_n, &#39;\n&#39;)
   
   if (i %% 2 == 1) {
-    cat(&#39;i is an odd number: i = &#39;, i, &#39;\n&#39;)
+    # cat(&#39;i is an odd number: i = &#39;, i, &#39;\n&#39;)
     all_plots[[i]] = line_plot(col_n)
   }
   
   else {
-    cat(&#39;i is an even number: i = &#39;, i, &#39;\n&#39;)
+    # cat(&#39;i is an even number: i = &#39;, i, &#39;\n&#39;)
     all_plots[[i]] = density_plot(col_n)
   }
   
-  cat(&#39;----------------------------------\n&#39;)
-}</code></pre>
-<pre><code>## The column number is:  2 
-## i is an odd number: i =  1 
-## ----------------------------------
-## The column number is:  2 
-## i is an even number: i =  2 
-## ----------------------------------
-## The column number is:  3 
-## i is an odd number: i =  3 
-## ----------------------------------
-## The column number is:  3 
-## i is an even number: i =  4 
-## ----------------------------------
-## The column number is:  4 
-## i is an odd number: i =  5 
-## ----------------------------------
-## The column number is:  4 
-## i is an even number: i =  6 
-## ----------------------------------
-## The column number is:  5 
-## i is an odd number: i =  7 
-## ----------------------------------
-## The column number is:  5 
-## i is an even number: i =  8 
-## ----------------------------------
-## The column number is:  6 
-## i is an odd number: i =  9 
-## ----------------------------------
-## The column number is:  6 
-## i is an even number: i =  10 
-## ----------------------------------
-## The column number is:  7 
-## i is an odd number: i =  11 
-## ----------------------------------
-## The column number is:  7 
-## i is an even number: i =  12 
-## ----------------------------------
-## The column number is:  8 
-## i is an odd number: i =  13 
-## ----------------------------------
-## The column number is:  8 
-## i is an even number: i =  14 
-## ----------------------------------
-## The column number is:  9 
-## i is an odd number: i =  15 
-## ----------------------------------
-## The column number is:  9 
-## i is an even number: i =  16 
-## ----------------------------------
-## The column number is:  10 
-## i is an odd number: i =  17 
-## ----------------------------------
-## The column number is:  10 
-## i is an even number: i =  18 
-## ----------------------------------
-## The column number is:  11 
-## i is an odd number: i =  19 
-## ----------------------------------
-## The column number is:  11 
-## i is an even number: i =  20 
-## ----------------------------------
-## The column number is:  12 
-## i is an odd number: i =  21 
-## ----------------------------------
-## The column number is:  12 
-## i is an even number: i =  22 
-## ----------------------------------
-## The column number is:  13 
-## i is an odd number: i =  23 
-## ----------------------------------
-## The column number is:  13 
-## i is an even number: i =  24 
-## ----------------------------------
-## The column number is:  14 
-## i is an odd number: i =  25 
-## ----------------------------------
-## The column number is:  14 
-## i is an even number: i =  26 
-## ----------------------------------
-## The column number is:  15 
-## i is an odd number: i =  27 
-## ----------------------------------
-## The column number is:  15 
-## i is an even number: i =  28 
-## ----------------------------------
-## The column number is:  16 
-## i is an odd number: i =  29 
-## ----------------------------------
-## The column number is:  16 
-## i is an even number: i =  30 
-## ----------------------------------
-## The column number is:  17 
-## i is an odd number: i =  31 
-## ----------------------------------
-## The column number is:  17 
-## i is an even number: i =  32 
-## ----------------------------------
-## The column number is:  18 
-## i is an odd number: i =  33 
-## ----------------------------------
-## The column number is:  18 
-## i is an even number: i =  34 
-## ----------------------------------
-## The column number is:  19 
-## i is an odd number: i =  35 
-## ----------------------------------
-## The column number is:  19 
-## i is an even number: i =  36 
-## ----------------------------------
-## The column number is:  20 
-## i is an odd number: i =  37 
-## ----------------------------------
-## The column number is:  20 
-## i is an even number: i =  38 
-## ----------------------------------
-## The column number is:  21 
-## i is an odd number: i =  39 
-## ----------------------------------
-## The column number is:  21 
-## i is an even number: i =  40 
-## ----------------------------------
-## The column number is:  22 
-## i is an odd number: i =  41 
-## ----------------------------------
-## The column number is:  22 
-## i is an even number: i =  42 
-## ----------------------------------
-## The column number is:  23 
-## i is an odd number: i =  43 
-## ----------------------------------
-## The column number is:  23 
-## i is an even number: i =  44 
-## ----------------------------------
-## The column number is:  24 
-## i is an odd number: i =  45 
-## ----------------------------------
-## The column number is:  24 
-## i is an even number: i =  46 
-## ----------------------------------
-## The column number is:  25 
-## i is an odd number: i =  47 
-## ----------------------------------
-## The column number is:  25 
-## i is an even number: i =  48 
-## ----------------------------------
-## The column number is:  26 
-## i is an odd number: i =  49 
-## ----------------------------------
-## The column number is:  26 
-## i is an even number: i =  50 
-## ----------------------------------
-## The column number is:  27 
-## i is an odd number: i =  51 
-## ----------------------------------
-## The column number is:  27 
-## i is an even number: i =  52 
-## ----------------------------------
-## The column number is:  28 
-## i is an odd number: i =  53 
-## ----------------------------------
-## The column number is:  28 
-## i is an even number: i =  54 
-## ----------------------------------
-## The column number is:  29 
-## i is an odd number: i =  55 
-## ----------------------------------
-## The column number is:  29 
-## i is an even number: i =  56 
-## ----------------------------------
-## The column number is:  30 
-## i is an odd number: i =  57 
-## ----------------------------------
-## The column number is:  30 
-## i is an even number: i =  58 
-## ----------------------------------</code></pre>
-<pre class="r"><code>all_plots$ncol = 6
+  # cat(&#39;----------------------------------\n&#39;)
+}
+
+
+all_plots$ncol = 6
 all_plots$widths = c(5,2,5,2,5,2)
 do.call(grid.arrange,  all_plots)</code></pre>
 <p><img src="/tutorials/line-plot_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>

@@ -3,6 +3,7 @@ weight: 4
 title: "Data Visualization"
 author: "gst data visualization group"
 output: html_document
+chapter: true
 ---
 
 <style>
@@ -17,6 +18,11 @@ pre code, pre, code {
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
+
+### GGPLOT2 plotting template
+### Line plot for time series data
+### Scatterplot
+### Network for graph-like data
 
 
 
