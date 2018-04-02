@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.31.1" />
+    <meta name="description" content="">
+
+
+    <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
+<link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
+
+    <title>Scatterplot :: My New Hugo Site</title>
+    
+    
+    <link href="../../css/nucleus.css?1522694611" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1522694611" rel="stylesheet">
+    <link href="../../css/hybrid.css?1522694611" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1522694611" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1522694611" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1522694611" rel="stylesheet">
+    <link href="../../css/theme.css?1522694611" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1522694611" rel="stylesheet">
+    
+      <link href="../../css/theme-blue.css?1522694611" rel="stylesheet">
+    
+
+    <script src="../../js/jquery-2.x.min.js?1522694611"></script>
+    
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left{ 
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/tutorials/scatterplot/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://mingchen0919.github.io/gst-colloquium-workshop-2018/">
+  <img src="../../images/gst-data-visualization-logo.png">
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fa fa-search"></i></label>
+    <input data-search-input id="search-by" type="text" placeholder="Search...">
+    <span data-search-clear=""><i class="fa fa-close"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1522694611"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1522694611"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1522694611"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/rstudio-accounts/" title="RStudio Accounts" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../rstudio-accounts/">
+          RStudio Accounts
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/datasets/" title="Datasets" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../datasets/">
+          Datasets
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ggplot2-framework/" title="Ggplot2" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ggplot2-framework/">
+          Ggplot2
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/tutorials/" title="Data Visualization" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../../tutorials/">
+          Data Visualization
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/tutorials/line-plot/" title="Line plot for time series data" class="dd-item ">
+        <a href="../../tutorials/line-plot/">
+        Line plot for time series data
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/tutorials/scatterplot/" title="Scatterplot" class="dd-item active">
+        <a href="../../tutorials/scatterplot/">
+        Scatterplot
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/tutorials/network/" title="Network for graph-like data" class="dd-item ">
+        <a href="../../tutorials/network/">
+        Network for graph-like data
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fa fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='../../'>Data Visualization</a> > <a href='../../tutorials/'>Data Visualization</a> > Scatterplot
+          
+         
+          
+         
+          
+           
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+
+        
+        <div id="body-inner">
+          
+            <h1>Scatterplot</h1>
+          
+
+        
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+</style>
+<div id="import-data" class="section level2">
+<h2>Import Data</h2>
+<pre class="r"><code>#---Loading data---#
+load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&#39;))</code></pre>
+</div>
+<div id="load-ggplot2-library" class="section level2">
+<h2>Load ggplot2 library</h2>
+<pre class="r"><code>#---loading ggplot library---#
+library(ggplot2)</code></pre>
+</div>
+<div id="visualization" class="section level2">
+<h2>Visualization</h2>
+<div id="plot-one-collective-variables-and-macrostates" class="section level3">
+<h3>Plot One; collective variables and macrostates</h3>
+<ul>
+<li>Geom object: point
+<ul>
+<li>TIC-0 -&gt; x</li>
+<li>TIC-1 -&gt; y</li>
+<li>Macrostate -&gt; color</li>
+</ul></li>
+</ul>
+<pre class="r"><code>#---plot one---#
+ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
+             stat = &quot;identity&quot;, 
+             position = &quot;identity&quot;) +
+  coord_cartesian() +
+  facet_null() +
+  
+  ##----map data values to visual values---##
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_identity() +
+  theme()</code></pre>
+<p><img src="../../tutorials/scatterplot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="plot-two-manipulating-axes-point-colors" class="section level3">
+<h3>Plot Two; manipulating axes, point colors</h3>
+<ul>
+<li>Geom object: point
+<ul>
+<li>TIC-0 -&gt; x</li>
+<li>TIC-1 -&gt; y</li>
+<li>Macrostate -&gt; color</li>
+</ul></li>
+<li>Plot edits
+<ul>
+<li>Set the axis labels (breaks)<br />
+</li>
+<li>Set the axis limits (limits)<br />
+</li>
+<li>Change axis orientation (trans = “reverse”)<br />
+</li>
+<li>Change colors for macrostates (scale_color_manual())<br />
+</li>
+<li>Set labels for macrostates (breaks; labels)<br />
+</li>
+<li>Change theme (theme_classic())</li>
+</ul></li>
+</ul>
+<pre class="r"><code>#---plot two---#
+ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
+             stat = &quot;identity&quot;, 
+             position = &quot;identity&quot;) +
+  coord_cartesian() +
+  facet_null() +
+  
+  ##----map data values to visual values---##
+  scale_x_continuous(name = &quot;TIC-0&quot;, 
+                     breaks = c(-1, 0, 1, 2, 3, 4, 5, 6, 7),
+                     limits = c(-1, 7)) +
+  scale_y_continuous(name = &quot;TIC-1&quot;,
+                     breaks = -7:3, 
+                     trans = &quot;reverse&quot;,
+                     limits = c(3, -7)) +
+  scale_color_manual(values = c(&quot;1&quot; = &quot;red&quot;, &quot;2&quot; = &quot;blue&quot;, &quot;3&quot; = &quot;yellow&quot;, &quot;4&quot; = &quot;green&quot;),
+                     name = &quot;Macrostate&quot;, 
+                     breaks = c(1,2,3,4),
+                     labels = c(&#39;state 1&#39;, &#39;state 2&#39;, &#39;state 3&#39;, &#39;state 4&#39;)) + 
+  theme_classic()</code></pre>
+<p><img src="../../tutorials/scatterplot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="plot-three-add-additional-factor-to-visualize" class="section level3">
+<h3>Plot Three; add additional factor to visualize</h3>
+<ul>
+<li>Geom object: point
+<ul>
+<li>TIC-0 -&gt; x</li>
+<li>TIC-1 -&gt; y</li>
+<li>Macrostate -&gt; shape</li>
+<li>Energy -&gt; color</li>
+</ul></li>
+<li>Plot edits
+<ul>
+<li>Energy added as parameter</li>
+<li>Change macrostate label</li>
+</ul></li>
+</ul>
+<pre class="r"><code>#---plot three---#
+ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate), color = Energy),
+             stat = &quot;identity&quot;, position = &quot;identity&quot;) +
+  coord_cartesian() +
+  facet_null() +
+  
+  ##----map data values to visual values---##
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_gradient() +
+  scale_shape_discrete() +
+  theme() +
+  
+  ##---change macrostate legend label---##
+  labs(shape=&quot;Macrostate&quot;) </code></pre>
+<p><img src="../../tutorials/scatterplot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="plot-four-manipulate-color-gradients-specify-point-shapes" class="section level3">
+<h3>Plot Four; manipulate color gradients, specify point shapes</h3>
+<ul>
+<li>Geom object: point
+<ul>
+<li>TIC-0 -&gt; x</li>
+<li>TIC-1 -&gt; y</li>
+<li>Macrostate -&gt; shape</li>
+<li>Energy -&gt; color</li>
+</ul></li>
+<li>Plot edits
+<ul>
+<li>Change color gradient for energy (scale_color_gradient)</li>
+<li>Specify shapes for macrostates</li>
+</ul></li>
+</ul>
+<pre class="r"><code>#---plot four---#
+ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate), color = Energy),
+             stat = &quot;identity&quot;, position = &quot;identity&quot;) +
+  coord_cartesian() +
+  facet_null() +
+  
+  ##----map data values to visual values---##
+  scale_x_continuous(name = &quot;TIC-0&quot;,
+                     breaks = -1:8) +
+  scale_y_continuous(name = &quot;TIC-1&quot;,
+                     breaks = -6:3) +
+  scale_color_gradient(low=&quot;blue&quot;, high=&quot;red&quot;,
+                       breaks = 0:8) +
+  scale_shape_manual(values = c(&quot;1&quot; = 15, &quot;2&quot; = 17, &quot;3&quot; = 19, &quot;4&quot; = 22),
+                     name = &quot;Macrostate&quot;) +
+  theme_classic()</code></pre>
+<p><img src="../../tutorials/scatterplot_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="plot-five-add-confidence-ellipses" class="section level3">
+<h3>Plot Five; add confidence ellipses</h3>
+<ul>
+<li>Geom object: point
+<ul>
+<li>TIC-0 -&gt; x</li>
+<li>TIC-1 -&gt; y</li>
+<li>Macrostate -&gt; shape</li>
+<li>Energy -&gt; color</li>
+</ul></li>
+<li>Geom object: path
+<ul>
+<li>TIC-0 -&gt; x</li>
+<li>TIC-1 -&gt; y</li>
+<li>Macrostate -&gt; color</li>
+<li>confidence ellipse -&gt; stat</li>
+</ul></li>
+<li>Plot edits
+<ul>
+<li>Change legend labels (labs())</li>
+</ul></li>
+</ul>
+<pre class="r"><code>#---plot five---#
+ggplot(energy_tics) +
+  geom_point(mapping = aes(x = TIC0, y = TIC1, fill = Energy, shape = as.factor(macrostate)),
+             stat = &quot;identity&quot;, position = &quot;identity&quot;, inherit.aes = FALSE) +
+  geom_path(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)), 
+            stat = &quot;ellipse&quot;, inherit.aes = FALSE) + 
+  coord_cartesian() +
+  facet_null() +
+  
+  ##----map data values to visual values---##
+  scale_x_continuous(name = &quot;TIC-0&quot;,
+                     breaks = -1:8) +
+  scale_y_continuous(name = &quot;TIC-1&quot;,
+                     breaks = -6:3) +
+  scale_shape_manual(values = c(&quot;1&quot; = 22, &quot;2&quot; = 24, &quot;3&quot; = 23, &quot;4&quot; = 25)) +
+  scale_fill_gradient(low = &quot;blue&quot;, high = &quot;red&quot;) +
+  scale_color_discrete() +
+  theme_classic() +
+  
+  ##---change macrostate legend label---##
+  labs(shape=&quot;Macrostate&quot;, color = &quot;Macrostate&quot;) </code></pre>
+<p><img src="../../tutorials/scatterplot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+</div>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+        
+            <a class="nav nav-prev" href="../../tutorials/line-plot/" title="Line plot for time series data"> <i class="fa fa-chevron-left"></i></a>
+        
+        
+            <a class="nav nav-next" href="../../tutorials/network/" title="Network for graph-like data" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1522694611"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1522694611"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1522694611"></script>
+    <script src="../../js/jquery.sticky.js?1522694611"></script>
+    <script src="../../js/featherlight.min.js?1522694611"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1522694611"></script>
+    <script src="../../js/highlight.pack.js?1522694611"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom.71422.js?1522694611"></script>
+    <script src="../../js/learn.js?1522694611"></script>
+    <script src="../../js/hugo-learn.js?1522694611"></script>
+
+    <link href="../../mermaid/mermaid.css?1522694611" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1522694611"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+

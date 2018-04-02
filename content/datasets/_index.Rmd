@@ -24,7 +24,7 @@ options("width" = 200)
 ## Dataset descriptions
 
 ```{r echo=FALSE}
-load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/S2-datasets/datasets.RData'))
+load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData'))
 ```
 
 ### Time series plot datasets: `trajectory`
