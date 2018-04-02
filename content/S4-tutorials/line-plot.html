@@ -16,7 +16,7 @@ pre code, pre, code {
 </style>
 <div id="import-data" class="section level2">
 <h2>Import data</h2>
-<pre class="r"><code>load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets-2/datasets.RData&#39;))</code></pre>
+<pre class="r"><code>load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/S2-datasets/datasets.RData&#39;))</code></pre>
 </div>
 <div id="load-libraries" class="section level2">
 <h2>Load libraries</h2>
@@ -47,7 +47,7 @@ p1 = ggplot(data = trajectory) +
   theme_classic()
 
 p1</code></pre>
-<p><img src="/tutorials-4/line-plot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/line-plot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 <div id="distribution-of-feature-values" class="section level3">
 <h3>Distribution of feature values</h3>
@@ -68,15 +68,15 @@ p2 = ggplot(data = trajectory) +
   scale_x_continuous(name = colnames(trajectory)[2]) +
   theme_classic()
 p2</code></pre>
-<p><img src="/tutorials-4/line-plot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/line-plot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="combine-time-series-plot-and-density-plot" class="section level3">
 <h3>Combine time series plot and density plot</h3>
 <pre class="r"><code>grid.arrange(p1, p2, ncol = 2, widths = c(3,1))</code></pre>
-<p><img src="/tutorials-4/line-plot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/line-plot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code># overwrite xlab on density plot.
 grid.arrange(p1, p2 + xlab(&#39;&#39;), ncol = 2, widths = c(3,1))</code></pre>
-<p><img src="/tutorials-4/line-plot_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<p><img src="/S4-tutorials/line-plot_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 </div>
 </div>
 <div id="all-features-in-one-plots" class="section level2">
@@ -117,9 +117,9 @@ density_plot = function(col_n) {
 }</code></pre>
 <p>Examples</p>
 <pre class="r"><code>line_plot(2)</code></pre>
-<p><img src="/tutorials-4/line-plot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/S4-tutorials/line-plot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <pre class="r"><code>density_plot(4)</code></pre>
-<p><img src="/tutorials-4/line-plot_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<p><img src="/S4-tutorials/line-plot_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
 <div id="plots-vector" class="section level3">
 <h3>Plots vector</h3>
 <pre class="r"><code>all_plots = list()
@@ -318,6 +318,6 @@ for (i in 1:58) {
 <pre class="r"><code>all_plots$ncol = 6
 all_plots$widths = c(5,2,5,2,5,2)
 do.call(grid.arrange,  all_plots)</code></pre>
-<p><img src="/tutorials-4/line-plot_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
+<p><img src="/S4-tutorials/line-plot_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
 </div>
 </div>

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Import data
 
 ```{r}
-load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets-2/datasets.RData'))
+load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/S2-datasets/datasets.RData'))
 ```
 
 ## Load libraries
