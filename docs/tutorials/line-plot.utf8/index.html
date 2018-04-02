@@ -13,19 +13,19 @@
     <title>Line plot for time series data :: My New Hugo Site</title>
     
     
-    <link href="../../css/nucleus.css?1522695830" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1522695830" rel="stylesheet">
-    <link href="../../css/hybrid.css?1522695830" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1522695830" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1522695830" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1522695830" rel="stylesheet">
-    <link href="../../css/theme.css?1522695830" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1522695830" rel="stylesheet">
+    <link href="../../css/nucleus.css?1522695748" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1522695748" rel="stylesheet">
+    <link href="../../css/hybrid.css?1522695748" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1522695748" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1522695748" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1522695748" rel="stylesheet">
+    <link href="../../css/theme.css?1522695748" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1522695748" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1522695830" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1522695748" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1522695830"></script>
+    <script src="../../js/jquery-2.x.min.js?1522695748"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/tutorials/line-plot/">
+  <body class="" data-url="/tutorials/line-plot.utf8/">
     <nav id="sidebar" class="">
 
 
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1522695830"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1522695830"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1522695748"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1522695748"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1522695830"></script>
+<script type="text/javascript" src="../../js/search.js?1522695748"></script>
 
     
   </div>
@@ -167,8 +167,27 @@
  
   
     
-      <li data-nav-id="/tutorials/line-plot/" title="Line plot for time series data" class="dd-item active">
-        <a href="../../tutorials/line-plot/">
+      <li data-nav-id="/tutorials/line-plot.knit/" title="Line plot for time series data" class="dd-item ">
+        <a href="../../tutorials/line-plot.knit/">
+        Line plot for time series data
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/tutorials/line-plot.utf8/" title="Line plot for time series data" class="dd-item active">
+        <a href="../../tutorials/line-plot.utf8/">
         Line plot for time series data
         
         </a>
@@ -208,6 +227,25 @@
       <li data-nav-id="/tutorials/network/" title="Network for graph-like data" class="dd-item ">
         <a href="../../tutorials/network/">
         Network for graph-like data
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/tutorials/line-plot/" title="" class="dd-item ">
+        <a href="../../tutorials/line-plot/">
+        
         
         </a>
     </li>
@@ -284,7 +322,25 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#import-data">Import data</a></li>
+<li><a href="#load-libraries">Load libraries</a></li>
+<li><a href="#visualization">Visualization</a>
+<ul>
+<li><a href="#feature-against-frame-index">Feature against frame index</a></li>
+<li><a href="#distribution-of-feature-values">Distribution of feature values</a></li>
+<li><a href="#combine-time-series-plot-and-density-plot">Combine time series plot and density plot</a></li>
+</ul></li>
+<li><a href="#all-features-in-one-plots">All features in one plots</a>
+<ul>
+<li><a href="#plots-vector">Plots vector</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -302,6 +358,8 @@
         
 
 
+
+
 <style>
 pre code, pre, code {
   white-space: pre !important;
@@ -310,30 +368,35 @@ pre code, pre, code {
   word-wrap: initial !important;
 }
 </style>
-<div id="import-data" class="section level2">
-<h2>Import data</h2>
-<pre class="r"><code>load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&#39;))</code></pre>
-</div>
-<div id="load-libraries" class="section level2">
-<h2>Load libraries</h2>
-<pre class="r"><code>library(ggplot2)
-library(gridExtra)</code></pre>
-</div>
-<div id="visualization" class="section level2">
-<h2>Visualization</h2>
-<div id="feature-against-frame-index" class="section level3">
-<h3>Feature against frame index</h3>
+
+<h2 id="import-data">Import data</h2>
+
+<pre><code class="language-r">load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData'))
+</code></pre>
+
+<h2 id="load-libraries">Load libraries</h2>
+
+<pre><code class="language-r">library(ggplot2)
+library(gridExtra)
+</code></pre>
+
+<h2 id="visualization">Visualization</h2>
+
+<h3 id="feature-against-frame-index">Feature against frame index</h3>
+
 <ul>
 <li><strong>Geom object: line</strong>
+
 <ul>
 <li>frame_index -&gt; x</li>
 <li>feature -&gt; y</li>
 </ul></li>
 </ul>
-<pre class="r"><code># ggplot2 template
+
+<pre><code class="language-r"># ggplot2 template
 p1 = ggplot(data = trajectory) +
   geom_line(mapping = aes(x = frame_index/1000, y = trajectory[, 2]), 
-            stat = &quot;identity&quot;, position = &quot;identity&quot;, color = &#39;#ff6d6d&#39;) +
+            stat = &quot;identity&quot;, position = &quot;identity&quot;, color = '#ff6d6d') +
   coord_cartesian() +
   facet_null() +
   
@@ -342,46 +405,58 @@ p1 = ggplot(data = trajectory) +
   scale_y_continuous(name = colnames(trajectory[2])) +
   theme_classic()
 
-p1</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-</div>
-<div id="distribution-of-feature-values" class="section level3">
-<h3>Distribution of feature values</h3>
+p1
+</code></pre>
+
+<p><img src="line-plot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+
+<h3 id="distribution-of-feature-values">Distribution of feature values</h3>
+
 <ul>
 <li><strong>Geom object: density</strong>
+
 <ul>
-<li>feature -&gt; x</li>
+<li>feature -&gt; x
+<br /></li>
 </ul></li>
 </ul>
-<pre class="r"><code># ggplot2 template
+
+<pre><code class="language-r"># ggplot2 template
 p2 = ggplot(data = trajectory) +
   geom_density(mapping = aes(x = trajectory[, 2]), 
-            stat = &quot;density&quot;, position = &quot;identity&quot;, color = &#39;#3dbfff&#39;) +
+            stat = &quot;density&quot;, position = &quot;identity&quot;, color = '#3dbfff') +
   coord_flip() +
   facet_null() +
   
   #----map data values to visual values---
   scale_x_continuous(name = colnames(trajectory)[2]) +
   theme_classic()
-p2</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-</div>
-<div id="combine-time-series-plot-and-density-plot" class="section level3">
-<h3>Combine time series plot and density plot</h3>
-<pre class="r"><code>grid.arrange(p1, p2, ncol = 2, widths = c(3,1))</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="r"><code># overwrite xlab on density plot.
-grid.arrange(p1, p2 + xlab(&#39;&#39;), ncol = 2, widths = c(3,1))</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
-</div>
-</div>
-<div id="all-features-in-one-plots" class="section level2">
-<h2>All features in one plots</h2>
+p2
+</code></pre>
+
+<p><img src="line-plot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+
+<h3 id="combine-time-series-plot-and-density-plot">Combine time series plot and density plot</h3>
+
+<pre><code class="language-r">grid.arrange(p1, p2, ncol = 2, widths = c(3,1))
+</code></pre>
+
+<p><img src="line-plot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+
+<pre><code class="language-r"># overwrite xlab on density plot.
+grid.arrange(p1, p2 + xlab(''), ncol = 2, widths = c(3,1))
+</code></pre>
+
+<p><img src="line-plot_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+
+<h2 id="all-features-in-one-plots">All features in one plots</h2>
+
 <p><strong>Define your own plotting functions</strong></p>
-<pre class="r"><code>line_plot = function(col_n) {
+
+<pre><code class="language-r">line_plot = function(col_n) {
   p = ggplot(data = trajectory) +
     geom_line(mapping = aes(x = frame_index/1000, y = trajectory[, col_n]), 
-              stat = &quot;identity&quot;, position = &quot;identity&quot;, color = &#39;#ff6d6d&#39;) +
+              stat = &quot;identity&quot;, position = &quot;identity&quot;, color = '#ff6d6d') +
     coord_cartesian() +
     facet_null() +
     scale_x_continuous() +
@@ -390,7 +465,7 @@ grid.arrange(p1, p2 + xlab(&#39;&#39;), ncol = 2, widths = c(3,1))</code></pre>
     theme(axis.title=element_text(size=5,face=&quot;bold&quot;)) +
     
     # helper functions
-    xlab(&#39;Frame Index&#39;) +
+    xlab('Frame Index') +
     ylab(colnames(trajectory)[col_n])
 
   return(p)
@@ -399,7 +474,7 @@ grid.arrange(p1, p2 + xlab(&#39;&#39;), ncol = 2, widths = c(3,1))</code></pre>
 density_plot = function(col_n) {
   p = ggplot(data = trajectory) +
     geom_density(mapping = aes(x = trajectory[, col_n]), 
-              stat = &quot;density&quot;, position = &quot;identity&quot;, color = &#39;#3dbfff&#39;) +
+              stat = &quot;density&quot;, position = &quot;identity&quot;, color = '#3dbfff') +
     coord_flip() +
     facet_null() +
     scale_x_continuous() +
@@ -407,36 +482,47 @@ density_plot = function(col_n) {
     theme(axis.title=element_text(size=5,face=&quot;bold&quot;)) +
     
     # helper functions
-    xlab(&#39;&#39;)
+    xlab('')
     
   return(p)
-}</code></pre>
+}
+</code></pre>
+
 <p>Examples</p>
-<pre class="r"><code>line_plot(2)</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<pre class="r"><code>density_plot(4)</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
-<div id="plots-vector" class="section level3">
-<h3>Plots vector</h3>
-<pre class="r"><code>all_plots = list()
+
+<pre><code class="language-r">line_plot(2)
+</code></pre>
+
+<p><img src="line-plot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+
+<pre><code class="language-r">density_plot(4)
+</code></pre>
+
+<p><img src="line-plot_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+
+<h3 id="plots-vector">Plots vector</h3>
+
+<pre><code class="language-r">all_plots = list()
 for (i in 1:58) {
   
   # get column number
   col_n = (i + 1) %/% 2 + 1
-  cat(&#39;The column number is: &#39;, col_n, &#39;\n&#39;)
+  cat('The column number is: ', col_n, '\n')
   
   if (i %% 2 == 1) {
-    cat(&#39;i is an odd number: i = &#39;, i, &#39;\n&#39;)
+    cat('i is an odd number: i = ', i, '\n')
     all_plots[[i]] = line_plot(col_n)
   }
   
   else {
-    cat(&#39;i is an even number: i = &#39;, i, &#39;\n&#39;)
+    cat('i is an even number: i = ', i, '\n')
     all_plots[[i]] = density_plot(col_n)
   }
   
-  cat(&#39;----------------------------------\n&#39;)
-}</code></pre>
+  cat('----------------------------------\n')
+}
+</code></pre>
+
 <pre><code>## The column number is:  2 
 ## i is an odd number: i =  1 
 ## ----------------------------------
@@ -610,13 +696,15 @@ for (i in 1:58) {
 ## ----------------------------------
 ## The column number is:  30 
 ## i is an even number: i =  58 
-## ----------------------------------</code></pre>
-<pre class="r"><code>all_plots$ncol = 6
+## ----------------------------------
+</code></pre>
+
+<pre><code class="language-r">all_plots$ncol = 6
 all_plots$widths = c(5,2,5,2,5,2)
-do.call(grid.arrange,  all_plots)</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
-</div>
-</div>
+do.call(grid.arrange,  all_plots)
+</code></pre>
+
+<p><img src="line-plot_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
 
 
 <footer class=" footline" >
@@ -720,6 +808,25 @@ do.call(grid.arrange,  all_plots)</code></pre>
             
                 
                     
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -767,6 +874,22 @@ do.call(grid.arrange,  all_plots)</code></pre>
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -777,7 +900,7 @@ do.call(grid.arrange,  all_plots)</code></pre>
 
 
         
-            <a class="nav nav-prev" href="../../tutorials/" title="Data Visualization"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="../../tutorials/line-plot.knit/" title="Line plot for time series data"> <i class="fa fa-chevron-left"></i></a>
         
         
             <a class="nav nav-next" href="../../tutorials/scatterplot/" title="Scatterplot" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
@@ -789,20 +912,20 @@ do.call(grid.arrange,  all_plots)</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1522695830"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1522695830"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1522695830"></script>
-    <script src="../../js/jquery.sticky.js?1522695830"></script>
-    <script src="../../js/featherlight.min.js?1522695830"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1522695830"></script>
-    <script src="../../js/highlight.pack.js?1522695830"></script>
+    <script src="../../js/clipboard.min.js?1522695748"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1522695748"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1522695748"></script>
+    <script src="../../js/jquery.sticky.js?1522695748"></script>
+    <script src="../../js/featherlight.min.js?1522695748"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1522695748"></script>
+    <script src="../../js/highlight.pack.js?1522695748"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1522695830"></script>
-    <script src="../../js/learn.js?1522695830"></script>
-    <script src="../../js/hugo-learn.js?1522695830"></script>
+    <script src="../../js/modernizr.custom.71422.js?1522695748"></script>
+    <script src="../../js/learn.js?1522695748"></script>
+    <script src="../../js/hugo-learn.js?1522695748"></script>
 
-    <link href="../../mermaid/mermaid.css?1522695830" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1522695830"></script>
+    <link href="../../mermaid/mermaid.css?1522695748" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1522695748"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
