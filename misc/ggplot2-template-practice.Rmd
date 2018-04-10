@@ -323,3 +323,51 @@ ggplot(data = mtcars) +
   scale_color_continuous() +
   theme_minimal()
 ```
+
+
+# Exercise
+
+```{r}
+# load data
+load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/update-ggplot-template-tutorial/content/datasets/exercise_1.RData'))
+
+p1 = ggplot(data = tics) +
+  # specify the data value that maps to y
+  geom_line(mapping = aes(x = 1:5000, y = TIC0)) +
+  # add one line code below to specify a coordinate function
+  coord_cartesian() +
+  facet_null() +
+  # add two line below to specify two scale functions, and use necessar parameters to specify x, y axis labels
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme_classic()
+
+p2 = ggplot(data = tics) +
+  # specify the data value that maps to x
+  geom_density(mapping = aes(x = TIC0)) +
+  # add one line code below to specify a coordinate function
+  coord_flip() +
+  facet_null() +
+  scale_x_continuous() +
+  theme_classic()
+
+p3 = ggplot(data = trajectory) +
+  # specify the data value that maps to y
+  geom_line(mapping = aes(x = 1:5000, y = PHE_5_CA_77_LYS_15_CA_241)) +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme_classic()
+
+p4 = ggplot(data = trajectory) +
+  # add one line code below to specify a geom function with correct mapping
+  geom_density(mapping = aes(x = PHE_5_CA_77_LYS_15_CA_241)) +
+  coord_flip() +
+  facet_null() +
+  scale_x_continuous() +
+  # add one line code below to specify a theme function
+  theme_classic()
+
+gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 2, widths = c(3,1))
+```

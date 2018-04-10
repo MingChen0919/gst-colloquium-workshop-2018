@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>Line plot for time series data</title>
-      <link>/tutorials/line-plot/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tutorials/line-plot/</guid>
-      <description>pre code, pre, code { white-space: pre !important; overflow-x: scroll !important; word-break: keep-all !important; word-wrap: initial !important; }  Import data load(url(&amp;#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&amp;#39;)) traj = read.csv(file = &amp;quot;../datasets/John_datasets/protein_folder/traj_0.dat&amp;quot;, sep = &amp;#39;\t&amp;#39;) #-------- tutorial 1 dataset---------- library(stringr) traj_0_dat = &amp;#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/traj_0.dat&amp;#39; feature_names = str_split(readLines(traj_0_dat)[1], &amp;#39;--&amp;#39;)[[1]] feature_names = gsub(&amp;#39;DIST: &amp;#39;, &amp;#39;&amp;#39;, feature_names) feature_names = gsub(&amp;#39; - &amp;#39;, &amp;#39;_&amp;#39;, feature_names) feature_names = gsub(&amp;#39; &amp;#39;, &amp;#39;_&amp;#39;, feature_names) data_raw = read.table(traj_0_dat, header = FALSE, sep = &amp;#39; &amp;#39;, comment.</description>
-    </item>
-    
-    <item>
       <title>Scatterplot</title>
       <link>/tutorials/scatterplot/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
