@@ -24,11 +24,42 @@ knitr::opts_chunk$set(echo = TRUE)
 load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData'))
 ```
 
+```{r}
+traj = read.csv(file = "../datasets/John_datasets/protein_folder/traj_0.dat", sep = '\t')
+
+#-------- tutorial 1 dataset----------
+library(stringr)
+traj_0_dat = 'https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/traj_0.dat'
+feature_names = str_split(readLines(traj_0_dat)[1], '--')[[1]]
+feature_names = gsub('DIST: ', '', feature_names)
+feature_names = gsub(' - ', '_', feature_names)
+feature_names = gsub(' ', '_', feature_names)
+
+data_raw = read.table(traj_0_dat, header = FALSE, sep = ' ', comment.char = 'D', stringsAsFactors = FALSE)
+colnames(data_raw) = feature_names
+
+# add frame index
+data_raw$frame_index = 1:nrow(data_raw)
+trajectory = data_raw[, c(742, 1:741)]
+
+tics = read.table(file = '../datasets/John_datasets/protein_folder/traj_0.energy_tics.dat', header = FALSE, comment.char = 'E')
+colnames(tics) = c('Energy', paste0('TIC', 0:11))
+exercise_dat = data.frame(trajectory, tics)
+save(exercise_dat, file = '../datasets/exercise_1.RData')
+```
+
+
+
 ## Load libraries
 
 ```{r}
 library(ggplot2)
 library(gridExtra)
+```
+
+```{r}
+ggplot(data = exercise_dat) +
+  geom_line(mapping = aes(x = PHE_5_CA_77_LEU_30_CA_464, y = TIC0))
 ```
 
 

@@ -25,11 +25,29 @@ pre code, pre, code {
 </style>
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
+knitr::opts_chunk$set(echo = FALSE, eval = TRUE)
 options("width" = 200)
+```
+
+## Import libraries 
+
+```{r, echo=TRUE}
 library(ggplot2)
 library(gridExtra)
 ```
+
+## Example data
+
+The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
+
+```{r, echo=FALSE}
+mtcars
+```
+
+```{r, echo=TRUE, eval=FALSE}
+help(mtcars)
+```
+
 
 ## Plotting template
 
@@ -46,7 +64,7 @@ library(gridExtra)
 
 ## GEOM_FUNCTION
 
-### Which geometric object: point vs. line
+### Specify a geometric object to represent your data
 
 ```{r, class.source="left"}
 p1 = ggplot(data = mtcars) + 
@@ -82,7 +100,7 @@ grid.arrange(p1, p2, ncol = 2)
 ```{r, class.source="left"}
 p1 = ggplot(data = mtcars) + 
   geom_point(mapping = aes(x = disp, y = hp,
-                           color = as.factor(gear)),
+                           shape = as.factor(gear)),
              stat = "identity") +
   coord_cartesian() + 
   scale_color_discrete() +
@@ -93,7 +111,7 @@ p1 = ggplot(data = mtcars) +
 ```{r, class.source="left"}
 p2 = ggplot(data = mtcars) + 
   geom_point(mapping = aes(x = disp, y = hp,
-                           color = as.factor(am)), 
+                           color = as.factor(gear)), 
              stat = "identity") +
   coord_cartesian() + 
   scale_color_discrete() +
@@ -107,7 +125,7 @@ grid.arrange(p1, p2, ncol = 2)
 
 ## Stat
 
-### Statistical transformation
+### transform your data, then map the transformed data values to visual values.
 
 ```{r, class.source="left"}
 p1 = ggplot(data = mtcars) + 
@@ -133,7 +151,7 @@ grid.arrange(p1, p2, ncol = 2)
 ```
 
 
-## COORDINATE 
+## COORDINATE SYSTEM
 
 ```{r, class.source="left"}
 p1 = ggplot(data = mtcars) + 
@@ -190,7 +208,7 @@ grid.arrange(p1, p2, ncol = 2)
 
 ## Scale
 
-### How data values are mapped to visual values
+### Control how data values are mapped to visual values and the mapping related attributes.
 
 ```{r, class.source="left"}
 p1 = ggplot(data = mtcars) + 
@@ -216,8 +234,9 @@ p2 = ggplot(data = mtcars) +
   coord_cartesian() + 
   scale_color_manual(name = 'gear',
                      values = c('3' = 'blue',
-                                '4' = 'yellow',
-                                '5' = 'red')) +
+                                '4' = 'green',
+                                '5' = 'red'),
+                     labels = c('3->blue', '4->green', '5->red')) +
   theme()
 ```
 
