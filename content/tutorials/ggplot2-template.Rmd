@@ -25,11 +25,41 @@ pre code, pre, code {
 </style>
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
+knitr::opts_chunk$set(echo = FALSE, eval = TRUE)
 options("width" = 200)
 library(ggplot2)
 library(gridExtra)
 ```
+
+## Get practice file 
+
+Run the following code to get the practice file into your working directory.
+
+```{r, eval=FALSE, echo=TRUE}
+download.file('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/update-ggplot-template-tutorial/misc/ggplot2-template-practice.Rmd', destfile = 'ggplot2-template-practice.Rmd')
+```
+
+## Example data
+
+The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
+
+```{r, echo=FALSE}
+mtcars
+```
+
+```{r, echo=TRUE, eval=FALSE}
+help(mtcars)
+```
+
+Basic data frame manipulation
+
+```{r, echo=TRUE}
+head(mtcars)
+mtcars[1:5, ]
+mtcars[, 2:4]
+mtcars$mpg
+```
+
 
 ## Plotting template
 
@@ -46,7 +76,7 @@ library(gridExtra)
 
 ## GEOM_FUNCTION
 
-### Which geometric object: point vs. line
+### Specify a geometric object to represent your data
 
 ```{r, class.source="left"}
 p1 = ggplot(data = mtcars) + 
@@ -82,7 +112,7 @@ grid.arrange(p1, p2, ncol = 2)
 ```{r, class.source="left"}
 p1 = ggplot(data = mtcars) + 
   geom_point(mapping = aes(x = disp, y = hp,
-                           color = as.factor(gear)),
+                           shape = as.factor(gear)),
              stat = "identity") +
   coord_cartesian() + 
   scale_color_discrete() +
@@ -93,7 +123,7 @@ p1 = ggplot(data = mtcars) +
 ```{r, class.source="left"}
 p2 = ggplot(data = mtcars) + 
   geom_point(mapping = aes(x = disp, y = hp,
-                           color = as.factor(am)), 
+                           color = as.factor(gear)), 
              stat = "identity") +
   coord_cartesian() + 
   scale_color_discrete() +
@@ -107,7 +137,7 @@ grid.arrange(p1, p2, ncol = 2)
 
 ## Stat
 
-### Statistical transformation
+### transform your data, then map the transformed data values to visual values.
 
 ```{r, class.source="left"}
 p1 = ggplot(data = mtcars) + 
@@ -133,7 +163,7 @@ grid.arrange(p1, p2, ncol = 2)
 ```
 
 
-## COORDINATE 
+## COORDINATE SYSTEM
 
 ```{r, class.source="left"}
 p1 = ggplot(data = mtcars) + 
@@ -190,7 +220,7 @@ grid.arrange(p1, p2, ncol = 2)
 
 ## Scale
 
-### How data values are mapped to visual values
+### Control how data values are mapped to visual values and the mapping related attributes.
 
 ```{r, class.source="left"}
 p1 = ggplot(data = mtcars) + 
@@ -216,8 +246,9 @@ p2 = ggplot(data = mtcars) +
   coord_cartesian() + 
   scale_color_manual(name = 'gear',
                      values = c('3' = 'blue',
-                                '4' = 'yellow',
-                                '5' = 'red')) +
+                                '4' = 'green',
+                                '5' = 'red'),
+                     labels = c('3->blue', '4->green', '5->red')) +
   theme()
 ```
 
@@ -251,4 +282,55 @@ p2 = ggplot(data = mtcars) +
 
 ```{r fig.align='center', echo=FALSE}
 grid.arrange(p1, p2, ncol = 2)
+```
+
+## Exercise
+
+Complete the code in the **Exercise** section in the `ggplot2-template-practice.Rmd` file to generate the exact same plot as below.
+
+```{r}
+# load data
+load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/update-ggplot-template-tutorial/content/datasets/exercise_1.RData'))
+
+p1 = ggplot(data = tics) +
+  # specify the data value that maps to y
+  geom_line(mapping = aes(x = 1:5000, y = TIC0)) +
+  # add one line code below to specify a coordinate function
+  coord_cartesian() +
+  facet_null() +
+  # add two line below to specify two scale functions, and use necessary parameters to specify x, y axis labels
+  scale_x_continuous(name = '') +
+  scale_y_continuous(name = 'TICA value') +
+  theme_classic()
+
+p2 = ggplot(data = tics) +
+  # specify the data value that maps to x
+  geom_density(mapping = aes(x = TIC0)) +
+  # add one line code below to specify a coordinate function
+  coord_flip() +
+  facet_null() +
+  scale_x_continuous(name = '') +
+  scale_y_continuous(name = '') +
+  theme_classic()
+
+p3 = ggplot(data = trajectory) +
+  # specify the data value that maps to y
+  geom_line(mapping = aes(x = 1:5000, y = PHE_5_CA_77_LYS_15_CA_241)) +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous(name = 'Frame index') +
+  scale_y_continuous(name = 'Feature value', breaks = c(0.8, 1.6, 2.4, 3.0), labels = c(0.8, 1.6, 2.4, 3.0)) +
+  theme_classic()
+
+p4 = ggplot(data = trajectory) +
+  # add one line code below to specify a geom function with correct mapping
+  geom_density(mapping = aes(x = PHE_5_CA_77_LYS_15_CA_241)) +
+  coord_flip() +
+  facet_null() +
+  scale_x_continuous(name = '', breaks = c(0.8, 1.6, 2.4, 3.0), labels = c(0.8, 1.6, 2.4, 3.0)) +
+  scale_y_continuous(name = 'Density') +
+  # add one line code below to specify a theme function
+  theme_classic()
+
+gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 2, widths = c(3,1))
 ```

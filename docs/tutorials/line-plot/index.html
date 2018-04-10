@@ -13,6 +13,7 @@
     <title>Line plot for time series data :: My New Hugo Site</title>
     
     
+<<<<<<< HEAD
     <link href="../../css/nucleus.css?1523382065" rel="stylesheet">
     <link href="../../css/font-awesome.min.css?1523382065" rel="stylesheet">
     <link href="../../css/hybrid.css?1523382065" rel="stylesheet">
@@ -26,6 +27,21 @@
     
 
     <script src="../../js/jquery-2.x.min.js?1523382065"></script>
+=======
+    <link href="../../css/nucleus.css?1523326910" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1523326910" rel="stylesheet">
+    <link href="../../css/hybrid.css?1523326910" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1523326910" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1523326910" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1523326910" rel="stylesheet">
+    <link href="../../css/theme.css?1523326910" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1523326910" rel="stylesheet">
+    
+      <link href="../../css/theme-blue.css?1523326910" rel="stylesheet">
+    
+
+    <script src="../../js/jquery-2.x.min.js?1523326910"></script>
+>>>>>>> 52dd2867a94239ebe1b2c8eba4286a319e1c7406
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -53,14 +69,23 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
+<<<<<<< HEAD
 <script type="text/javascript" src="../../js/lunr.min.js?1523382065"></script>
 <script type="text/javascript" src="../../js/auto-complete.js?1523382065"></script>
+=======
+<script type="text/javascript" src="../../js/lunr.min.js?1523326910"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1523326910"></script>
+>>>>>>> 52dd2867a94239ebe1b2c8eba4286a319e1c7406
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
+<<<<<<< HEAD
 <script type="text/javascript" src="../../js/search.js?1523382065"></script>
+=======
+<script type="text/javascript" src="../../js/search.js?1523326910"></script>
+>>>>>>> 52dd2867a94239ebe1b2c8eba4286a319e1c7406
 
     
   </div>
@@ -310,11 +335,35 @@ pre code, pre, code {
 <div id="import-data" class="section level2">
 <h2>Import data</h2>
 <pre class="r"><code>load(url(&#39;https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData&#39;))</code></pre>
+<pre class="r"><code>traj = read.csv(file = &quot;../datasets/John_datasets/protein_folder/traj_0.dat&quot;, sep = &#39;\t&#39;)
+
+#-------- tutorial 1 dataset----------
+library(stringr)
+traj_0_dat = &#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/traj_0.dat&#39;
+feature_names = str_split(readLines(traj_0_dat)[1], &#39;--&#39;)[[1]]
+feature_names = gsub(&#39;DIST: &#39;, &#39;&#39;, feature_names)
+feature_names = gsub(&#39; - &#39;, &#39;_&#39;, feature_names)
+feature_names = gsub(&#39; &#39;, &#39;_&#39;, feature_names)
+
+data_raw = read.table(traj_0_dat, header = FALSE, sep = &#39; &#39;, comment.char = &#39;D&#39;, stringsAsFactors = FALSE)
+colnames(data_raw) = feature_names
+
+# add frame index
+data_raw$frame_index = 1:nrow(data_raw)
+trajectory = data_raw[, c(742, 1:741)]
+
+tics = read.table(file = &#39;../datasets/John_datasets/protein_folder/traj_0.energy_tics.dat&#39;, header = FALSE, comment.char = &#39;E&#39;)
+colnames(tics) = c(&#39;Energy&#39;, paste0(&#39;TIC&#39;, 0:11))
+exercise_dat = data.frame(trajectory, tics)
+save(exercise_dat, file = &#39;../datasets/exercise_1.RData&#39;)</code></pre>
 </div>
 <div id="load-libraries" class="section level2">
 <h2>Load libraries</h2>
 <pre class="r"><code>library(ggplot2)
 library(gridExtra)</code></pre>
+<pre class="r"><code>ggplot(data = exercise_dat) +
+  geom_line(mapping = aes(x = PHE_5_CA_77_LEU_30_CA_464, y = TIC0))</code></pre>
+<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="visualization" class="section level2">
 <h2>Visualization</h2>
@@ -340,7 +389,7 @@ p1 = ggplot(data = trajectory) +
   theme_classic()
 
 p1</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="distribution-of-feature-values" class="section level3">
 <h3>Distribution of feature values</h3>
@@ -361,12 +410,12 @@ p2 = ggplot(data = trajectory) +
   scale_x_continuous(name = colnames(trajectory)[2]) +
   theme_classic()
 p2</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="combine-time-series-plot-and-density-plot" class="section level3">
 <h3>Combine time series plot and density plot</h3>
 <pre class="r"><code>grid.arrange(p1, p2, ncol = 2, widths = c(3,1))</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 </div>
 <div id="all-features-in-one-plots-optional" class="section level2">
@@ -407,9 +456,9 @@ density_plot = function(col_n) {
 }</code></pre>
 <p>Examples</p>
 <pre class="r"><code>line_plot(2)</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre class="r"><code>density_plot(4)</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
 <div id="plots-vector" class="section level3">
 <h3>Plots vector</h3>
 <pre class="r"><code>all_plots = list()
@@ -436,7 +485,7 @@ for (i in 1:58) {
 all_plots$ncol = 6
 all_plots$widths = c(5,2,5,2,5,2)
 do.call(grid.arrange,  all_plots)</code></pre>
-<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
+<p><img src="../../tutorials/line-plot_files/figure-html/unnamed-chunk-10-1.png" width="960" /></p>
 </div>
 </div>
 
@@ -614,6 +663,7 @@ do.call(grid.arrange,  all_plots)</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
+<<<<<<< HEAD
     <script src="../../js/clipboard.min.js?1523382065"></script>
     <script src="../../js/perfect-scrollbar.min.js?1523382065"></script>
     <script src="../../js/perfect-scrollbar.jquery.min.js?1523382065"></script>
@@ -628,6 +678,22 @@ do.call(grid.arrange,  all_plots)</code></pre>
 
     <link href="../../mermaid/mermaid.css?1523382065" type="text/css" rel="stylesheet" />
     <script src="../../mermaid/mermaid.js?1523382065"></script>
+=======
+    <script src="../../js/clipboard.min.js?1523326910"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1523326910"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1523326910"></script>
+    <script src="../../js/jquery.sticky.js?1523326910"></script>
+    <script src="../../js/featherlight.min.js?1523326910"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1523326910"></script>
+    <script src="../../js/highlight.pack.js?1523326910"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom.71422.js?1523326910"></script>
+    <script src="../../js/learn.js?1523326910"></script>
+    <script src="../../js/hugo-learn.js?1523326910"></script>
+
+    <link href="../../mermaid/mermaid.css?1523326910" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1523326910"></script>
+>>>>>>> 52dd2867a94239ebe1b2c8eba4286a319e1c7406
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

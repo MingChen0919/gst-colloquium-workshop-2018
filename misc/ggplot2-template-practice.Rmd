@@ -1,0 +1,375 @@
+---
+title: "ggplot2-template-practice"
+author: "Ming Chen"
+date: "4/9/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+```
+
+
+# Geom functions
+
+* geom_point
+* geom_line
+* geom_point + geom_line
+* geom_line + point (ggplot2 is built up by layers, so plotting order matters.)
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_line(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity", color="red") +
+  geom_line(mapping = aes(x = disp, y = hp), 
+             stat = "identity", size=4) +
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_line(mapping = aes(x = disp, y = hp), 
+             stat = "identity", size=4) +
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity", color="red") +
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+
+# Mappings
+
+* x -> x axis
+* y -> y axis
+* gear -> color (continuous color)
+* gear -> color (discrete color)
+* am  -> shape (discrete)
+* wt -> size (continuous)
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=gear), 
+             stat = "identity") +
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_continuous() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=as.factor(gear)), 
+             stat = "identity") +
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_discrete() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=as.factor(gear), shape=as.factor(am)), 
+             stat = "identity") +
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_discrete() +
+  scale_shape_discrete() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=as.factor(gear), 
+                           shape=as.factor(am), size=wt),  
+             stat = "identity") +
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_discrete() +
+  scale_shape_discrete() +
+  theme()
+```
+
+
+# STAT
+
+```{r}
+cat("===== geom_point ======\n")
+args(geom_point)
+cat("===== geom_line ======\n")
+args(geom_line)
+cat("===== geom_bar ======\n")
+args(geom_bar)
+cat("===== geom_histogram ======\n")
+args(geom_histogram)
+cat("===== geom_bin2d ======\n")
+args(geom_bin2d)
+cat("===== geom_density ======\n")
+args(geom_density)
+```
+
+# COORDINATE
+
+* coord_cartesian
+* coord_flip
+* coord_trans
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_flip() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_trans(x="log10", y="log10") +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+
+# Facet
+
+* facet_null
+* split by a variable on y axis
+* split by a variable on x axis
+* split by multiple variables
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_grid(. ~ am ) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_grid(am ~ . ) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_grid(am ~ gear ) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_grid(am + gear ~ .) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  theme()
+```
+
+# Scale
+
+* discrete data values -> discreate visual values (x, y, color, shape)
+* continuous data values -> continous visual values (x, y, color, size, area, transparency)
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=gear), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_continuous() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=as.factor(gear)), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous(name = "Displacemen (cu.in.)", 
+                     breaks = c(100, 150, 200, 250, 300, 350, 400),
+                     labels = c("0.10k", "0.15k", "0.20k", "0.25k", "0.30k", "0.35k", "0.40k")) +
+  scale_y_continuous(name = "Gross horsepower", limits = c(0, 500)) +
+  scale_color_manual(values = c("3"="red", "4"="blue", "5"="green"),
+                     name="Gear") +
+  theme()
+```
+
+# Theme
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=gear), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_continuous() +
+  theme()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=gear), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_continuous() +
+  theme_bw()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=gear), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_continuous() +
+  theme_classic()
+```
+
+```{r}
+ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=gear), 
+             stat = "identity") +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_continuous() +
+  theme_minimal()
+```
+
+
+# Exercise
+
+```{r}
+# load data
+load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/update-ggplot-template-tutorial/content/datasets/exercise_1.RData'))
+
+p1 = ggplot(data = tics) +
+  # specify the data value that maps to y
+  geom_line(mapping = aes(x = 1:5000, y = )) +
+  # add one line code below to specify a coordinate function
+  
+  facet_null() +
+  # add two line below to specify two scale functions, and use necessary parameters to specify x, y axis labels
+  
+  
+  theme_classic()
+
+p2 = ggplot(data = tics) +
+  # specify the data value that maps to x
+  geom_density(mapping = aes(x = )) +
+  # add one line code below to specify a coordinate function
+  
+  facet_null() +
+  scale_x_continuous(name = '') +
+  scale_y_continuous(name = '') +
+  theme_classic()
+
+p3 = ggplot(data = trajectory) +
+  # specify the data value that maps to y
+  geom_line(mapping = aes(x = 1:5000, y = )) +
+  coord_cartesian() +
+  facet_null() +
+  scale_x_continuous(name = 'Frame index') +
+  scale_y_continuous(name = 'Feature value', breaks = c(0.8, 1.6, 2.4, 3.0), labels = c(0.8, 1.6, 2.4, 3.0)) +
+  theme_classic()
+
+p4 = ggplot(data = trajectory) +
+  # add one line code below to specify a geom function with correct mapping
+  
+  coord_flip() +
+  facet_null() +
+  scale_x_continuous(name = '', breaks = c(0.8, 1.6, 2.4, 3.0), labels = c(0.8, 1.6, 2.4, 3.0)) +
+  scale_y_continuous(name = 'Density') +
+  # add one line code below to specify a theme function
+  
+
+gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 2, widths = c(3,1))
+```

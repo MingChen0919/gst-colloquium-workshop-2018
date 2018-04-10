@@ -13,19 +13,19 @@
     <title>RStudio Accounts :: My New Hugo Site</title>
     
     
-    <link href="../css/nucleus.css?1523382065" rel="stylesheet">
-    <link href="../css/font-awesome.min.css?1523382065" rel="stylesheet">
-    <link href="../css/hybrid.css?1523382065" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1523382065" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1523382065" rel="stylesheet">
-    <link href="../css/auto-complete.css?1523382065" rel="stylesheet">
-    <link href="../css/theme.css?1523382065" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1523382065" rel="stylesheet">
+    <link href="../css/nucleus.css?1523382471" rel="stylesheet">
+    <link href="../css/font-awesome.min.css?1523382471" rel="stylesheet">
+    <link href="../css/hybrid.css?1523382471" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1523382471" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1523382471" rel="stylesheet">
+    <link href="../css/auto-complete.css?1523382471" rel="stylesheet">
+    <link href="../css/theme.css?1523382471" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1523382471" rel="stylesheet">
     
-      <link href="../css/theme-blue.css?1523382065" rel="stylesheet">
+      <link href="../css/theme-blue.css?1523382471" rel="stylesheet">
     
 
-    <script src="../js/jquery-2.x.min.js?1523382065"></script>
+    <script src="../js/jquery-2.x.min.js?1523382471"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1523382065"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1523382065"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1523382471"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1523382471"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1523382065"></script>
+<script type="text/javascript" src="../js/search.js?1523382471"></script>
 
     
   </div>
@@ -148,25 +148,6 @@
       <li data-nav-id="/tutorials/ggplot2-template/" title="ggplot2 plotting template" class="dd-item ">
         <a href="../tutorials/ggplot2-template/">
         ggplot2 plotting template
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
- 
-  
-    
-      <li data-nav-id="/tutorials/line-plot/" title="Line plot for time series data" class="dd-item ">
-        <a href="../tutorials/line-plot/">
-        Line plot for time series data
         
         </a>
     </li>
@@ -304,20 +285,23 @@ pre code, pre, code {
 <div id="workshop-environment" class="section level2">
 <h2>Workshop Environment</h2>
 <p><strong>RStudio Server Account</strong></p>
-<p>Select an user account (row) from this <a href="https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0">google sheet</a> and put your name on the right column to mark that this user account has been used.</p>
-<p><strong>Open the URL in the first row in a new browser tab (copy URL and paste in tab, hit [enter])</strong></p>
-<p><strong>Use the <code>upload</code> button to upload local files to the Server.</strong></p>
-<p><img src='images/upload-data.png' width="600"/></p>
-<div id="install-packages-optional" class="section level3">
-<h3>Install packages (optional)</h3>
-<p>You can use the code below to install R packages in the RStudio server.</p>
+<p>Find your name in this <a href="https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0">google sheet</a> and use the associated username and password to login to this <a href="http://129.114.104.121/">RStudio Server</a>.</p>
+<p><strong>Running a docker container locally</strong></p>
+<p>Thanks to the machine learning workshop from last week! Everyone should have had docker installed. If you are interestd in running a local RStudio server. You can use the command below:</p>
+<pre class="bash"><code>docker pull mingchen0919/gst-dv-rstudio
+docker run --name=gst_dv -d -p 80:8787 mingchen0919/gst-dv-rstudio</code></pre>
+<p>You RStudio server should be available at <a href="http://127.0.0.1" class="uri">http://127.0.0.1</a>.</p>
+<div id="install-packages" class="section level3">
+<h3>Install packages</h3>
+<p>In case that you want to add your own packages, you can use the code below to install R packages in the RStudio server.</p>
 <pre class="r"><code>dir.create(&#39;~/my-r-lib&#39;)
 .libPaths(&#39;~/my-r-lib&#39;)
 install.packages(&#39;ggplot2&#39;)</code></pre>
 </div>
 </div>
-<div id="build-workshop-environment-admin-users-only" class="section level2">
-<h2>Build Workshop Environment (admin users only)</h2>
+<div id="build-workshop-environment" class="section level2">
+<h2>Build Workshop Environment</h2>
+<p>If you are interested in how we set up the RStudio on the jetstream cloud computing environment, below is the instruction.</p>
 <div id="rstudio-docker-on-jetstream" class="section level3">
 <h3>RStudio Docker on Jetstream</h3>
 <p>Launch a Jetstream image with Docker installed on Jetstream. Then run the following to luanch an RStudio server.</p>
@@ -471,22 +455,6 @@ done</code></pre>
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -509,20 +477,20 @@ done</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1523382065"></script>
-    <script src="../js/perfect-scrollbar.min.js?1523382065"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1523382065"></script>
-    <script src="../js/jquery.sticky.js?1523382065"></script>
-    <script src="../js/featherlight.min.js?1523382065"></script>
-    <script src="../js/html5shiv-printshiv.min.js?1523382065"></script>
-    <script src="../js/highlight.pack.js?1523382065"></script>
+    <script src="../js/clipboard.min.js?1523382471"></script>
+    <script src="../js/perfect-scrollbar.min.js?1523382471"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1523382471"></script>
+    <script src="../js/jquery.sticky.js?1523382471"></script>
+    <script src="../js/featherlight.min.js?1523382471"></script>
+    <script src="../js/html5shiv-printshiv.min.js?1523382471"></script>
+    <script src="../js/highlight.pack.js?1523382471"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom.71422.js?1523382065"></script>
-    <script src="../js/learn.js?1523382065"></script>
-    <script src="../js/hugo-learn.js?1523382065"></script>
+    <script src="../js/modernizr.custom.71422.js?1523382471"></script>
+    <script src="../js/learn.js?1523382471"></script>
+    <script src="../js/hugo-learn.js?1523382471"></script>
 
-    <link href="../mermaid/mermaid.css?1523382065" type="text/css" rel="stylesheet" />
-    <script src="../mermaid/mermaid.js?1523382065"></script>
+    <link href="../mermaid/mermaid.css?1523382471" type="text/css" rel="stylesheet" />
+    <script src="../mermaid/mermaid.js?1523382471"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
