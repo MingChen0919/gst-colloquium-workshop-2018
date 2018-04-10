@@ -35,20 +35,21 @@ library(ggplot2)
 ## Import data
 
 ```{r}
-transition = read.table(url('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/transitionmatrix.dat'))
+protein_transition <- read.table(url('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/transitionmatrix.microstates.dat'))
 ```
 
 Now, take a look at the data we just imported. Click `Environment` on the right board, and then click the `transistion`. 
-If you are command line geek, you can also type `View(transition)` in console. 
+If you are command line geek, you can also type `View(protein_transition)` in console. 
 
 
 ## Plotting heatmap
-Firt, I will help you to do some data transformation and reshaping.
+First, I will help you to do some data transformation and reshaping.
 ```{r}
 # Change data into a matrix with same row names and column names. 
-row.names(transition) <- colnames(transition) 
-transition_mat <- as.matrix(transition)
+row.names(protein_transition) <- colnames(protein_transition)
+transition_mat <- as.matrix(protein_transition)
 melt_mat <- melt(transition_mat)
+
 ```
 
 Now, use ggplot2 to make a heatmap using the 'melt_mat' data. 
@@ -57,6 +58,8 @@ ggplot(data = melt_mat) +
   geom_tile(mapping = aes(x=Var1, y=Var2, fill=value)) +
   scale_fill_gradient(name= "transition") +
   theme_void()
+
+#ggsave("protein_heatmap.png")
 ```
 
 ### Think about how you can make the heatmap look better? 
@@ -71,7 +74,7 @@ ggplot(data = melt_mat) +
 We can also use the transition data to make network plots. First, an example of a messy network figure using only transition data values. (You don't have to try this)
 
 ```{r}
-n = network(transition)
+n = network(protein_transition)
 
 n1 = ggnetwork(n)
 
@@ -90,20 +93,23 @@ ggplot(n1, aes(x = x, y = y, xend = xend, yend = yend)) +
 
 ### Add attributes to **vertices**
 
-1. Assign an important level to each vertex. Importance is ramdonly assigned here since we don't have this type of data. However, in the real world you may have information e.g. p-value, FDR, correlation coeffient to determine the importance of your data. 
+1. Assign an weight levels to each vertex.  
 
-2. Assign group to vertex. Groups are also assigned ramdonly, just want to give you a feeling of how to deal with multidimentional data. 
+2. Assign macrostate groups to vertex. 
 
-```{r}
-n = network(transition)
-n %v% "importance" = sample(1:6, nrow(transition), replace = TRUE)
-n %v% "group" = sample(c("A", "B", "C"), nrow(transition), replace = TRUE)
-```
-
-3. Visualize **transition**, **group** and **importance** information in one figure.
+3. Visualize **transition**, **group** and **weight** information in one figure.
 
 ```{r}
+macrostate = read.table(url('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/macrostate.map.dat'))
+
+distribution = read.table(url('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/stationarydistribution.microstates.dat'))
+distribution$weight <- as.numeric(cut(distribution$V1, 6))
+
+
+n %v% "weight" = distribution[,2]
+n %v% "macrostate" = macrostate[,1]
 n2 = ggnetwork(n)
+
 
 n2$x = n2$x[, 1]
 n2$y = n2$y[, 1]
@@ -112,7 +118,7 @@ n2$yend = n2$yend[, 1]
 
 
 ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_nodes(mapping = aes(color = group, size = importance)) +
+  geom_nodes(mapping = aes(color = macrostate, size = weight)) +
   geom_edges() +
   theme_blank()
 ```
@@ -124,23 +130,25 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
 
 ```{r}
 ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_nodes(mapping = aes(color = group, size = importance)) +
+  geom_nodes(mapping = aes(color = macrostate, size = weight)) +
   geom_edges(alpha = 0.05) +
   theme_blank()
+
+#ggsave("network.png")
 ```
 
 2. Set a threshold for edge display.
 
 ```{r}
 threshold = 0.1
-transition2 = transition
+transition2 = protein_transition
 transition2[transition2 < 0.1] = 0
 
 
 n = network(transition2)
 
-n %v% "importance" = sample(1:6, nrow(transition), replace = TRUE)
-n %v% "group" = sample(c("A", "B", "C"), nrow(transition), replace = TRUE)
+n %v% "weight" = distribution[,2]
+n %v% "macrostate" = macrostate[,1]
 
 n1 = ggnetwork(n)
 
@@ -150,9 +158,11 @@ n1$xend = n1$xend[, 1]
 n1$yend = n1$yend[, 1]
 
 ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_nodes(mapping = aes(color = group, size = importance)) +
+  geom_nodes(mapping = aes(color = macrostate, size = weight)) +
   geom_edges(alpha = 0.8) +
   theme_blank()
+
+#ggsave("reduceNetwork.png")
 ```
 
 ### b. Add labels to nodes (Optional)
@@ -161,10 +171,10 @@ We will not include this part in our workshop, please try it yourself if you are
 ```{r}
 ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_edges(alpha = 0.8) +
-  geom_nodelabel(aes(label = vertex.names, color = as.factor(importance)), 
+  geom_nodelabel(aes(label = vertex.names, color = as.factor(weight)), 
                  cex = 2, 
                  fontface = "bold") +
-  scale_color_manual(name = "Importance", values = colorRampPalette(c("yellow", "red"))(6)) +
+  scale_color_manual(name = "Weight", values = colorRampPalette(c("yellow", "red"))(6)) +
   theme_blank()
 ```
 
