@@ -29,15 +29,15 @@ library(ggplot2)</code></pre>
 </div>
 <div id="import-data" class="section level2">
 <h2>Import data</h2>
-<pre class="r"><code>transition = read.table(url(&#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/transitionmatrix.dat&#39;))</code></pre>
-<p>Now, take a look at the data we just imported. Click <code>Environment</code> on the right board, and then click the <code>transistion</code>. If you are command line geek, you can also type <code>View(transition)</code> in console.</p>
+<pre class="r"><code>protein_transition &lt;- read.table(url(&#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/transitionmatrix.microstates.dat&#39;))</code></pre>
+<p>Now, take a look at the data we just imported. Click <code>Environment</code> on the right board, and then click the <code>transistion</code>. If you are command line geek, you can also type <code>View(protein_transition)</code> in console.</p>
 </div>
 <div id="plotting-heatmap" class="section level2">
 <h2>Plotting heatmap</h2>
-<p>Firt, I will help you to do some data transformation and reshaping.</p>
+<p>First, I will help you to do some data transformation and reshaping.</p>
 <pre class="r"><code># Change data into a matrix with same row names and column names. 
-row.names(transition) &lt;- colnames(transition) 
-transition_mat &lt;- as.matrix(transition)
+row.names(protein_transition) &lt;- colnames(protein_transition)
+transition_mat &lt;- as.matrix(protein_transition)
 melt_mat &lt;- melt(transition_mat)</code></pre>
 <p>Now, use ggplot2 to make a heatmap using the ‘melt_mat’ data.</p>
 <pre class="r"><code>ggplot(data = melt_mat) +
@@ -45,6 +45,7 @@ melt_mat &lt;- melt(transition_mat)</code></pre>
   scale_fill_gradient(name= &quot;transition&quot;) +
   theme_void()</code></pre>
 <p><img src="/tutorials/network_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>#ggsave(&quot;protein_heatmap.png&quot;)</code></pre>
 <div id="think-about-how-you-can-make-the-heatmap-look-better" class="section level3">
 <h3>Think about how you can make the heatmap look better?</h3>
 <ul>
@@ -60,7 +61,7 @@ melt_mat &lt;- melt(transition_mat)</code></pre>
 <div id="simple-network" class="section level2">
 <h2>Simple network</h2>
 <p>We can also use the transition data to make network plots. First, an example of a messy network figure using only transition data values. (You don’t have to try this)</p>
-<pre class="r"><code>n = network(transition)
+<pre class="r"><code>n = network(protein_transition)
 
 n1 = ggnetwork(n)
 
@@ -80,16 +81,20 @@ ggplot(n1, aes(x = x, y = y, xend = xend, yend = yend)) +
 <div id="add-attributes-to-vertices" class="section level3">
 <h3>Add attributes to <strong>vertices</strong></h3>
 <ol style="list-style-type: decimal">
-<li><p>Assign an important level to each vertex. Importance is ramdonly assigned here since we don’t have this type of data. However, in the real world you may have information e.g. p-value, FDR, correlation coeffient to determine the importance of your data.</p></li>
-<li><p>Assign group to vertex. Groups are also assigned ramdonly, just want to give you a feeling of how to deal with multidimentional data.</p></li>
+<li><p>Assign an weight levels to each vertex.</p></li>
+<li><p>Assign macrostate groups to vertex.</p></li>
+<li><p>Visualize <strong>transition</strong>, <strong>group</strong> and <strong>weight</strong> information in one figure.</p></li>
 </ol>
-<pre class="r"><code>n = network(transition)
-n %v% &quot;importance&quot; = sample(1:6, nrow(transition), replace = TRUE)
-n %v% &quot;group&quot; = sample(c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), nrow(transition), replace = TRUE)</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Visualize <strong>transition</strong>, <strong>group</strong> and <strong>importance</strong> information in one figure.</li>
-</ol>
-<pre class="r"><code>n2 = ggnetwork(n)
+<pre class="r"><code>macrostate = read.table(url(&#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/macrostate.map.dat&#39;))
+
+distribution = read.table(url(&#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/stationarydistribution.microstates.dat&#39;))
+distribution$weight &lt;- as.numeric(cut(distribution$V1, 6))
+
+
+n %v% &quot;weight&quot; = distribution[,2]
+n %v% &quot;macrostate&quot; = macrostate[,1]
+n2 = ggnetwork(n)
+
 
 n2$x = n2$x[, 1]
 n2$y = n2$y[, 1]
@@ -98,10 +103,10 @@ n2$yend = n2$yend[, 1]
 
 
 ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_nodes(mapping = aes(color = group, size = importance)) +
+  geom_nodes(mapping = aes(color = macrostate, size = weight)) +
   geom_edges() +
   theme_blank()</code></pre>
-<p><img src="/tutorials/network_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/tutorials/network_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 </div>
 <div id="modify-the-basic-network" class="section level2">
@@ -112,22 +117,23 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
 <li>To change the transprancy of edges.</li>
 </ol>
 <pre class="r"><code>ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_nodes(mapping = aes(color = group, size = importance)) +
+  geom_nodes(mapping = aes(color = macrostate, size = weight)) +
   geom_edges(alpha = 0.05) +
   theme_blank()</code></pre>
-<p><img src="/tutorials/network_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/tutorials/network_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>#ggsave(&quot;network.png&quot;)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Set a threshold for edge display.</li>
 </ol>
 <pre class="r"><code>threshold = 0.1
-transition2 = transition
+transition2 = protein_transition
 transition2[transition2 &lt; 0.1] = 0
 
 
 n = network(transition2)
 
-n %v% &quot;importance&quot; = sample(1:6, nrow(transition), replace = TRUE)
-n %v% &quot;group&quot; = sample(c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), nrow(transition), replace = TRUE)
+n %v% &quot;weight&quot; = distribution[,2]
+n %v% &quot;macrostate&quot; = macrostate[,1]
 
 n1 = ggnetwork(n)
 
@@ -137,21 +143,22 @@ n1$xend = n1$xend[, 1]
 n1$yend = n1$yend[, 1]
 
 ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_nodes(mapping = aes(color = group, size = importance)) +
+  geom_nodes(mapping = aes(color = macrostate, size = weight)) +
   geom_edges(alpha = 0.8) +
   theme_blank()</code></pre>
-<p><img src="/tutorials/network_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/tutorials/network_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>#ggsave(&quot;reduceNetwork.png&quot;)</code></pre>
 </div>
 <div id="b.-add-labels-to-nodes-optional" class="section level3">
 <h3>b. Add labels to nodes (Optional)</h3>
 <p>We will not include this part in our workshop, please try it yourself if you are interested in and would like to use this type of plot in your research.</p>
 <pre class="r"><code>ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_edges(alpha = 0.8) +
-  geom_nodelabel(aes(label = vertex.names, color = as.factor(importance)), 
+  geom_nodelabel(aes(label = vertex.names, color = as.factor(weight)), 
                  cex = 2, 
                  fontface = &quot;bold&quot;) +
-  scale_color_manual(name = &quot;Importance&quot;, values = colorRampPalette(c(&quot;yellow&quot;, &quot;red&quot;))(6)) +
+  scale_color_manual(name = &quot;Weight&quot;, values = colorRampPalette(c(&quot;yellow&quot;, &quot;red&quot;))(6)) +
   theme_blank()</code></pre>
-<p><img src="/tutorials/network_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/tutorials/network_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 </div>

@@ -2,15 +2,20 @@
 
 #-------- tutorial 1 dataset----------
 library(stringr)
-traj_0_dat = 'https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/traj_0.dat'
+traj_0_dat = 'https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/traj_0.dat'
 feature_names = str_split(readLines(traj_0_dat)[1], '--')[[1]]
+feature_names = gsub('DIST: ', '', feature_names)
+feature_names = gsub(' - ', '_', feature_names)
+feature_names = gsub(' ', '_', feature_names)
 
-data_raw = read.table(traj_0_dat, header = FALSE, sep = ' ', comment.char = 'D', stringsAsFactors = FALSE)
-colnames(data_raw) = feature_names
+trajectory = read.table(traj_0_dat, header = FALSE, sep = ' ', comment.char = 'D', stringsAsFactors = FALSE)
+colnames(trajectory) = feature_names
 
-# add frame index
-data_raw$frame_index = 1:nrow(data_raw)
-trajectory = data_raw[, c(30, 1:29)]
+dim(trajectory)
+
+tics = read.table(file = '../datasets/John_datasets/protein_folder/traj_0.energy_tics.dat', header = FALSE, comment.char = 'E')[, 1:5]
+colnames(tics) = c('Energy', 'TIC0', 'TIC1', 'TIC2', 'TIC3')
+save(trajectory, tics, file = '../datasets/exercise_1.RData')
 
 
 

@@ -22,17 +22,25 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 **RStudio Server Account**
 
-Select an user account (row) from this [google sheet](https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0) and put your name on the right column to mark that this user account has been used.
+Find your name in this [google sheet](https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0) and use the associated username and password to login to this [RStudio Server](http://129.114.104.121/).
 
-**Open the URL in the first row in a new browser tab (copy URL and paste in tab, hit [enter])**
+**Running a docker container locally**
 
-**Use the `upload` button to upload local files to the Server.**
+Thanks to the machine learning workshop from last week! Everyone should have had docker installed. If you are interestd in running a local RStudio server. You can use the command below:
 
-<img src='images/upload-data.png' width="600"/>
+```{bash}
+docker pull mingchen0919/gst-dv-rstudio
+docker run --name=gst_dv -d -p 80:8787 mingchen0919/gst-dv-rstudio
+```
 
-### Install packages (optional)
+You RStudio server should be available at http://127.0.0.1.
 
-You can use the code below to install R packages in the RStudio server.
+
+
+
+### Install packages
+
+In case that you want to add your own packages, you can use the code below to install R packages in the RStudio server.
 
 ```{r}
 dir.create('~/my-r-lib')
@@ -41,7 +49,10 @@ install.packages('ggplot2')
 ```
 
 
-## Build Workshop Environment (admin users only)
+## Build Workshop Environment
+
+If you are interested in how we set up the RStudio on the jetstream cloud computing environment, below is the instruction. 
+
 ### RStudio Docker on Jetstream
 
 Launch a Jetstream image with Docker installed on Jetstream. Then run the following to luanch an RStudio server.

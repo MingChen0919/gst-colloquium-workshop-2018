@@ -1,0 +1,143 @@
+
+
+Descriptions of data files. Values in [brackets] are
+implicit, meaning they wouldn't be written in the file
+but have the meaning indicated.
+
+
+
+------------------------------------------------------------
+not given :: atom coordinate trajectory
+The best way to visualize this data is as a stack of
+'frames'. Each frame is a snapshot of positions of all
+atoms in the protein. Each position has x, y, and z
+coordinates. The real files are more like having all
+the atom coordinates smooshed together into a long
+row, and each row is a snapshot/frame.
+
+frame :: (rows of) atoms x (columns of) coords
+
+               [x]    [y]    [z]
+    [atom1]   coord  coord  coord
+    [atom2]   coord  coord  coord
+    [atom3]   coord  coord  coord
+      ...      ...    ...    ...
+
+
+trajectory :: stack of frames
+
+    frame1
+    frame2
+    frame3
+     ...
+
+
+real representation :: frames x coords
+
+              [atom1]        [atom2]        [atom3]      ...
+           [x]   [y]   [z]   [x]   [y]   [z]   [x]   [y]   [z]   ...
+  [frame1] coord coord coord coord coord coord coord coord coord  ...
+  [frame2] coord coord coord coord coord coord coord coord coord  ...
+  [frame3] coord coord coord coord coord coord coord coord coord  ...
+    ...
+
+
+
+------------------------------------------------------------
+traj_N.dat :: feature trajectory
+This data is similar to the coordinate trajectories, but
+isolates measurements from each frame instead of listing
+all atomic positions in each frame. These measurements
+are called features, which are things like: 
+ - distance between 2 atoms such as distance between
+   alpha carbons of residue 1 and residue 3
+ - angles such as backbone dihedral angles
+
+So if we only looked at the first example feature from
+the trajectories, our data would be how far apart these
+alpha carbons are in each frame. If the value changed a
+lot in the trajectory, then these residues are moving
+towards and/or away from each other. If it stayed pretty
+constant, then the atoms / residues are staying in the
+same relative position.
+
+trajectory :: frames x values
+
+           [feature1] [feature2] [feature3]  ...
+  [frame1]  value      value      value    ...
+  [frame2]  value      value      value    ...
+  [frame3]  value      value      value    ...
+   ...
+
+
+
+------------------------------------------------------------
+traj_N.energy_tics.dat
+This data is the dimension-reduced trajectory. We used a
+PCA-like method to analyze the feature trajectory, which
+tells us vectors (called collective variables, CVs) that
+explain the pattern of how all the feature values change.
+A good example for thinking about this would be that you
+have a protein with a large and slow open-close motion.
+The open/close motion should be the first CV, so this
+vector is the change in feature values when the protein
+opens and closes. Say the CV points in the 'opening'
+direction, then if the protein is closed the coordinate
+in this CV would be 0 or small. As you add more of the
+vector to the feature values, the coordinate would grow
+to open the protein. This way, we only need a single
+number for each frame to tell us how open or closed the
+protein is. Typically, 3-5 CVs will replace hundreds of
+feature values, since each CV encodes something that
+happens to all the features. In this case, the CV's are
+called TICs.
+
+Somewhat unrelatedly, I have also prepended the data
+columns with an energy column. This is a rough estimate
+of the protein's internal energy in each frame.
+
+trajectory :: frames x values
+
+           [Energy]  [TIC0]  [TIC1]  ...
+  [frame1]   value   value   value    ...
+  [frame2]   value   value   value    ...
+  [frame3]   value   value   value    ...
+   ...
+
+
+
+------------------------------------------------------------
+traj_N.microclusters.dat
+After reducing the dimensionality of the data with CVs,
+we cluster the frames in their CV coordinates. The first
+clustering uses a large number of groups, and in physics
+terms these are called the microstates of the protein.
+This file is the microstate trajectory, so 1 value for
+each frame. The entire trajectory is stored as a single
+row, with the number of columns equal to the number of
+frames. The values are simply an integer/index
+indicating which cluster the frame is in.
+
+trajectory :: microstates x frame
+
+                [frame1]  [frame2]  [frame3]  ...
+   [microstate]  value     value     value     ...
+
+
+
+------------------------------------------------------------
+traj_N.macroclusters.dat
+The same situation as the microclusters, except that
+instead of a large number of groups to describe
+microstates, we have clustered the clusters into a
+small number of groups called macrostates. Going with
+the open-close example above, maybe there are dozens
+or hundreds of microstates in the closed position.
+After computing the clustered-clusters, there will be
+1 (or a small number) of closed macrostates.
+
+trajectory :: microstates x frame
+
+                [frame1]  [frame2]  [frame3]  ...
+   [macrostate]  value     value     value     ...
+
