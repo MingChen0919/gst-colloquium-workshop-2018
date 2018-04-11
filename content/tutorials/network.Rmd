@@ -1,6 +1,6 @@
 ---
 weight: 3
-title: "Network for graph-like data"
+title: "Heatmap and Network for graph-like data"
 author: "GST Data Visualization Group"
 output: html_document
 ---
@@ -97,7 +97,7 @@ ggplot(n1, aes(x = x, y = y, xend = xend, yend = yend)) +
 
 2. Assign macrostate groups to vertex. 
 
-3. Visualize **transition**, **group** and **weight** information in one figure.
+3. Visualize **transition**, **macrostate** and **weight** information in one figure.
 
 ```{r}
 macrostate = read.table(url('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/macrostate.map.dat'))
@@ -125,56 +125,59 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
 
 ## Modify the basic network
 
-### a. Adjust edges.
-1. To change the transprancy of edges.
+To change the transprancy of edges.
 
 ```{r}
 ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_nodes(mapping = aes(color = macrostate, size = weight)) +
-  geom_edges(alpha = 0.05) +
+  geom_edges(alpha = 0.01) +
   theme_blank()
 
 #ggsave("network.png")
 ```
 
-2. Set a threshold for edge display.
+## A macrostate network
+
+Instead of using the microstate transition, we process it into macrostates and using the new macrostate transition and distrubution. 
 
 ```{r}
-threshold = 0.1
-transition2 = protein_transition
-transition2[transition2 < 0.1] = 0
+macro_transition <- read.table(url("https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/transitionmatrix.macrostates.dat"))
+macro_distrubution <- read.table(url("https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/stationarydistribution.macrostates.dat"))
+
+n= network(macro_transition)
+n %v% "weight" = macro_distrubution[,1]
+n2 = ggnetwork(n)
 
 
-n = network(transition2)
+n2$x = n2$x[, 1]
+n2$y = n2$y[, 1]
+n2$xend = n2$xend[, 1]
+n2$yend = n2$yend[, 1]
+n2$macrostat = gsub("V","",n2$vertex.names)
+n2$macrostat = as.numeric(n2$macrostat)
 
-n %v% "weight" = distribution[,2]
-n %v% "macrostate" = macrostate[,1]
 
-n1 = ggnetwork(n)
+ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_nodes(mapping = aes(size = macrostat, color=vertex.names)) +
+  geom_edges(alpha = 0.3) +
+  theme_blank() 
 
-n1$x = n1$x[, 1]
-n1$y = n1$y[, 1]
-n1$xend = n1$xend[, 1]
-n1$yend = n1$yend[, 1]
-
-ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_nodes(mapping = aes(color = macrostate, size = weight)) +
-  geom_edges(alpha = 0.8) +
-  theme_blank()
-
-#ggsave("reduceNetwork.png")
 ```
 
-### b. Add labels to nodes (Optional)
+### Excercise (5 min)
+1. change curvature in the geom_edges()
+2. change the line width cooresponding to the weight. (Hint: add mapping = aes(size = weight) in the geom_edges())
+3. now run ggplot again and see what changes!
+
+## Add labels to nodes (Optional)
 We will not include this part in our workshop, please try it yourself if you are interested in and would like to use this type of plot in your research.
 
 ```{r}
-ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_edges(alpha = 0.8) +
+ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_edges(alpha = 0.3) +
   geom_nodelabel(aes(label = vertex.names, color = as.factor(weight)), 
                  cex = 2, 
                  fontface = "bold") +
-  scale_color_manual(name = "Weight", values = colorRampPalette(c("yellow", "red"))(6)) +
+  scale_color_manual(name = "Weight", values = colorRampPalette(c("yellow", "red"))(12)) +
   theme_blank()
 ```
-

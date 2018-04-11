@@ -10,22 +10,22 @@
     <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
 
-    <title>Network for graph-like data :: My New Hugo Site</title>
+    <title>Heatmap and Network for graph-like data :: My New Hugo Site</title>
     
     
-    <link href="../../css/nucleus.css?1523382471" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1523382471" rel="stylesheet">
-    <link href="../../css/hybrid.css?1523382471" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1523382471" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1523382471" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1523382471" rel="stylesheet">
-    <link href="../../css/theme.css?1523382471" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1523382471" rel="stylesheet">
+    <link href="../../css/nucleus.css?1523476731" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1523476731" rel="stylesheet">
+    <link href="../../css/hybrid.css?1523476731" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1523476731" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1523476731" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1523476731" rel="stylesheet">
+    <link href="../../css/theme.css?1523476731" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1523476731" rel="stylesheet">
     
-      <link href="../../css/theme-blue.css?1523382471" rel="stylesheet">
+      <link href="../../css/theme-blue.css?1523476731" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1523382471"></script>
+    <script src="../../js/jquery-2.x.min.js?1523476731"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1523382471"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1523382471"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1523476731"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1523476731"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1523382471"></script>
+<script type="text/javascript" src="../../js/search.js?1523476731"></script>
 
     
   </div>
@@ -183,9 +183,9 @@
  
   
     
-      <li data-nav-id="/tutorials/network/" title="Network for graph-like data" class="dd-item active">
+      <li data-nav-id="/tutorials/network/" title="Heatmap and Network for graph-like data" class="dd-item active">
         <a href="../../tutorials/network/">
-        Network for graph-like data
+        Heatmap and Network for graph-like data
         
         </a>
     </li>
@@ -250,7 +250,7 @@
             
           
           
-            <a href='../../'>Data Visualization</a> > <a href='../../tutorials/'>Data Visualization</a> > Network for graph-like data
+            <a href='../../'>Data Visualization</a> > <a href='../../tutorials/'>Data Visualization</a> > Heatmap and Network for graph-like data
           
          
           
@@ -274,7 +274,7 @@
         
         <div id="body-inner">
           
-            <h1>Network for graph-like data</h1>
+            <h1>Heatmap and Network for graph-like data</h1>
           
 
         
@@ -356,7 +356,7 @@ ggplot(n1, aes(x = x, y = y, xend = xend, yend = yend)) +
 <ol style="list-style-type: decimal">
 <li><p>Assign an weight levels to each vertex.</p></li>
 <li><p>Assign macrostate groups to vertex.</p></li>
-<li><p>Visualize <strong>transition</strong>, <strong>group</strong> and <strong>weight</strong> information in one figure.</p></li>
+<li><p>Visualize <strong>transition</strong>, <strong>macrostate</strong> and <strong>weight</strong> information in one figure.</p></li>
 </ol>
 <pre class="r"><code>macrostate = read.table(url(&#39;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/macrostate.map.dat&#39;))
 
@@ -384,56 +384,58 @@ ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
 </div>
 <div id="modify-the-basic-network" class="section level2">
 <h2>Modify the basic network</h2>
-<div id="a.-adjust-edges." class="section level3">
-<h3>a. Adjust edges.</h3>
-<ol style="list-style-type: decimal">
-<li>To change the transprancy of edges.</li>
-</ol>
+<p>To change the transprancy of edges.</p>
 <pre class="r"><code>ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_nodes(mapping = aes(color = macrostate, size = weight)) +
-  geom_edges(alpha = 0.05) +
+  geom_edges(alpha = 0.01) +
   theme_blank()</code></pre>
 <p><img src="../../tutorials/network_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <pre class="r"><code>#ggsave(&quot;network.png&quot;)</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Set a threshold for edge display.</li>
-</ol>
-<pre class="r"><code>threshold = 0.1
-transition2 = protein_transition
-transition2[transition2 &lt; 0.1] = 0
-
-
-n = network(transition2)
-
-n %v% &quot;weight&quot; = distribution[,2]
-n %v% &quot;macrostate&quot; = macrostate[,1]
-
-n1 = ggnetwork(n)
-
-n1$x = n1$x[, 1]
-n1$y = n1$y[, 1]
-n1$xend = n1$xend[, 1]
-n1$yend = n1$yend[, 1]
-
-ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_nodes(mapping = aes(color = macrostate, size = weight)) +
-  geom_edges(alpha = 0.8) +
-  theme_blank()</code></pre>
-<p><img src="../../tutorials/network_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<pre class="r"><code>#ggsave(&quot;reduceNetwork.png&quot;)</code></pre>
 </div>
-<div id="b.-add-labels-to-nodes-optional" class="section level3">
-<h3>b. Add labels to nodes (Optional)</h3>
+<div id="a-macrostate-network" class="section level2">
+<h2>A macrostate network</h2>
+<p>Instead of using the microstate transition, we process it into macrostates and using the new macrostate transition and distrubution.</p>
+<pre class="r"><code>macro_transition &lt;- read.table(url(&quot;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/transitionmatrix.macrostates.dat&quot;))
+macro_distrubution &lt;- read.table(url(&quot;https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/master/content/datasets/John_datasets/protein_folder/stationarydistribution.macrostates.dat&quot;))
+
+n= network(macro_transition)
+n %v% &quot;weight&quot; = macro_distrubution[,1]
+n2 = ggnetwork(n)
+
+
+n2$x = n2$x[, 1]
+n2$y = n2$y[, 1]
+n2$xend = n2$xend[, 1]
+n2$yend = n2$yend[, 1]
+n2$macrostat = gsub(&quot;V&quot;,&quot;&quot;,n2$vertex.names)
+n2$macrostat = as.numeric(n2$macrostat)
+
+
+ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_nodes(mapping = aes(size = macrostat, color=vertex.names)) +
+  geom_edges(alpha = 0.3) +
+  theme_blank() </code></pre>
+<p><img src="../../tutorials/network_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div id="excercise-5-min" class="section level3">
+<h3>Excercise (5 min)</h3>
+<ol style="list-style-type: decimal">
+<li>change curvature in the geom_edges()</li>
+<li>change the line width cooresponding to the weight. (Hint: add mapping = aes(size = weight) in the geom_edges())</li>
+<li>now run ggplot again and see what changes!</li>
+</ol>
+</div>
+</div>
+<div id="add-labels-to-nodes-optional" class="section level2">
+<h2>Add labels to nodes (Optional)</h2>
 <p>We will not include this part in our workshop, please try it yourself if you are interested in and would like to use this type of plot in your research.</p>
-<pre class="r"><code>ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_edges(alpha = 0.8) +
+<pre class="r"><code>ggplot(n2, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_edges(alpha = 0.3) +
   geom_nodelabel(aes(label = vertex.names, color = as.factor(weight)), 
                  cex = 2, 
                  fontface = &quot;bold&quot;) +
-  scale_color_manual(name = &quot;Weight&quot;, values = colorRampPalette(c(&quot;yellow&quot;, &quot;red&quot;))(6)) +
+  scale_color_manual(name = &quot;Weight&quot;, values = colorRampPalette(c(&quot;yellow&quot;, &quot;red&quot;))(12)) +
   theme_blank()</code></pre>
 <p><img src="../../tutorials/network_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-</div>
 </div>
 
 
@@ -591,20 +593,20 @@ ggplot(n1, mapping = aes(x = x, y = y, xend = xend, yend = yend)) +
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1523382471"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1523382471"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1523382471"></script>
-    <script src="../../js/jquery.sticky.js?1523382471"></script>
-    <script src="../../js/featherlight.min.js?1523382471"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1523382471"></script>
-    <script src="../../js/highlight.pack.js?1523382471"></script>
+    <script src="../../js/clipboard.min.js?1523476731"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1523476731"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1523476731"></script>
+    <script src="../../js/jquery.sticky.js?1523476731"></script>
+    <script src="../../js/featherlight.min.js?1523476731"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1523476731"></script>
+    <script src="../../js/highlight.pack.js?1523476731"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1523382471"></script>
-    <script src="../../js/learn.js?1523382471"></script>
-    <script src="../../js/hugo-learn.js?1523382471"></script>
+    <script src="../../js/modernizr.custom.71422.js?1523476731"></script>
+    <script src="../../js/learn.js?1523476731"></script>
+    <script src="../../js/hugo-learn.js?1523476731"></script>
 
-    <link href="../../mermaid/mermaid.css?1523382471" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1523382471"></script>
+    <link href="../../mermaid/mermaid.css?1523476731" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1523476731"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
