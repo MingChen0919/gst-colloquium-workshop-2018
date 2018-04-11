@@ -1,17 +1,8 @@
 ---
 weight: 2
 title: "Scatterplot"
-output: html_document
+output: md_document
 ---
-
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
@@ -20,13 +11,13 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Import Data
 ```{r}
-#---Loading data---#
-load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData'))
+#---Loading data
+load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/GST-WS.RData'))
 ```
 
 ## Load ggplot2 library
 ```{r}
-#---loading ggplot library---#
+#---loading ggplot library
 library(ggplot2)
 ```
 
@@ -39,7 +30,7 @@ library(ggplot2)
     * Macrostate -> color
   
 ```{r}
-#---plot one---#
+#---plot one
 ggplot(energy_tics) +
   geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
              stat = "identity", 
@@ -47,10 +38,9 @@ ggplot(energy_tics) +
   coord_cartesian() +
   facet_null() +
   
-  ##----map data values to visual values---##
+  ##----map data values to visual values
   scale_x_continuous() +
   scale_y_continuous() +
-  scale_color_identity() +
   theme()
 ```
 
@@ -68,7 +58,7 @@ ggplot(energy_tics) +
     * Set labels for macrostates (breaks; labels)  
     * Change theme (theme_classic())  
 ```{r}
-#---plot two---#
+#---plot two
 ggplot(energy_tics) +
   geom_point(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)),
              stat = "identity", 
@@ -76,18 +66,18 @@ ggplot(energy_tics) +
   coord_cartesian() +
   facet_null() +
   
-  ##----map data values to visual values---##
+  ##----map data values to visual values
   scale_x_continuous(name = "TIC-0", 
-                     breaks = c(-1, 0, 1, 2, 3, 4, 5, 6, 7),
-                     limits = c(-1, 7)) +
+                     breaks = c(0, 1, 2, 3, 4),
+                     limits = c(0, 4)) +
   scale_y_continuous(name = "TIC-1",
-                     breaks = -7:3, 
+                     breaks = -16:5, 
                      trans = "reverse",
-                     limits = c(3, -7)) +
-  scale_color_manual(values = c("1" = "red", "2" = "blue", "3" = "yellow", "4" = "green"),
+                     limits = c(5, -16)) +
+  scale_color_manual(values = c("0" = "black", "1" = "red", "2" = "blue", "3" = "yellow", "4" = "green", "5" = "purple", "6" = "pink", "7" = "grey", "8" = "brown", "9" = "coral", "10" = "mediumaquamarine", "11" = "orange"),
                      name = "Macrostate", 
-                     breaks = c(1,2,3,4),
-                     labels = c('state 1', 'state 2', 'state 3', 'state 4')) + 
+                     breaks = c(0,1,2,3,4,5,6,7,8,9,10,11),
+                     labels = c('state 0', 'state 1', 'state 2', 'state 3', 'state 4', 'state 5', 'state 6', 'state 7', 'state 8', 'state 9', 'state 10', 'state 11')) + 
   theme_classic()
 ```
 
@@ -102,21 +92,21 @@ ggplot(energy_tics) +
     * Change macrostate label
     
 ```{r}
-#---plot three---#
+#---plot three
 ggplot(energy_tics) +
   geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate), color = Energy),
              stat = "identity", position = "identity") +
   coord_cartesian() +
   facet_null() +
   
-  ##----map data values to visual values---##
+  ##----map data values to visual values
   scale_x_continuous() +
   scale_y_continuous() +
   scale_color_gradient() +
   scale_shape_discrete() +
   theme() +
   
-  ##---change macrostate legend label---##
+  ##---change macrostate legend label
   labs(shape="Macrostate") 
 ```
 
@@ -131,21 +121,20 @@ ggplot(energy_tics) +
     * Change color gradient for energy (scale_color_gradient)
     * Specify shapes for macrostates
 ```{r}
-#---plot four---#
+#---plot four
 ggplot(energy_tics) +
   geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate), color = Energy),
              stat = "identity", position = "identity") +
   coord_cartesian() +
   facet_null() +
   
-  ##----map data values to visual values---##
-  scale_x_continuous(name = "TIC-0",
-                     breaks = -1:8) +
+  ##----map data values to visual values
+  scale_x_continuous(name = "TIC-0") +
   scale_y_continuous(name = "TIC-1",
-                     breaks = -6:3) +
+                     breaks = -15:5) +
   scale_color_gradient(low="blue", high="red",
-                       breaks = 0:8) +
-  scale_shape_manual(values = c("1" = 15, "2" = 17, "3" = 19, "4" = 22),
+                       breaks = 0:11) +
+  scale_shape_manual(values = c("0" = 0, "1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5, "6" = 6, "7" = 7, "8" = 8, "9" = 9, "10" = 10, "11" = 11),
                      name = "Macrostate") +
   theme_classic()
 ```
@@ -165,25 +154,22 @@ ggplot(energy_tics) +
 * Plot edits
     * Change legend labels (labs())
 ```{r}
-#---plot five---#
+#---plot five
 ggplot(energy_tics) +
-  geom_point(mapping = aes(x = TIC0, y = TIC1, fill = Energy, shape = as.factor(macrostate)),
+  geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate)),
              stat = "identity", position = "identity", inherit.aes = FALSE) +
   geom_path(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)), 
             stat = "ellipse", inherit.aes = FALSE) + 
   coord_cartesian() +
   facet_null() +
   
-  ##----map data values to visual values---##
-  scale_x_continuous(name = "TIC-0",
-                     breaks = -1:8) +
-  scale_y_continuous(name = "TIC-1",
-                     breaks = -6:3) +
-  scale_shape_manual(values = c("1" = 22, "2" = 24, "3" = 23, "4" = 25)) +
-  scale_fill_gradient(low = "blue", high = "red") +
+  ##----map data values to visual values
+  scale_x_continuous(name = "TIC-0") +
+  scale_y_continuous(name = "TIC-1") +
+  scale_shape_manual(values = c("0" = 0, "1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5, "6" = 6, "7" = 7, "8" = 8, "9" = 9, "10" = 10, "11" = 11)) +
   scale_color_discrete() +
-  theme_classic() +
+  theme(legend.position = "bottom") +
   
-  ##---change macrostate legend label---##
+  ##---change macrostate legend label
   labs(shape="Macrostate", color = "Macrostate") 
 ```
