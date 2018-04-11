@@ -2,7 +2,7 @@ Import Data
 -----------
 
     #---Loading data
-    load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/GST-WS.RData'))
+    load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData'))
 
 Load ggplot2 library
 --------------------
@@ -63,16 +63,16 @@ Visualization
       
       ##----map data values to visual values
       scale_x_continuous(name = "TIC-0", 
-                         breaks = c(0, 1, 2, 3, 4),
-                         limits = c(0, 4)) +
+                         breaks = c(0, 1, 2, 3, 4, 5, 6),
+                         limits = c(0, 6)) +
       scale_y_continuous(name = "TIC-1",
-                         breaks = -16:5, 
+                         breaks = -7:3, 
                          trans = "reverse",
-                         limits = c(5, -16)) +
-      scale_color_manual(values = c("0" = "black", "1" = "red", "2" = "blue", "3" = "yellow", "4" = "green", "5" = "purple", "6" = "pink", "7" = "grey", "8" = "brown", "9" = "coral", "10" = "mediumaquamarine", "11" = "orange"),
+                         limits = c(3, -7)) +
+      scale_color_manual(values = c("1" = "red", "2" = "blue", "3" = "yellow", "4" = "green"),
                          name = "Macrostate", 
-                         breaks = c(0,1,2,3,4,5,6,7,8,9,10,11),
-                         labels = c('state 0', 'state 1', 'state 2', 'state 3', 'state 4', 'state 5', 'state 6', 'state 7', 'state 8', 'state 9', 'state 10', 'state 11')) + 
+                         breaks = c(1,2,3,4),
+                         labels = c('state 1', 'state 2', 'state 3', 'state 4')) + 
       theme_classic()
 
 ![](scatterplot_files/figure-markdown_strict/unnamed-chunk-4-1.png)
@@ -132,10 +132,10 @@ Visualization
       ##----map data values to visual values
       scale_x_continuous(name = "TIC-0") +
       scale_y_continuous(name = "TIC-1",
-                         breaks = -15:5) +
+                         breaks = -7:3) +
       scale_color_gradient(low="blue", high="red",
-                           breaks = 0:11) +
-      scale_shape_manual(values = c("0" = 0, "1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5, "6" = 6, "7" = 7, "8" = 8, "9" = 9, "10" = 10, "11" = 11),
+                           breaks = 0:8) +
+      scale_shape_manual(values = c("1" = 1, "2" = 2, "3" = 3, "4" = 4),
                          name = "Macrostate") +
       theme_classic()
 
@@ -160,7 +160,7 @@ Visualization
 
     #---plot five
     ggplot(energy_tics) +
-      geom_point(mapping = aes(x = TIC0, y = TIC1, shape = as.factor(macrostate)),
+      geom_point(mapping = aes(x = TIC0, y = TIC1, fill = Energy, shape = as.factor(macrostate)),
                  stat = "identity", position = "identity", inherit.aes = FALSE) +
       geom_path(mapping = aes(x = TIC0, y = TIC1, color = as.factor(macrostate)), 
                 stat = "ellipse", inherit.aes = FALSE) + 
@@ -170,9 +170,10 @@ Visualization
       ##----map data values to visual values
       scale_x_continuous(name = "TIC-0") +
       scale_y_continuous(name = "TIC-1") +
-      scale_shape_manual(values = c("0" = 0, "1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5, "6" = 6, "7" = 7, "8" = 8, "9" = 9, "10" = 10, "11" = 11)) +
+      scale_shape_manual(values = c("1" = 21, "2" = 22, "3" = 23, "4" = 24)) +
       scale_color_discrete() +
-      theme(legend.position = "bottom") +
+      scale_fill_gradient(low = "blue", high = "red") +
+      theme() +
       
       ##---change macrostate legend label
       labs(shape="Macrostate", color = "Macrostate") 
