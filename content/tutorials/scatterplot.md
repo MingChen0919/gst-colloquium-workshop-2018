@@ -33,6 +33,7 @@ Visualization
       ##----map data values to visual values
       scale_x_continuous() +
       scale_y_continuous() +
+      scale_color_identity() +
       theme()
 
 ![](scatterplot_files/figure-markdown_strict/unnamed-chunk-3-1.png)
