@@ -288,38 +288,45 @@ grid.arrange(p1, p2, ncol = 2)
 
 Complete the code in the **Exercise** section in the `ggplot2-template-practice.Rmd` file to generate the exact same plot as below.
 
+Two variables you are looking for:
+* **TIC0** from data `energy_tics`
+* **PHE_5_CA_77_LYS_15_CA_241** from data `trajectory`
+
 ```{r}
 # load data
-load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/update-ggplot-template-tutorial/content/datasets/exercise_1.RData'))
+load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/GST-WS.RData'))
+```
 
-p1 = ggplot(data = tics) +
+
+```{r}
+p1 = ggplot(data = energy_tics) +
   # specify the data value that maps to y
-  geom_line(mapping = aes(x = 1:5000, y = TIC0)) +
+  geom_line(mapping = aes(x = 1:nrow(energy_tics), y = TIC0)) +
   # add one line code below to specify a coordinate function
   coord_cartesian() +
   facet_null() +
   # add two line below to specify two scale functions, and use necessary parameters to specify x, y axis labels
   scale_x_continuous(name = '') +
-  scale_y_continuous(name = 'TICA value') +
+  scale_y_continuous(name = 'TIC0', breaks = c(0, 1, 2, 3), labels = c('0.0', '1.0', '2.0', '3.0')) +
   theme_classic()
 
-p2 = ggplot(data = tics) +
+p2 = ggplot(data = energy_tics) +
   # specify the data value that maps to x
   geom_density(mapping = aes(x = TIC0)) +
   # add one line code below to specify a coordinate function
   coord_flip() +
   facet_null() +
-  scale_x_continuous(name = '') +
-  scale_y_continuous(name = '') +
+  scale_x_continuous(name = '', breaks = c(0, 1, 2, 3), labels = c('0.0', '1.0', '2.0', '3.0')) +
+  scale_y_continuous(name = '', breaks = c(3,6,9,12), labels = c('3','6','9','12')) +
   theme_classic()
 
 p3 = ggplot(data = trajectory) +
   # specify the data value that maps to y
-  geom_line(mapping = aes(x = 1:5000, y = PHE_5_CA_77_LYS_15_CA_241)) +
+  geom_line(mapping = aes(x = 1:nrow(trajectory), y = PHE_5_CA_77_LYS_15_CA_241)) +
   coord_cartesian() +
   facet_null() +
   scale_x_continuous(name = 'Frame index') +
-  scale_y_continuous(name = 'Feature value', breaks = c(0.8, 1.6, 2.4, 3.0), labels = c(0.8, 1.6, 2.4, 3.0)) +
+  scale_y_continuous(name = 'PHE_5_CA_77_LYS_15_CA_241') +
   theme_classic()
 
 p4 = ggplot(data = trajectory) +
@@ -327,7 +334,7 @@ p4 = ggplot(data = trajectory) +
   geom_density(mapping = aes(x = PHE_5_CA_77_LYS_15_CA_241)) +
   coord_flip() +
   facet_null() +
-  scale_x_continuous(name = '', breaks = c(0.8, 1.6, 2.4, 3.0), labels = c(0.8, 1.6, 2.4, 3.0)) +
+  scale_x_continuous(name = '') +
   scale_y_continuous(name = 'Density') +
   # add one line code below to specify a theme function
   theme_classic()

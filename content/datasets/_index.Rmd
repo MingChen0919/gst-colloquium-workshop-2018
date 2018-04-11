@@ -1,7 +1,6 @@
 ---
 weight: 2
 title: "Datasets"
-author: "gst data visualization group"
 output: html_document
 ---
 
@@ -20,38 +19,74 @@ options("width" = 200)
 ```
 
 
-
-## Dataset descriptions
-
 ```{r echo=FALSE}
-load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/datasets.RData'))
+load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/master/content/datasets/GST-WS.RData'))
 ```
 
-### Time series plot datasets: `trajectory`
 
-* **dimension**: 5001 rows x 30 columns
-* **column 1**: frame indices, from 1 to 5001.
-* **column 2-30**: feature values from molecular simulation.
+## MD Features Trajectory
 
-Below is the first few rows and columns of `trajectory`:
-
-```{r eval=TRUE}
-trajectory[1:10, 1:4]
-```
-
-### TICA plot datasets: `energy_tics`
-
-This data is the dimension-reduced trajectory. We used a PCA-like method to analyze the feature trajectory, which tells us vectors (called collective variables, CVs) that explain the pattern of how all the feature values change. A good example for thinking about this would be that you have a protein with a large and slow open-close motion. The open/close motion should be the first CV, so this vector is the change in feature values when the protein opens and closes. Say the CV points in the 'opening' direction, then if the protein is closed the coordinate in this CV would be 0 or small. As you add more of the vector to the feature values, the coordinate would grow to open the protein. This way, we only need a single number for each frame to tell us how open or closed the protein is. Typically, 3-5 CVs will replace hundreds of feature values, since each CV encodes something that happens to all the features. In this case, the CV's are called TICs. Then we cluster the frames in their CV coordinates into a big and a small groups called microstates and macrostates, respectively.
-
-
-* **dimension**: 5001 rows x 8 columns
-* **column 1**: frame indices, from 1 to 5001.
-* **column 2**: energy column. It isa rough estimate of the protein's internal energy in each frame.
-* **column 3-6**: collective variables columns (CVs).
-* **column 7**: microstates
-* **column 8**: macrostates.
+* Features Trajectory in `trajectory`
+* The data format has 1 row per frame with N entries, and n rows
 
 ```{r}
-head(energy_tics)
+trajectory[1:5, 1:3]
+```
+
+## Energy & TIC trajectory
+
+* Use TICs as **collective variables**
+    + Projection of a frame (741 features) onto each of d (a few) TIC (741x1 vector)
+    + Reduces dimensionality 741→**d** of data
+    + Capture informative (kinetic) data variation
+
+```{r}
+head(energy_tics[, 1:4])
+```
+
+## Microstate & Macrostate Trajectory:
+
+* Microstate
+  + After k-means clustering with k=1000
+    - Each frame belongs to a cluster, ie microstate
+    - Used TIC coordinate space (12 CVs)
+
+* Macrostate
+  + A Markov State Model was made first
+    - Coarse-graining of microstates
+    - Each frame now belongs to a macrostate
+    - Used PCCA + manual
+
+```{r}
+head(energy_tics[, 5:6])
+```
+
+## Markov State Transition Matrix
+
+* MSM: transition probability between (micro)states
+
+    + Depends only on current state
+    + Made by sliding window approach
+    + Count microstate transitions from each i to each j, this ‘count’ matrix is the MSM
+
+* Normalize counts: Probability of moving from state i to state j:  $t_{i,j}$
+  
+    + $t_{i,j=i}$ :  probability of staying in i
+    + $t_{i,j \neq i}$ : probability of jumping to j
+  
+```{r}
+protein_transition[1:5, 1:5]
+```
+
+## Stationary Distribution
+
+* Equilibrium Population of States
+    + First eigenvector of MSM transition matrix
+    + Next eigenvectors are the kinetic processes
+    + First eigenvector is 1
+    + Next eigenvectors correspond to rates
+  
+```{r}
+head(stationary_distribution)
 ```
 

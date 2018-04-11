@@ -13,9 +13,9 @@ colnames(trajectory) = feature_names
 
 dim(trajectory)
 
-tics = read.table(file = '../datasets/John_datasets/protein_folder/traj_0.energy_tics.dat', header = FALSE, comment.char = 'E')[, 1:5]
-colnames(tics) = c('Energy', 'TIC0', 'TIC1', 'TIC2', 'TIC3')
-save(trajectory, tics, file = '../datasets/exercise_1.RData')
+tics = read.table(file = 'content/datasets/John_datasets/protein_folder/traj_0.energy_tics.dat', header = FALSE, comment.char = 'E')
+colnames(tics) = c('Energy', 'TIC0', 'TIC1')
+save(trajectory, tics, file = 'content//datasets/exercise_1.RData')
 
 
 
