@@ -328,12 +328,9 @@ ggplot(data = mtcars) +
 # Exercise
 
 ```{r}
-# load data
-load(url('https://github.com/MingChen0919/gst-colloquium-workshop-2018/raw/update-ggplot-template-tutorial/content/datasets/exercise_1.RData'))
-
-p1 = ggplot(data = tics) +
+p1 = ggplot(data = energy_tics) +
   # specify the data value that maps to y
-  geom_line(mapping = aes(x = 1:5000, y = )) +
+  geom_line(mapping = aes(x = 1:nrow(energy_tics), y = )) +
   # add one line code below to specify a coordinate function
   
   facet_null() +
@@ -342,23 +339,23 @@ p1 = ggplot(data = tics) +
   
   theme_classic()
 
-p2 = ggplot(data = tics) +
+p2 = ggplot(data = energy_tics) +
   # specify the data value that maps to x
   geom_density(mapping = aes(x = )) +
   # add one line code below to specify a coordinate function
   
   facet_null() +
-  scale_x_continuous(name = '') +
-  scale_y_continuous(name = '') +
+  scale_x_continuous(name = '', breaks = c(0, 1, 2, 3), labels = c('0.0', '1.0', '2.0', '3.0')) +
+  scale_y_continuous(name = '', breaks = c(3,6,9,12), labels = c('3','6','9','12')) +
   theme_classic()
 
 p3 = ggplot(data = trajectory) +
   # specify the data value that maps to y
-  geom_line(mapping = aes(x = 1:5000, y = )) +
+  geom_line(mapping = aes(x = 1:nrow(trajectory), y = )) +
   coord_cartesian() +
   facet_null() +
   scale_x_continuous(name = 'Frame index') +
-  scale_y_continuous(name = 'Feature value', breaks = c(0.8, 1.6, 2.4, 3.0), labels = c(0.8, 1.6, 2.4, 3.0)) +
+  scale_y_continuous(name = 'PHE_5_CA_77_LYS_15_CA_241') +
   theme_classic()
 
 p4 = ggplot(data = trajectory) +
@@ -366,7 +363,7 @@ p4 = ggplot(data = trajectory) +
   
   coord_flip() +
   facet_null() +
-  scale_x_continuous(name = '', breaks = c(0.8, 1.6, 2.4, 3.0), labels = c(0.8, 1.6, 2.4, 3.0)) +
+  scale_x_continuous(name = '') +
   scale_y_continuous(name = 'Density') +
   # add one line code below to specify a theme function
   
