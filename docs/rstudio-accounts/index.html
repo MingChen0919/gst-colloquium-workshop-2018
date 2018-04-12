@@ -13,19 +13,19 @@
     <title>RStudio Accounts :: My New Hugo Site</title>
     
     
-    <link href="../css/nucleus.css?1523500062" rel="stylesheet">
-    <link href="../css/font-awesome.min.css?1523500062" rel="stylesheet">
-    <link href="../css/hybrid.css?1523500062" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1523500062" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1523500062" rel="stylesheet">
-    <link href="../css/auto-complete.css?1523500062" rel="stylesheet">
-    <link href="../css/theme.css?1523500062" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1523500062" rel="stylesheet">
+    <link href="../css/nucleus.css?1523540897" rel="stylesheet">
+    <link href="../css/font-awesome.min.css?1523540897" rel="stylesheet">
+    <link href="../css/hybrid.css?1523540897" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1523540897" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1523540897" rel="stylesheet">
+    <link href="../css/auto-complete.css?1523540897" rel="stylesheet">
+    <link href="../css/theme.css?1523540897" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1523540897" rel="stylesheet">
     
-      <link href="../css/theme-blue.css?1523500062" rel="stylesheet">
+      <link href="../css/theme-blue.css?1523540897" rel="stylesheet">
     
 
-    <script src="../js/jquery-2.x.min.js?1523500062"></script>
+    <script src="../js/jquery-2.x.min.js?1523540897"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -53,14 +53,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1523500062"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1523500062"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1523540897"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1523540897"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1523500062"></script>
+<script type="text/javascript" src="../js/search.js?1523540897"></script>
 
     
   </div>
@@ -285,7 +285,8 @@ pre code, pre, code {
 <div id="workshop-environment" class="section level2">
 <h2>Workshop Environment</h2>
 <p><strong>RStudio Server Account</strong></p>
-<p>Find your name in this <a href="https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0">google sheet</a> and use the associated username and password to login to this <a href="http://129.114.104.121/">RStudio Server</a>.</p>
+<p>Find your name in this <a href="https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0">google sheet</a> and use the associated username and password to login to this <a href="http://149.165.157.82/">RStudio Server</a>.</p>
+<p>We have a <a href="http://129.114.16.58/">second server</a> running as a backup. Please use this one only when the first one does not work for you.</p>
 <p><strong>Running a docker container locally</strong></p>
 <p>Thanks to the machine learning workshop from last week! Everyone should have had docker installed. If you are interestd in running a local RStudio server. You can use the command below:</p>
 <pre class="bash"><code>docker pull mingchen0919/gst-dv-rstudio
@@ -320,11 +321,18 @@ docker run --name=gst_dv -d -p 80:8787 mingchen0919/gst-dv-rstudio</code></pre>
 docker exec -it gst_dv bash
 
 # create users in the rstudio container
-for id in $(seq 1 30)
+for id in $(seq 1 45)
 do
   echo &quot;gst_user_${id}:passwd_user_${id}::::/home/gst_user_${id}:&quot; | newusers
 done</code></pre>
 </div>
+</div>
+<div id="for-admin-users" class="section level2">
+<h2>For admin users</h2>
+<ul>
+<li><a href="https://mingchen0919.github.io/gst-colloquium-workshop-2018/solutions/exercise_1">code 1</a></li>
+<li><a href="https://mingchen0919.github.io/gst-colloquium-workshop-2018/solutions/tutorial3_codes">code 2</a></li>
+</ul>
 </div>
 
 
@@ -477,20 +485,20 @@ done</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1523500062"></script>
-    <script src="../js/perfect-scrollbar.min.js?1523500062"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1523500062"></script>
-    <script src="../js/jquery.sticky.js?1523500062"></script>
-    <script src="../js/featherlight.min.js?1523500062"></script>
-    <script src="../js/html5shiv-printshiv.min.js?1523500062"></script>
-    <script src="../js/highlight.pack.js?1523500062"></script>
+    <script src="../js/clipboard.min.js?1523540897"></script>
+    <script src="../js/perfect-scrollbar.min.js?1523540897"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1523540897"></script>
+    <script src="../js/jquery.sticky.js?1523540897"></script>
+    <script src="../js/featherlight.min.js?1523540897"></script>
+    <script src="../js/html5shiv-printshiv.min.js?1523540897"></script>
+    <script src="../js/highlight.pack.js?1523540897"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom.71422.js?1523500062"></script>
-    <script src="../js/learn.js?1523500062"></script>
-    <script src="../js/hugo-learn.js?1523500062"></script>
+    <script src="../js/modernizr.custom.71422.js?1523540897"></script>
+    <script src="../js/learn.js?1523540897"></script>
+    <script src="../js/hugo-learn.js?1523540897"></script>
 
-    <link href="../mermaid/mermaid.css?1523500062" type="text/css" rel="stylesheet" />
-    <script src="../mermaid/mermaid.js?1523500062"></script>
+    <link href="../mermaid/mermaid.css?1523540897" type="text/css" rel="stylesheet" />
+    <script src="../mermaid/mermaid.js?1523540897"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

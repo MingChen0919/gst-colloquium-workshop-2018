@@ -31,13 +31,6 @@ library(ggplot2)
 library(gridExtra)
 ```
 
-## Get practice file 
-
-Run the following code to get the practice file into your working directory.
-
-```{r, eval=FALSE, echo=TRUE}
-download.file('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/update-ggplot-template-tutorial/misc/ggplot2-template-practice.Rmd', destfile = 'ggplot2-template-practice.Rmd')
-```
 
 ## Example data
 
@@ -51,16 +44,6 @@ mtcars
 help(mtcars)
 ```
 
-Basic data frame manipulation
-
-```{r, echo=TRUE}
-head(mtcars)
-mtcars[1:5, ]
-mtcars[, 2:4]
-mtcars$mpg
-```
-
-
 ## Plotting template
 
 ![](images/ggplot2-template.png)
@@ -73,6 +56,14 @@ mtcars$mpg
 * **FACET_FUNCTION**: divide plots into subplots
 * **SCALE_FUNCTION**: how data values are mapped to visual values.
 * **THEME_FUNCTION**: the apperance of graph components that is not directly related to the mappings.
+
+## Get practice file 
+
+Run the following code to get the practice file into your working directory.
+
+```{r, eval=FALSE, echo=TRUE}
+download.file('https://raw.githubusercontent.com/MingChen0919/gst-colloquium-workshop-2018/update-ggplot-template-tutorial/misc/ggplot2-template-practice.Rmd', destfile = 'ggplot2-template-practice.Rmd')
+```
 
 ## GEOM_FUNCTION
 
@@ -284,7 +275,7 @@ p2 = ggplot(data = mtcars) +
 grid.arrange(p1, p2, ncol = 2)
 ```
 
-## Exercise
+## Exercise (10 min)
 
 Complete the code in the **Exercise** section in the `ggplot2-template-practice.Rmd` file to generate the exact same plot as below.
 

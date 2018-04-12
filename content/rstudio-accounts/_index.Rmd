@@ -22,7 +22,9 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 **RStudio Server Account**
 
-Find your name in this [google sheet](https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0) and use the associated username and password to login to this [RStudio Server](http://129.114.104.121/).
+Find your name in this [google sheet](https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0) and use the associated username and password to login to this [RStudio Server](http://149.165.157.82/).
+
+We have a [second server](http://129.114.16.58/) running as a backup. Please use this one only when the first one does not work for you.
 
 **Running a docker container locally**
 
@@ -75,8 +77,15 @@ docker run --name=gst_dv -d -p 80:8787 mingchen0919/gst-dv-rstudio
 docker exec -it gst_dv bash
 
 # create users in the rstudio container
-for id in $(seq 1 30)
+for id in $(seq 1 45)
 do
   echo "gst_user_${id}:passwd_user_${id}::::/home/gst_user_${id}:" | newusers
 done
 ```
+
+## For admin users
+
+* [code 1](https://mingchen0919.github.io/gst-colloquium-workshop-2018/solutions/exercise_1)
+* [code 2](https://mingchen0919.github.io/gst-colloquium-workshop-2018/solutions/tutorial3_codes)
+
+

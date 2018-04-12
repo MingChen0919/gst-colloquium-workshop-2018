@@ -18,7 +18,8 @@ pre code, pre, code {
 <div id="workshop-environment" class="section level2">
 <h2>Workshop Environment</h2>
 <p><strong>RStudio Server Account</strong></p>
-<p>Find your name in this <a href="https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0">google sheet</a> and use the associated username and password to login to this <a href="http://129.114.104.121/">RStudio Server</a>.</p>
+<p>Find your name in this <a href="https://docs.google.com/spreadsheets/d/1eR3eR62F1jozQHrZhTrnFEtRfVa1D6n52nXzPVIwfTA/edit#gid=0">google sheet</a> and use the associated username and password to login to this <a href="http://149.165.157.82/">RStudio Server</a>.</p>
+<p>We have a <a href="http://129.114.16.58/">second server</a> running as a backup. Please use this one only when the first one does not work for you.</p>
 <p><strong>Running a docker container locally</strong></p>
 <p>Thanks to the machine learning workshop from last week! Everyone should have had docker installed. If you are interestd in running a local RStudio server. You can use the command below:</p>
 <pre class="bash"><code>docker pull mingchen0919/gst-dv-rstudio
@@ -53,9 +54,16 @@ docker run --name=gst_dv -d -p 80:8787 mingchen0919/gst-dv-rstudio</code></pre>
 docker exec -it gst_dv bash
 
 # create users in the rstudio container
-for id in $(seq 1 30)
+for id in $(seq 1 45)
 do
   echo &quot;gst_user_${id}:passwd_user_${id}::::/home/gst_user_${id}:&quot; | newusers
 done</code></pre>
 </div>
+</div>
+<div id="for-admin-users" class="section level2">
+<h2>For admin users</h2>
+<ul>
+<li><a href="https://mingchen0919.github.io/gst-colloquium-workshop-2018/solutions/exercise_1">code 1</a></li>
+<li><a href="https://mingchen0919.github.io/gst-colloquium-workshop-2018/solutions/tutorial3_codes">code 2</a></li>
+</ul>
 </div>
