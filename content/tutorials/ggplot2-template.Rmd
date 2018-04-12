@@ -288,9 +288,9 @@ grid.arrange(p1, p2, ncol = 2)
 
 Complete the code in the **Exercise** section in the `ggplot2-template-practice.Rmd` file to generate the exact same plot as below.
 
-Two variables you are looking for:
-* **TIC0** from data `energy_tics`
-* **PHE_5_CA_77_LYS_15_CA_241** from data `trajectory`
+* Two variables that you will use:
+    + **TIC0** from data `energy_tics`
+    + **PHE_5_CA_77_LYS_15_CA_241** from data `trajectory`
 
 ```{r}
 # load data
