@@ -275,6 +275,25 @@ p2 = ggplot(data = mtcars) +
 grid.arrange(p1, p2, ncol = 2)
 ```
 
+
+## Bonus
+
+We can easily convert a ggplot2 plot into an interactive plot.
+
+```{r, echo=TRUE}
+p = ggplot(data = mtcars) + 
+  geom_point(mapping = aes(x = disp, y = hp, color=as.factor(gear), shape=as.factor(am)), 
+             stat = "identity") +
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_color_discrete(name = "(gear, am)") +
+  scale_shape_discrete(name = "") +
+  theme()
+plotly::ggplotly(p)
+```
+
+
 ## Exercise (10 min)
 
 Complete the code in the **Exercise** section in the `ggplot2-template-practice.Rmd` file to generate the exact same plot as below.
